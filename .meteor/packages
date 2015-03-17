@@ -7,3 +7,8 @@
 meteor-platform
 autopublish
 insecure
+msavin:mongol
+accounts-password
+accounts-ui
+twbs:bootstrap
+iron:router

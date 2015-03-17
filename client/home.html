@@ -1,0 +1,57 @@
+
+<template name='home'>
+		{{> createPost}}
+		{{> posts}}
+</template>
+
+<template name="createPost">
+	<div style='width: 400px; border: 2px solid #ccc; padding: 20px'>
+		<h3>Neuen post erstellen:</h3>
+		<form role='form'>
+			<input id='titel' class='form-control' type="text" placeholder="titel"><br>
+			<input id='text' class='form-control' type="text" placeholder="text"><br>
+			<div class='checkbox'>
+				<label>
+					<input id='istAngebot' type="checkbox"> Ist Angebot
+				</label>
+			</div>
+
+			<h4>Tags:</h4>
+			{{#each possibleTags}}
+				<div class='checkbox'>
+					<label>
+						<input class="tag" id='{{tag}}' type="checkbox"> {{tag}}
+					</label>
+				</div>
+			{{/each}}
+			<input id='submitButton' class='btn' type="button" value="Submit Post"><br>
+		</form>
+	</div>
+</template>
+
+
+<template name="posts">
+	{{#each posts}}
+		<div class='post' style='border: 2px solid #ccc; margin-top: 10px; padding: 10px'>
+			{{#if istAngebot}}
+				{{> angebot}}
+			{{else}}
+				{{> nachfrage}}
+			{{/if}}
+		</div>
+	{{/each}}
+</template>
+
+<template name="angebot">
+	<h3>{{title}} (Angebot)</h3>
+	<p>{{text}}</p>
+	<p style="color: grey"> - erstellt von {{userEmail}}</p>
+	<p>tags: {{#each tags}} {{this}} {{/each}}</p>
+</template>
+
+<template name="nachfrage">
+	<h3>{{title}} (Nachfrage)</h3>
+	<p>{{text}}</p>
+	<p style="color: grey"> - erstellt von {{userEmail}}</p>
+	<p>tags: {{#each tags}} {{this}} {{/each}}</p>
+</template>

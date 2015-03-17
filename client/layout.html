@@ -1,0 +1,8 @@
+<template name='layout'>
+	<div style='padding: 20px'>
+
+		{{> loginButtons}}
+		<a href="{{pathFor 'profile'}}" class='btn btn-default'>Profile</a>
+		{{> yield}}
+	</div>
+</template>

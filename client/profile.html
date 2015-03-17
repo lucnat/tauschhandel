@@ -1,0 +1,35 @@
+<template name="profile">
+	{{> nachrichten}}
+	{{> myPosts}}
+	{{> watchList}}
+	{{> benutzerdaten}}
+	{{> einstellungen}}
+</template>
+
+<template name="nachrichten">
+	<h3>Nachrichten:</h3>
+	{{#each nachrichten}}
+		<label>von: {{absender}}</label>
+		<label>an: {{empfaenger}}</label>
+		<h4>{{subject}}</h4>
+		<p>{{text}}</p>
+	{{/each}}
+</template>
+
+<template name="myPosts">
+	<h3>Meine Posts</h3>
+</template>
+
+<template name="watchList">
+
+</template>
+
+<template name="benutzerdaten">
+	<h3>Benutzerdaten: </h3>
+
+</template>
+
+<template name="einstellungen">
+	<h3>Einstellungen:</h3>
+</template>
+
