@@ -18,7 +18,7 @@ Template.createPost.helpers({
 
 Template.createPost.events({
 	'click #submitButton': function(){
-		if(Meteor.user()){
+		if(isLoggedIn()){
 
 			checkboxes = document.getElementsByClassName('tag');
 			
@@ -33,6 +33,7 @@ Template.createPost.events({
 				title: 		$('#titel').val(),
 				text: 		$('#text').val(),
 				istAngebot: $('#istAngebot')[0].checked,
+				bild: 		$('#bild').val(),
 				tags: 		tags,
 				userID: 	Meteor.user()._id,
 				userEmail: 	Meteor.user().emails[0].address,	

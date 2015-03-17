@@ -5,13 +5,12 @@ AdminShizzle	= new Mongo.Collection ('adminshizzle');
 
 
 tags = [
-	{tag: 'Bücher', count: 0},
-	{tag: 'Möbel', count: 0},
-	{tag: 'Unterhaltungselektronik', count: 0},
-	{tag: 'Telefon/Mobile', count: 0},
-	{tag: 'Haushaltsgeräte', count: 0},
-]
-
+	{tag: 'Bücher', 					count: 0},
+	{tag: 'Möbel', 						count: 0},
+	{tag: 'Unterhaltungselektronik', 	count: 0},
+	{tag: 'Telefon/Mobile', 			count: 0},
+	{tag: 'Haushaltsgeräte', 			count: 0},
+];
 
 /*
 

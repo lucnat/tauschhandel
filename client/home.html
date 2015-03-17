@@ -16,12 +16,12 @@
 				</label>
 			</div>
 
+			<input id='bild' class='form-control' type="text" placeholder="Bild URL"><br>
+
 			<h4>Tags:</h4>
 			{{#each possibleTags}}
 				<div class='checkbox'>
-					<label>
-						<input class="tag" id='{{tag}}' type="checkbox"> {{tag}}
-					</label>
+					<label> <input class="tag" id='{{tag}}' type="checkbox"> {{tag}} </label>
 				</div>
 			{{/each}}
 			<input id='submitButton' class='btn btn-success' type="button" value="Submit Post"><br>
@@ -45,8 +45,10 @@
 <template name="angebot">
 	<h3>{{title}} (Angebot)</h3>
 	<p>{{text}}</p>
+	<img src="{{bild}}}" width='400'>
 	<p style="color: grey"> - erstellt von {{userEmail}}</p>
 	<p>tags: {{#each tags}} {{this}} {{/each}}</p>
+
 </template>
 
 <template name="nachfrage">
