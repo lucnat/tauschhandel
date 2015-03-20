@@ -9,12 +9,20 @@
 <template name="nachrichten">
 	<h3>Nachrichten:</h3>
 	{{#each nachrichten}}
-		<label>von: {{absender}}</label>
-		<label>an: {{empfaenger}}</label>
-		<h4>{{subject}}</h4>
-		<p>{{text}}</p>
+		{{> nachricht}}
 	{{/each}}
 </template>
+
+<template name="nachricht">
+	<div class="panel panel-success">
+		<div class="panel-heading">von: {{absenderName}} | an: {{empfaengerName}}</div>
+		<div class="panel-body">
+			<h4>{{subject}}</h4>
+			<p>{{text}}</p>
+		</div>
+	</div>
+</template>
+
 
 <template name="myPosts">
 	<h3>Meine Posts</h3>

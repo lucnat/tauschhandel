@@ -36,12 +36,13 @@ Template.createPost.events({
 				bild: 		$('#bild').val(),
 				tags: 		tags,
 				userID: 	Meteor.user()._id,
-				userEmail: 	Meteor.user().emails[0].address,	
+				userName: 	Meteor.user().username,	
 				createdAt: 	new Date(),
 				viewCount: 	0
 			}
 
 			Posts.insert(newPost);
+
 		}
 	}
 });

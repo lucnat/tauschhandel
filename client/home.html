@@ -47,7 +47,7 @@
 	<h3>{{title}} (Angebot)</h3>
 	<p>{{text}}</p>
 	<img src="{{bild}}}" width='400'>
-	<p style="color: grey"> - erstellt von {{userEmail}}</p>
+	<p style="color: grey"> - erstellt von {{userName}}</p>
 	<p>tags: {{#each tags}} {{this}} {{/each}}</p>
 
 </template>
@@ -55,6 +55,6 @@
 <template name="nachfrage">
 	<h3>{{title}} (Nachfrage)</h3>
 	<p>{{text}}</p>
-	<p style="color: grey"> - erstellt von {{userEmail}}</p>
+	<p style="color: grey"> - erstellt von {{userName}}</p>
 	<p>tags: {{#each tags}} {{this}} {{/each}}</p>
 </template>

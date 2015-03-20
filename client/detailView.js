@@ -1,7 +1,7 @@
 Template.detailView.events({
 	'submit form': function(event){
 		event.preventDefault();
-		console.log(this);
+		
 		var message = {
 			subject: 	'Frage zu '+ this.title,
 			text: 		$('#text').val(),
@@ -12,5 +12,7 @@ Template.detailView.events({
 		}
 
 		Messages.insert(message);
+
+		Router.go('profile');
 	},
 });
