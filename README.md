@@ -32,7 +32,7 @@
 
 ### PostDiscussions
 	- _id
-	- post id
+	- postID
 	- question
 	- answer
 	- questioner 
