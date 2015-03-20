@@ -36,7 +36,6 @@
 	- question
 	- answer
 	- questioner 
-	- answered
 	- published
 	- changed at
 
