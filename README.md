@@ -1,4 +1,7 @@
-## Data Structure
+# Data Structure
 
-# Datenbanken
+## Datenbanken
+	- Profiles
+	- Posts
 	- Messages
+	- AdminShizzle
