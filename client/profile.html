@@ -1,15 +1,14 @@
 <template name="profile">
 	{{> nachrichten}}
-	{{> myPosts}}
 	{{> watchList}}
 	{{> benutzerdaten}}
 	{{> einstellungen}}
 </template>
 
 <template name="nachrichten">
-	<h3>Nachrichten:</h3>
-	{{#each nachrichten}}
-		{{> nachricht}}
+	<h3>Notifications:</h3>
+	{{#each notifications}}
+		{{> notification}}
 	{{/each}}
 </template>
 
@@ -24,9 +23,6 @@
 </template>
 
 
-<template name="myPosts">
-	<h3>Meine Posts</h3>
-</template>
 
 <template name="watchList">
 

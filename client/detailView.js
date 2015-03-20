@@ -14,8 +14,12 @@ Template.detailView.events({
 		var post = Posts.findOne({_id: this._id})
 		post.discussion.push(newDiscussionPair);
 		Posts.update({_id: this._id}, post);
-
-		Router.go('profile');
 	},
+
+	'click #interesseButton': function(){
+		var post = Posts.findOne({_id: this._id});
+		post.interessenten.push(Meteor.user()._id);
+		Posts.update({_id: this._id}, post);
+	}
 });
 

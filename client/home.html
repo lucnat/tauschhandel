@@ -34,27 +34,16 @@
 <template name="posts">
 	{{#each posts}}
 		<div class='post' style='border: 2px solid #ccc; margin-top: 10px; padding: 10px'>
-			{{#if istAngebot}}
-				{{> angebot}}
-			{{else}}
-				{{> nachfrage}}
-			{{/if}}
+		{{> post}}
 		</div>
 	{{/each}}
 </template>
 
-<template name="angebot">
-	<h3>{{title}} (Angebot)</h3>
+<template name="post">
+	<h3>{{title}}</h3>
 	<p>{{text}}</p>
 	<img src="{{bild}}}" width='400'>
 	<p style="color: grey"> - erstellt von {{userName}}</p>
 	<p>tags: {{#each tags}} {{this}} {{/each}}</p>
 
-</template>
-
-<template name="nachfrage">
-	<h3>{{title}} (Nachfrage)</h3>
-	<p>{{text}}</p>
-	<p style="color: grey"> - erstellt von {{userName}}</p>
-	<p>tags: {{#each tags}} {{this}} {{/each}}</p>
 </template>
