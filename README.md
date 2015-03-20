@@ -3,6 +3,7 @@
 ## Datenbanken
 	- Users
 	- Posts
+	- PostDiscussions
 	- Messages
 	- AdminShizzle
 
@@ -26,17 +27,18 @@
 	- userName
 	- createdAt
 	- viewCount
-	- discussion
-		- discussionPair
-			- question
-			- answer
-			- questioner 
-			- answered
-			- published
-			- changed at
 	- interessenten
 	- vergebenAn
 
+### PostDiscussions
+	- _id
+	- post id
+	- question
+	- answer
+	- questioner 
+	- answered
+	- published
+	- changed at
 
 
 ### Messages
