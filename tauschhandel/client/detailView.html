@@ -7,16 +7,8 @@
 	<button id='interesseButton' class='btn btn-success'> Interesse Melden </button>
 
 	<h3>Fragen & Antworten:</h3>
-	{{#each discussion}}
-
-		{{#if published}}
-			<div class="panel panel-success">
-				<div class="panel-heading">Frage: {{question}}</div>
-				<div class="panel-body">
-					<p>{{answer}}</p>
-				</div>
-			</div>
-		{{/if}}
+	{{#each discussions}}
+		{{> discussionPair}}
 	{{/each}}
 	{{> createPostQuestion}}
 

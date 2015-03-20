@@ -8,6 +8,10 @@ Meteor.publish('posts', function(){
 	return Posts.find({});
 });
 
+Meteor.publish('postdiscussions', function(){
+	return PostDiscussions.find({});
+});
+
 Meteor.publish('messages', function(){
 	//TODO: do not publish all messages, but only if current user is sender or recipient
 	return Messages.find({});

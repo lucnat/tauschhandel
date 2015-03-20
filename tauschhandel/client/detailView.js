@@ -3,23 +3,28 @@ Template.detailView.events({
 		event.preventDefault();
 		
 		var newDiscussionPair = {
+			postID: 	this._id,
 			question: 	$('#text').val(),
 			answer: 	'', 
 			questioner: Meteor.user()._id,
-			answered: 	false,
 			published: 	false,
 			changedAt: 	new Date(),
 		}
 
-		var post = Posts.findOne({_id: this._id})
-		post.discussion.push(newDiscussionPair);
-		Posts.update({_id: this._id}, post);
+		PostDiscussions.insert(newDiscussionPair);
+		$('#text').val('');
 	},
 
 	'click #interesseButton': function(){
 		var post = Posts.findOne({_id: this._id});
 		post.interessenten.push(Meteor.user()._id);
 		Posts.update({_id: this._id}, post);
+	}
+});
+
+Template.detailView.helpers({
+	'discussions': function(){
+		return PostDiscussions.find({postID: this._id, published: true}).fetch();
 	}
 });
 

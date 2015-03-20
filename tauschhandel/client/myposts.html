@@ -1,0 +1,38 @@
+<template name='myposts'>
+	<h3>Meine Posts</h3>
+	{{#each myPosts}}
+		{{> mypost}}
+	{{/each}}
+</template>
+
+<template name='mypost'>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div style='float: left'>{{title}} </div>
+			<div style='text-align: right'><button class='btn btn-primary btn-sm'>edit</button></div>
+
+		</div>
+		<div class="panel-body">
+			<p>{{text}}</p>
+			{{#each discussions}}
+			{{> discussionPair}}
+			{{/each}}
+
+		</div>
+	</div>
+</template>
+
+<template name="discussionPair">
+	<div class="panel panel-success">
+		<div class="panel-heading"><label>Frage:</label><br> {{question}}</div>
+		<div class="panel-body">
+			{{#if answer}}
+				<label>Antwort: </label><br> {{answer}}
+			{{else}}
+				<form role='form'>
+					<label>Antwort: </label><br> <input id='antwort' class='form-control' type="text" placeholder="Antwort">
+				</form>
+			{{/if}}
+		</div>
+	</div>
+</template>
