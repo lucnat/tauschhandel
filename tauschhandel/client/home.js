@@ -50,3 +50,10 @@ Template.createPost.events({
 	}
 });
 
+Template.home.rendered = function(){
+	console.log(this);
+}
+
+Template.posts.rendered = function(){
+	console.log(this);
+}

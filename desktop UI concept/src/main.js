@@ -2,7 +2,9 @@ var Engine 			= famous.core.Engine;
 var Surface 		= famous.core.Surface;
 var ImageSurface 	= famous.surfaces.ImageSurface;
 var Modifier 		= famous.core.Modifier;
+var Transform 		= famous.core.Transform;
 var mainContext 	= Engine.createContext();
+
 
 var bg = new ImageSurface({
   size: [undefined, undefined],
@@ -10,26 +12,47 @@ var bg = new ImageSurface({
 
 bg.setContent('http://img.gawkerassets.com/img/17lm97guuqu9zpng/original.png');
 
-var bgmod = new Modifier({
-	origin: [0.5,0.5],
-	align: [0.5,0.5]
-});
+mainContext.add(bg);
 
-var postitmod = new Modifier({
-	origin: [0.5,0.5],
-	align: [0.5,0.5]
-});
 
-for(var i=0; i<3; i++){
-	var x = Math.random();
-	var y = Math.random();
-	var bgmod = new Modifier({ origin: [x,y], align: [x,y] });
-	var postitmod = new Modifier({ origin: [x,y], align: [x,y] });
+
+var pos = [];
+pos[0] = [Math.random(), Math.random()];
+
+var minRelBreite = 220/914;
+var minRelHoehe = 260/885;
+
+
+
+for(var i=1; i<7; i++){
+	var collided = true;
+	var tries = 0;
+	while(collided){
+		pos[i] = [Math.random(), Math.random()];
+		collided = false;
+		tries++;
+
+
+		for(var j=0; j<i; j++){
+			if(Math.abs(pos[i][0]-pos[j][0]) < minRelBreite && Math.abs(pos[i][1]-pos[j][1]) < minRelHoehe) {
+				console.log('lets try new position');
+				collided = true;
+			}
+		}
+	}
+}
+
+
+pos.forEach(function(pos){
+
+	var phi = (Math.random()-0.5)/3;
+	var bgmod = new Modifier({ origin: pos, align: pos, transform: Transform.rotateZ(phi)});
+	var postitmod = new Modifier({ origin: pos, align: pos, transform: Transform.rotateZ(phi)});
 
 	var postitbg = new ImageSurface({
 	  size: [270,270]
 	});
-	postitbg.setContent('http://upload.wikimedia.org/wikipedia/commons/e/e5/Post-it-note-transparent.png')
+	postitbg.setContent('http://upload.wikimedia.org/wikipedia/commons/e/e5/Post-it-note-transparent.png');
 
 	var postitText = new Surface({
 	  content: "<h3> Geile Mixer </h3> <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna  nostrud  </p>",
@@ -45,11 +68,8 @@ for(var i=0; i<3; i++){
 	mainContext.add(bgmod).add(postitbg);
 	mainContext.add(postitmod).add(postitText);
 
-}
+});
 
 
 
 
-mainContext.add(bg);
-mainContext.add(bgmod).add(postitbg);
-mainContext.add(postitmod).add(postitText);
