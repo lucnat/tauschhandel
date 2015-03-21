@@ -3,15 +3,12 @@
 	<p>{{text}}</p>
 	Kategorie: {{#each tags}} {{this}} {{/each}}
 	<p style="color: grey"> - erstellt von {{userEmail}}</p>
-
 	<button id='interesseButton' class='btn btn-success'> Interesse Melden </button>
-
 	<h3>Fragen & Antworten:</h3>
 	{{#each discussions}}
 		{{> discussionPair}}
 	{{/each}}
 	{{> createPostQuestion}}
-
 </template>
 
 
@@ -23,5 +20,4 @@
 			<input id='submitButton' class='btn btn-success' type="submit" value="Frage stellen"><br>
 		</form>
 	</div>
-
 </template>

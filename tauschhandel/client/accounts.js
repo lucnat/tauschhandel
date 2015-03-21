@@ -1,9 +1,6 @@
 Accounts.ui.config({
-    
     requestPermissions: {},
-
     passwordSignupFields: 'USERNAME_AND_EMAIL',
-
     extraSignupFields: [{
         fieldName: 'terms',
         fieldLabel: 'I accept the terms and conditions',
@@ -11,5 +8,4 @@ Accounts.ui.config({
         visible: true,
         saveToProfile: false
     }],
-
 });

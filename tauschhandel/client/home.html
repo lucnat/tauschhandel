@@ -11,14 +11,11 @@
 			<input id='titel' class='form-control' type="text" placeholder="titel"><br>
 			<input id='text' class='form-control' type="text" placeholder="text"><br>
 			<input id='bild' class='form-control' type="text" placeholder="Bild URL"><br>
-			
 			<div class='checkbox'>
 				<label>
 					<input id='istAngebot' type="checkbox"> Ist Angebot
 				</label>
 			</div>
-
-
 			<h4>Tags:</h4>
 			{{#each possibleTags}}
 				<div class='checkbox'>
@@ -34,7 +31,7 @@
 <template name="posts">
 	{{#each posts}}
 		<div class='post' style='border: 2px solid #ccc; margin-top: 10px; padding: 10px'>
-		{{> post}}
+			{{> post}}
 		</div>
 	{{/each}}
 </template>
@@ -45,5 +42,4 @@
 	<img src="{{bild}}}" width='400'>
 	<p style="color: grey"> - erstellt von {{userName}}</p>
 	<p>tags: {{#each tags}} {{this}} {{/each}}</p>
-
 </template>
