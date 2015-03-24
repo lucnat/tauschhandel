@@ -22,6 +22,36 @@ pos[0] = [Math.random(), Math.random()];
 var minRelBreite = 220/914;
 var minRelHoehe = 260/885;
 
+var topbar = new Surface({
+	size: [undefined, 50],
+	properties: {
+		borderBottom: '1px solid white',
+	}
+});
+
+
+var homeButton = new Surface({
+	size: [true, true],
+	content: '<button>Home</button>',
+	properties: {
+		lineHeight: '50px',
+
+	}
+});
+
+var homeButtonMod = new Modifier({
+		origin: [0, 0],
+		align: [0, 0],
+		transform: Transform.translate(15,0,0),
+		
+});
+
+mainContext.add(topbar);
+mainContext.add(homeButtonMod).add(homeButton);
+
+
+
+
 
 
 for(var i=1; i<7; i++){
@@ -67,6 +97,7 @@ pos.forEach(function(pos){
 
 	mainContext.add(bgmod).add(postitbg);
 	mainContext.add(postitmod).add(postitText);
+
 
 });
 

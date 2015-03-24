@@ -1,16 +1,26 @@
-#famous global seed
-> A Seed Project to get started with the global build of Famo.us
+#Positioning
 
-##Getting Started
+## z = 0
+- bg 'Holzhintergrund'
 
-To get started with this project you can choose to either git-clone or [download the zip](https://github.com/Famous/famous-global-seed/archive/master.zip)
+## z = 1
+- Post-it's
 
-open index.html, and start writing code in src/main.js
+## z = 2
+- topbar
 
-That's it!!!
+### z = 2.5
+- buttons topbar
 
-## Contributing
-All contributions are welcome! The simplest way to show your support for this project is to **"star" it**.
+## z = 3
+- detailView
+- tabs: Profile, Info
 
-##License
-ISC
+### z = 3.1
+- submitt form
+
+## z = 4
+- login
+
+## z = 5
+- Slideshow
