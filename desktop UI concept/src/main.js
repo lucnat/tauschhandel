@@ -6,6 +6,7 @@ var Transform 		= famous.core.Transform;
 var mainContext 	= Engine.createContext();
 
 
+// Background
 var bg = new ImageSurface({
   size: [undefined, undefined],
 })
@@ -15,13 +16,7 @@ bg.setContent('http://img.gawkerassets.com/img/17lm97guuqu9zpng/original.png');
 mainContext.add(bg);
 
 
-
-var pos = [];
-pos[0] = [Math.random(), Math.random()];
-
-var minRelBreite = 220/914;
-var minRelHoehe = 260/885;
-
+// Topbar
 var topbar = new Surface({
 	size: [undefined, 50],
 	properties: {
@@ -30,28 +25,58 @@ var topbar = new Surface({
 });
 
 
+// Buttons: Surfaces & Modifiers
 var homeButton = new Surface({
 	size: [true, true],
-	content: '<button>Home</button>',
+	content: '<input type="image" src="https://www.hernandocountygis-fl.us/PropertySearch/Images/Home%20Button.png" name="image" width="30" height="30">',
 	properties: {
-		lineHeight: '50px',
-
+		
 	}
 });
 
 var homeButtonMod = new Modifier({
-		origin: [0, 0],
+		origin: [0, 0.5, 2.5],
 		align: [0, 0],
-		transform: Transform.translate(15,0,0),
+		transform: Transform.translate(15,25,0),
+		
+});
+
+var profileButton = new Surface({
+	size: [true, true],
+	content: '<input type="image" src="http://i.imgur.com/TiLqB9T.gif" name="image" width="40" height="40">',
+});
+
+var profileButtonMod = new Modifier({
+		origin: [0, 0.5, 2.5],
+		align: [0, 0],
+		transform: Transform.translate(45,25,0),
+		
+});
+
+var infoButton = new Surface({
+	size: [true, true],
+	content: '<input type="image" src="http://www.journalism.co.za/wp-content/uploads/2014/08/more_information_icon.jpg" name="image" width="40" height="40">',
+});
+
+var infoButtonMod = new Modifier({
+		origin: [0, 0.5, 2.5],
+		align: [0, 0],
+		transform: Transform.translate(75,25,0),
 		
 });
 
 mainContext.add(topbar);
 mainContext.add(homeButtonMod).add(homeButton);
+mainContext.add(profileButtonMod).add(profileButton);
+mainContext.add(infoButtonMod).add(infoButton);
 
 
+// Random Post-it Machine
+var pos = [];
+pos[0] = [Math.random(), Math.random()];
 
-
+var minRelBreite = 220/914;
+var minRelHoehe = 260/885;
 
 
 for(var i=1; i<7; i++){
