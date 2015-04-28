@@ -1,20 +1,28 @@
 <template name="profile">
-	{{> nachrichten}}
+	{{> konversationen}}
 	{{> watchList}}
 	{{> benutzerdaten}}
 	{{> einstellungen}}
 </template>
 
-<template name="nachrichten">
-	<h3>Notifications:</h3>
-	{{#each notifications}}
-		{{> notification}}
+<template name="konversationen">
+	<h3>Konversationen:</h3>
+	{{#each konversationen}}
+		{{> konversation}}
 	{{/each}}
+</template>
+
+<template name="konversation">
+	<div class="panel-heading">Konversationspartner, Post</div>
+	<div class="panel-body">
+		<h4>{{subject}}</h4>
+		<p>{{text}}</p>
+	</div>
 </template>
 
 <template name="nachricht">
 	<div class="panel panel-success">
-		<div class="panel-heading">von: {{absenderName}} | an: {{empfaengerName}}</div>
+		<div class="panel-heading">von: {{absender}} | an: {{empfaenger}}</div>
 		<div class="panel-body">
 			<h4>{{subject}}</h4>
 			<p>{{text}}</p>

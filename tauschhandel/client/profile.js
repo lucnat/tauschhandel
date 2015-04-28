@@ -1,25 +1,15 @@
-Template.nachrichten.helpers({
-    'nachrichten': function() {
+Template.konversationen.helpers({
+    'konversationen': function() {
         var me = Meteor.user()._id;
-        console.log(me);
         var myOutbox = Messages.find({
             absender: me
         }).fetch();
         var myInbox = Messages.find({
             empfaenger: me
         }).fetch();
-        return myInbox.concat(myOutbox);
+        
+        var myMessages = myInbox.concat(myOutbox);
+        console.log(myMessages);
+        return null
     }
-});
-Template.nachricht.helpers({
-    'absenderName': function() {
-        return Users.findOne({
-            '_id': this.absender
-        }).username;
-    },
-    'empfaengerName': function() {
-        return Users.findOne({
-            '_id': this.empfaenger
-        }).username;
-    },
 });

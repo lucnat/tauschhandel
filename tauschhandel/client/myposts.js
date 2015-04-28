@@ -17,7 +17,8 @@ Template.mypost.helpers({
 Template.discussionPair.events({
     'submit form': function(event) {
         event.preventDefault();
-        var antwort = event.target.children[0].value;
+        var antwort = $('#antwort').val();
+        
         PostDiscussions.update({
             _id: this._id
         }, {
@@ -26,5 +27,6 @@ Template.discussionPair.events({
                 published: true
             }
         });
+        
     }
 });

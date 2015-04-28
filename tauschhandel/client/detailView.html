@@ -4,6 +4,7 @@
 	Kategorie: {{#each tags}} {{this}} {{/each}}
 	<p style="color: grey"> - erstellt von {{userEmail}}</p>
 	<button id='interesseButton' class='btn btn-success'> Interesse Melden </button>
+	<p>vergeben an: {{vergebenAn}}</p>
 	<h3>Fragen & Antworten:</h3>
 	{{#each discussions}}
 		{{> discussionPair}}

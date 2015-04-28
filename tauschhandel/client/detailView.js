@@ -6,7 +6,7 @@ Template.detailView.events({
             question: $('#text').val(),
             answer: '',
             questioner: Meteor.user()._id,
-            published: false,
+            published: true,
             changedAt: new Date(),
         }
         PostDiscussions.insert(newDiscussionPair);
