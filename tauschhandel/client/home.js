@@ -1,9 +1,9 @@
-Template.posts.helpers({
+Template.previewList.helpers({
     'posts': function() {
         return Posts.find({}).fetch();
     },
 });
-Template.posts.events({
+Template.previewList.events({
     'click .post': function() {
         Router.go('/p/' + this._id);
     },
@@ -41,9 +41,3 @@ Template.createPost.events({
         }
     }
 });
-Template.home.rendered = function() {
-    console.log(this);
-}
-Template.posts.rendered = function() {
-    console.log(this);
-}

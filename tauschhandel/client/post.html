@@ -1,0 +1,67 @@
+
+<template name='post'>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div style='float: left'>{{title}}  - erstellt {{userName}}</div>
+			<div style='text-align: right'><button class='btn btn-primary btn-sm'>edit</button></div>
+		</div>
+		<div class="panel-body">
+			<img src="{{bild}}}" width='200'>
+			<p>{{text}}</p>
+
+			{{> discussion}}
+			
+			<br>
+			<p>tags: {{#each tags}} {{this}} {{/each}}</p>
+		</div>
+	</div>
+
+</template>
+
+<template name="discussion">
+	{{#if previewMode}}
+	{{else}}
+		{{#each discussions}}
+			{{> discussionPair}}
+		{{/each}}
+	{{/if}}
+
+	{{#if loggedIn}}
+		{{> createPostQuestion}}
+	{{/if}}
+
+</template>
+
+
+<template name="discussionPair">
+	<div class="panel panel-success">
+		<div class="panel-heading"><label>Frage:</label><br> {{question}}
+			<div class="panel-body">
+				{{#if answer}}
+					<label>Antwort: </label><br> {{answer}}
+				{{else}}
+					{{#if isMyPost}}
+						<form role='form'>
+							<label>Antwort: </label><br> <input id='antwort' class='form-control' type="text" placeholder="Antwort">
+						</form>
+					{{else}}
+						<p>Noch keine Antwort</p>
+					{{/if}}
+				{{/if}}
+			</div>
+		</div>
+
+	</div>
+</template>
+
+<template name='createPostQuestion'>
+	<form role='form'>
+		<div class="input-group">
+			<input id='text' type="text" class="form-control" placeholder="Stelle eine Frage...">
+			<span class="input-group-btn">
+				<button id='submitButton' class="btn btn-success" type="button">Frage stellen!</button>
+			</span>
+		</div>
+	</form>
+
+</template>

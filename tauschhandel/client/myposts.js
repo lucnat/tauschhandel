@@ -6,27 +6,5 @@ Template.myposts.helpers({
             }).fetch();
         } catch (e) {}
     }
-});
-Template.mypost.helpers({
-    'discussions': function() {
-        return PostDiscussions.find({
-            postID: this._id
-        }).fetch();
-    }
-});
-Template.discussionPair.events({
-    'submit form': function(event) {
-        event.preventDefault();
-        var antwort = $('#antwort').val();
-        
-        PostDiscussions.update({
-            _id: this._id
-        }, {
-            $set: {
-                answer: antwort,
-                published: true
-            }
-        });
-        
-    }
+    
 });

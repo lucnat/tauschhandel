@@ -28,5 +28,9 @@ Template.detailView.helpers({
             postID: this._id,
             published: true
         }).fetch();
+    },
+
+    'loggedIn': function(){
+        return !!Meteor.user();
     }
 });

@@ -1,24 +1,5 @@
 <template name='detailView'>
-	<h3>{{title}}</h3>
-	<p>{{text}}</p>
-	Kategorie: {{#each tags}} {{this}} {{/each}}
-	<p style="color: grey"> - erstellt von {{userEmail}}</p>
-	<button id='interesseButton' class='btn btn-success'> Interesse Melden </button>
-	<p>vergeben an: {{vergebenAn}}</p>
-	<h3>Fragen & Antworten:</h3>
-	{{#each discussions}}
-		{{> discussionPair}}
-	{{/each}}
-	{{> createPostQuestion}}
+	{{> post}}
 </template>
 
 
-<template name='createPostQuestion'>
-	<div style='width: 400px; border: 2px solid #ccc; padding: 20px'>
-		<h3>Etwas fragen zum Post:</h3>
-		<form role='form'>
-			<input id='text' class='form-control' type="text" placeholder="text"><br>
-			<input id='submitButton' class='btn btn-success' type="submit" value="Frage stellen"><br>
-		</form>
-	</div>
-</template>
