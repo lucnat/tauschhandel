@@ -9,20 +9,18 @@ Template.discussion.helpers({
     },
 
     'previewMode': function(){
-        console.log('PreviewMode: ' + Session.get('previewMode'));
         return Session.get('previewMode');
+    },
+
+    'isMyPost': function(){
+        return isMyPost(this._id);
     }
 
 });
 
 Template.discussionPair.helpers({
     'isMyPost': function(){
-        var post = Posts.findOne({_id: this.postID});
-        console.log(post);
-        if(post.userID === Meteor.user()._id)
-            return true
-        else
-            return false;
+        return isMyPost(this.postID);
     }
 
 });
@@ -42,3 +40,11 @@ Template.discussionPair.events({
         });
     }
 });
+
+function isMyPost(postID){
+    var post = Posts.findOne({_id: postID});
+    if(post.userID === Meteor.user()._id)
+        return true
+    else
+        return false;
+}

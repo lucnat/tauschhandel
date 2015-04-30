@@ -1,3 +1,7 @@
+Template.detailView.rendered = function(){
+    Session.set('previewMode', false);
+}
+
 Template.detailView.events({
     'submit form': function(event) {
         event.preventDefault();
@@ -22,6 +26,7 @@ Template.detailView.events({
         }, post);
     }
 });
+
 Template.detailView.helpers({
     'discussions': function() {
         return PostDiscussions.find({

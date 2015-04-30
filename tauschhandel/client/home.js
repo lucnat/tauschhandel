@@ -1,3 +1,7 @@
+Template.home.rendered = function(){
+    Session.set('previewMode', true);
+}
+
 Template.previewList.helpers({
     'posts': function() {
         return Posts.find({}).fetch();

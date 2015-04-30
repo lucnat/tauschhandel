@@ -1,3 +1,7 @@
+Template.myposts.rendered = function(){
+	Session.set('previewMode', false);
+}
+
 Template.myposts.helpers({
     'myPosts': function() {
         try {
