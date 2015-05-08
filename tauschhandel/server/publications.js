@@ -9,8 +9,12 @@ Meteor.publish('posts', function(){
 });
 
 Meteor.publish('postdiscussions', function(){
-	return PostDiscussions.find({});
+	return PostDiscussions.find({published: true});
 });
+
+Meteor.publish('notifications', function(userID){
+	return Notifications.find({ receiver: userID });
+})
 
 Meteor.publish('messages', function(){
 	//TODO: do not publish all messages, but only if current user is sender or recipient

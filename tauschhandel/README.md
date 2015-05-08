@@ -1,4 +1,19 @@
-# Data Structure
+# Roadmap
+## V0.5
+ - All discussions published
+ - Desktop UI bootstrap
+ - phone UI
+ - notifications
+
+## V0.6
+ - spam detection
+ - image upload
+
+## V0.7
+ - Desktop UI
+ - Search by text, tag
+ - messages
+ - post edit
 
 ## Datenbanken
 	- Users
@@ -39,6 +54,14 @@
 	- published
 	- changed at
 
+### Notifications
+	- _id
+	- triggerer
+	- receiver
+	- message
+	- link
+	- createdAt
+	- readAt
 
 ### Messages
 	- _id
@@ -48,6 +71,7 @@
 	- empfaenger
 	- sentAt
 	- readAt
+
 
 ### AdminShizzle
 	- 

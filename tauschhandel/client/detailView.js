@@ -5,6 +5,7 @@ Template.detailView.rendered = function(){
 Template.detailView.events({
     'submit form': function(event) {
         event.preventDefault();
+        console.log(this);
         var newDiscussionPair = {
             postID: this._id,
             question: $('#text').val(),
@@ -14,6 +15,10 @@ Template.detailView.events({
             changedAt: new Date(),
         }
         PostDiscussions.insert(newDiscussionPair);
+        var notification = {
+            triggerer: Meteor.user()._id,
+            receiver: 
+        }
         $('#text').val('');
     },
     'click #interesseButton': function() {
