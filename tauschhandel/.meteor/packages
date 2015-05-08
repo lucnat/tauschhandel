@@ -8,10 +8,10 @@ meteor-platform
 insecure
 msavin:mongol
 accounts-password
-twbs:bootstrap
 iron:router
-ian:accounts-ui-bootstrap-3
 accounts-facebook
 accounts-google
-mjn:famous
-gadicohen:famous-views
+meteoric:ionic
+meteoric:ionicons-sass
+meteoric:ionic-sass
+accounts-ui

@@ -1,6 +1,12 @@
 <template name="profile">
+
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Profile</h1>
+	{{/contentFor}}
+
+	{{> loginButtons}}<br><br>
+
 	{{> konversationen}}
-	{{> notifications}}
 	{{> benutzerdaten}}
 	{{> einstellungen}}
 </template>
@@ -29,23 +35,6 @@
 		</div>
 	</div>
 </template>
-
-<template name="notifications">
-	<h3>Notifications</h3>
-	{{#each notifications}}
-		{{> notification}}
-	{{/each}}
-</template>
-
-<template name="notification">
-	{{#if readAt}}
-		<a href="{{link}}">{{message}}</a>
-	{{else}}
-		<a href="{{link}}">{{message}} </a> <button class='btn btn-default'>Als gelesen markieren</button>
-	{{/if}}
-	<br>
-</template>
-
 
 <template name="benutzerdaten">
 	<h3>Benutzerdaten: </h3>

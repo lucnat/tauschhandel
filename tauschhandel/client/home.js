@@ -42,6 +42,7 @@ Template.createPost.events({
                 vergebenAn: null
             }
             Posts.insert(newPost);
+            IonModal.close();
         }
     }
 });

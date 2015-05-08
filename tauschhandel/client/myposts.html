@@ -1,5 +1,9 @@
 <template name='myposts'>
-	<h3>Meine Posts</h3>
+	
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">My Posts</h1>
+	{{/contentFor}}
+
 	{{#each myPosts}}
 		{{> post}}
 	{{/each}}

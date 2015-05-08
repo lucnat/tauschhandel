@@ -4,9 +4,12 @@ Router.configure({
 
 Router.route('/', {name: 'home'});
 
+Router.route('/myposts', {name: 'myposts'});
+
+Router.route('/notifications', {name: 'notifications'});
+
 Router.route('/profile', {name: 'profile'});
 
-Router.route('/myposts', {name: 'myposts'});
 
 Router.route('/p/:postId', {
 	name: 'detailView',

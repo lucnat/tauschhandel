@@ -1,0 +1,19 @@
+<template name="notifications">
+	
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Notifications</h1>
+	{{/contentFor}}
+
+	{{#each notifications}}
+		{{> notification}}
+	{{/each}}
+</template>
+
+<template name="notification">
+	{{#if readAt}}
+		<a href="{{link}}">{{message}}</a>
+	{{else}}
+		<a href="{{link}}">{{message}} </a> <button class='btn btn-default'>Als gelesen markieren</button>
+	{{/if}}
+	<br>
+</template>

@@ -1,9 +1,26 @@
 <template name='layout'>
-	<div style='padding: 20px'>
-		<a href="{{pathFor 'home'}}" class='btn btn-primary'>Home</a>
-		<a href="{{pathFor 'profile'}}" class='btn btn-primary'>Profile</a>
-		<a href="{{pathFor 'myposts'}}" class='btn btn-primary'>Meine Posts</a>
-		{{> loginButtons}}<br><br>
-		{{> yield}}
-	</div>
+	{{#ionBody}}
+
+		{{> ionNavBar class="bar-dark"}}
+
+		{{#contentFor "headerTitle"}}
+			<h1 class="title">Tauschhandel</h1>
+		{{/contentFor}}
+
+		{{#ionContent class="padding"}}
+
+			<div style='padding'>
+				{{> yield}}
+			</div>
+
+		{{/ionContent}}
+
+      {{#ionTabs style="ios"}}
+        {{> ionTab title="Home" path="home" iconOff="ios-bolt-outline" iconOn="ios-bolt" class="tab-item-positive"}}
+        {{> ionTab title="My Posts" path="myposts" iconOff="ios-clock-outline" iconOn="ios-clock" class="tab-item-positive"}}
+        {{> ionTab title="Notifications" path="notifications" iconOff="ios-bell-outline" iconOn="ios-bell" class="tab-item-positive"}}
+        {{> ionTab title="Profile" path="profile" iconOff="ios-person-outline" iconOn="ios-person" class="tab-item-positive"}}
+      {{/ionTabs}}
+
+	{{/ionBody}}
 </template>

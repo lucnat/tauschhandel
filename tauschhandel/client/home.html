@@ -1,40 +1,83 @@
 
 <template name='home'>
-		{{> createPost}}
-		<br><br>
-		{{> previewList}}
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Home</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		<button class="button button-clear pull-left" data-ion-modal="search">
+			{{> ionIcon icon='ios-search'}}
+		</button>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		<button class="button button-clear pull-right" data-ion-modal="createPost">
+			{{> ionIcon icon='ios-plus-empty'}}
+		</button>
+	{{/contentFor}}
+
+	{{> previewList}}
 </template>
 
 <template name="createPost">
-	<div style='width: 400px; border: 2px solid #ccc; padding: 20px'>
-		<h3>Neuen post erstellen:</h3>
-		<form role='form'>
-			<input id='titel' class='form-control' type="text" placeholder="titel"><br>
-			<input id='text' class='form-control' type="text" placeholder="text"><br>
-			<input id='bild' class='form-control' type="text" placeholder="Bild URL"><br>
-			<div class='checkbox'>
-				<label>
-					<input id='istAngebot' type="checkbox"> Ist Angebot
+	{{#ionModal title='Neuer Post'}}
+		<div class='padding'>
+
+			<h3>Neuen post erstellen:</h3>
+			<form>
+				<label class="item item-input">
+					<i class="icon ion-home placeholder-icon"></i>
+					<input id='titel' type="text" placeholder="titel"><br>
 				</label>
-			</div>
-			<h4>Tags:</h4>
-			{{#each possibleTags}}
-				<div class='checkbox'>
-					<label> <input class="tag" id='{{tag}}' type="checkbox"> {{tag}} </label>
-				</div>
-			{{/each}}
-			<input id='submitButton' class='btn btn-success' type="button" value="Submit Post"><br>
-		</form>
-	</div>
+				<label class="item item-input">
+					<i class="icon ion-document-text placeholder-icon"></i>
+					<input id='text'  type="text" placeholder="text"><br>
+				</label>
+				<label class="item item-input">
+					<i class="icon ion-image placeholder-icon"></i>
+					<input id='bild'  type="text" placeholder="Bild URL"><br>
+				</label>
+
+				<ul class="list">
+					<li class="item item-toggle">
+						Ist Angebot
+
+						<label class="toggle">
+							<input id='istAngebot' type="checkbox" checked='true'>
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+					</li>
+				</ul>
+
+				<h4>Tags:</h4>
+				{{#each possibleTags}}
+					<div class='checkbox'>
+						<label> <input class="tag" id='{{tag}}' type="checkbox"> {{tag}} </label>
+					</div>
+				{{/each}}
+				<input id='submitButton' class='button button-positive' type="button" value="Submit Post"><br>
+			</form>
+		</div>
+	{{/ionModal}}
 </template>
 
 
 <template name="previewList">
-
-	{{#each posts}}
-		<div class='post'>
-			{{> post}}
-		</div>
-	{{/each}}
+	{{#ionList}}
+		{{#each posts}}
+			{{> postPreview}}
+		{{/each}}
+	{{/ionList}}
 </template>
+
+<template name="postPreview">
+	{{#ionItem iconLeft=true iconRight=true}}
+		<h2>{{title}}</h2> 
+		<p>{{text}}</p>
+		{{> ionIcon icon="ios-arrow-forward" class="positive"}}
+	{{/ionItem}}
+</template>
+
 
