@@ -1,7 +1,14 @@
 //Meteor.subscribe('allUsers');
 Meteor.subscribe('posts');
 Meteor.subscribe('postdiscussions');
-Meteor.subscribe('notifications', [ Meteor.user()._id ] )
+
+Tracker.autorun(function(){
+	try{
+		Meteor.subscribe('notifications', Meteor.user()._id);
+	} catch(e){ }
+	
+});
+
 Meteor.subscribe('messages');
 Meteor.subscribe('tags');
 Meteor.subscribe('adminshizzle');

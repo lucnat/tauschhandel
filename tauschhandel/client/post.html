@@ -9,6 +9,19 @@
 			<img src="{{bild}}}" width='200'>
 			<p>{{text}}</p>
 
+			{{#if isMyPost}}
+				Vergebe an Interessent:
+				{{> interessenten}}
+			{{else}}
+				{{#if hasInterest}}
+					<button id='interesseMelden' class='btn btn-warning disabled'>Interesse Melden</button>
+				{{else}}
+					<button id='interesseMelden' class='btn btn-warning '>Interesse gemeldet</button>
+				{{/if}}
+			{{/if}}
+
+			<br><br>
+
 			{{> discussion}}
 			
 			<br>
@@ -18,7 +31,18 @@
 
 </template>
 
+<template name="interessenten">
+	{{#each interessenten}}
+		{{> interessent}}
+	{{/each}}
+</template>
+
+<template name="interessent">
+	<button class='btn btn-default'>{{this}}</button> <br>
+</template>
+
 <template name="discussion">
+	<h3>Q&A</h3>
 	{{#if previewMode}}
 	{{else}}
 		{{#each discussions}}
@@ -26,12 +50,10 @@
 		{{/each}}
 	{{/if}}
 
-
 	{{#if isMyPost}}
 	{{else}}
 		{{> createPostQuestion}}
 	{{/if}}
-
 </template>
 
 
