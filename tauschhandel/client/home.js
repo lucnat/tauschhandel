@@ -1,3 +1,5 @@
+Session.set('imageIDs', []);
+
 Template.home.rendered = function(){
     Session.set('previewMode', true);
 }
@@ -16,6 +18,10 @@ Template.createPost.helpers({
     'possibleTags': function() {
         return Tags.find({}).fetch();
     },
+
+    'imageIDs': function(){
+        return Session.get('imageIDs');
+    }
 });
 Template.createPost.events({
     'click #submitButton': function() {
@@ -31,7 +37,7 @@ Template.createPost.events({
                 title: $('#titel').val(),
                 text: $('#text').val(),
                 istAngebot: $('#istAngebot')[0].checked,
-                bild: $('#bild').val(),
+                imageIDs: Session.get('imageIDs'),
                 tags: tags,
                 userID: Meteor.user()._id,
                 userName: Meteor.user().username,
@@ -42,7 +48,33 @@ Template.createPost.events({
                 vergebenAn: null
             }
             Posts.insert(newPost);
+
+            Session.set('imageIDs', []);
             IonModal.close();
         }
+    },
+    'click #imageUpload': function(event){
+        event.preventDefault();
+        MeteorCamera.getPicture(function(error, localData){
+
+            options = {
+                apiKey: '9c96a9ec19cc485',
+                image: localData,
+            }
+
+            console.log(localData);
+
+            Imgur.upload(options, function(error, remoteData){
+                if(error){
+                    alert(error);
+                }
+                var image = $('#image');
+                var ids = Session.get('imageIDs');
+                ids.push(remoteData.id);
+                Session.set('imageIDs', ids);
+            });
+
+        });
     }
+
 });

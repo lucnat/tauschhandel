@@ -5,3 +5,4 @@ isLoggedIn = function() {
         return false;
     } else return true;
 }
+

@@ -35,7 +35,10 @@
 				</label>
 				<label class="item item-input">
 					<i class="icon ion-image placeholder-icon"></i>
-					<input id='bild'  type="text" placeholder="Bild URL"><br>
+					{{#each imageIDs}}
+						<img id='image' src='http://i.imgur.com/{{this}}s.jpg'><br> &nbsp;&nbsp;&nbsp;
+					{{/each}}
+					<button id='imageUpload' class='button button-positive icon icon-left ion-plus'> Image</button>
 				</label>
 
 				<ul class="list">
@@ -55,10 +58,12 @@
 				{{#each possibleTags}}
 					<div class='checkbox'>
 						<label> <input class="tag" id='{{tag}}' type="checkbox"> {{tag}} </label>
-					</div>
+					</div><br>
 				{{/each}}
 				<input id='submitButton' class='button button-positive' type="button" value="Submit Post"><br>
 			</form>
+
+
 		</div>
 	{{/ionModal}}
 </template>
