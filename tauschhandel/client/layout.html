@@ -6,18 +6,14 @@
 		{{#contentFor "headerTitle"}}
 			<h1 class="title">Tauschhandel</h1>
 		{{/contentFor}}
-
-		{{#ionContent class="padding"}}
-
-			<div style='padding'>
-				{{> yield}}
-			</div>
-
-		{{/ionContent}}
+		
+		{{#ionNavView}}
+			{{> yield}}
+		{{/ionNavView}}
 
       {{#ionTabs style="ios"}}
-        {{> ionTab title="Home" path="home" iconOff="ios-bolt-outline" iconOn="ios-bolt" class="tab-item-positive"}}
-        {{> ionTab title="My Posts" path="myposts" iconOff="ios-clock-outline" iconOn="ios-clock" class="tab-item-positive"}}
+        {{> ionTab title="Browse" path="home" iconOff="ios-browsers-outline" iconOn="ios-browsers" class="tab-item-positive"}}
+        {{> ionTab title="Watchlist" path="watchlist" iconOff="android-favorite-outline" iconOn="android-favorite" class="tab-item-positive"}}
         {{> ionTab title="Notifications" path="notifications" iconOff="ios-bell-outline" iconOn="ios-bell" class="tab-item-positive"}}
         {{> ionTab title="Profile" path="profile" iconOff="ios-person-outline" iconOn="ios-person" class="tab-item-positive"}}
       {{/ionTabs}}

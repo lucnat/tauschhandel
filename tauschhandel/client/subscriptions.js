@@ -5,8 +5,7 @@ Meteor.subscribe('postdiscussions');
 Tracker.autorun(function(){
 	try{
 		Meteor.subscribe('notifications', Meteor.user()._id);
-	} catch(e){ }
-	
+	} catch(e) {}	
 });
 
 Meteor.subscribe('messages');

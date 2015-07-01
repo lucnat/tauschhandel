@@ -1,37 +1,69 @@
 
 <template name='post'>
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<div style='float: left'>{{title}}  - erstellt {{userName}}</div>
-			<div style='text-align: right'><button class='btn btn-primary btn-sm'>edit</button></div>
-		</div>
-		<div class="panel-body">
-			<img src="{{bild}}}" width='200'>
-			<p>{{text}}</p>
+	{{#contentFor "headerButtonLeft"}}
+		{{>ionNavBackButton path="home" text="Posts"}}
+	{{/contentFor}}
 
-			{{#if isMyPost}}
-				{{#if vergebenAn}}
-					Vergeben an {{vergebenAn}}
-				{{else}}
-					Vergebe an: <br>
-					{{> interessenten}}
+	{{#ionView}}
+	  {{#ionContent}}
+		<div class="card">
+			<div class="item item-divider">
+				{{post.title}} - by {{post.userName}}
+			</div>
+			<div class="item item-text-wrap">
+
+				<div id='slidebox' style='width: 100%'>
+					{{#ionSlideBox}}
+						{{#each post.imageIDs}}
+							{{#ionSlide class='light-bg'}}
+								<img src="http://i.imgur.com/{{this}}.jpg" width='100%'>
+							{{/ionSlide}}
+						{{/each}}
+				     {{/ionSlideBox}}
+				</div>
+				
+
+				<br>
+				<p>{{post.text}}</p>
+				<br>
+
+				<p>tags: {{#each post.tags}} {{this}} {{/each}}</p>
+				<br>
+				{{#if isMyPost}}
+					{{#if vergebenAn}}
+						Vergeben an {{vergebenAn}}
+					{{else}}
+						Vergebe an: <br>
+						{{> interessenten}}
+					{{/if}}
 				{{/if}}
-			{{else}}
+
+			</div>
+
+			<div class="item tabs tabs-secondary tabs-icon-left">
 				{{#if hasInterest}}
-					<button id='interesseMelden' class='btn btn-warning disabled'>Interesse Melden</button>
+					<a id='like' class="tab-item" href="#" style='background-color: #FF5C5C; border-radius: 5px'>
+				      <i class="icon ion-thumbsup"></i>
+				      Like
+					</a>
 				{{else}}
-					<button id='interesseMelden' class='btn btn-warning '>Interesse gemeldet</button>
+					<a id='like' class="tab-item" href="#">
+				      <i class="icon ion-thumbsup"></i>
+				      Like
+					</a>
 				{{/if}}
-			{{/if}}
-
-			<br><br>
-
-			{{> discussion}}
-			
-			<br>
-			<p>tags: {{#each tags}} {{this}} {{/each}}</p>
+				<a class="tab-item" href="#">
+					<i class="icon ion-chatbox"></i>
+					Q&A
+				</a>
+				<a class="tab-item" href="#">
+					<i class="icon ion-share"></i>
+					Share
+				</a>
+			</div>
 		</div>
-	</div>
+	  {{/ionContent}}
+	{{/ionView}}
 
 </template>
 
@@ -46,7 +78,6 @@
 </template>
 
 <template name="discussion">
-	<h3>Q&A</h3>
 	{{#if previewMode}}
 	{{else}}
 		{{#each discussions}}
@@ -85,11 +116,12 @@
 <template name='createPostQuestion'>
 	<form role='form'>
 		<div class="input-group">
-			<input id='text' type="text" class="form-control" placeholder="Stelle eine Frage...">
-			<span class="input-group-btn">
-				<button id='submitButton' class="btn btn-success" type="button">Frage stellen!</button>
-			</span>
+		<label class="item item-input">
+			<textarea id='text' placeholder="Comments"></textarea>
+		</label>
+		<label class="item item-input">
+			<button id='submitButton' class="button button-positive button-outline" type="button">Frage stellen!</button>
+		</label>
 		</div>
 	</form>
-
 </template>

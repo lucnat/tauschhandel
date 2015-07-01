@@ -16,7 +16,11 @@
 		</button>
 	{{/contentFor}}
 
-	{{> previewList}}
+	{{#ionView}}
+	  {{#ionContent}}
+		{{> previewList}}
+	  {{/ionContent}}
+	{{/ionView}}
 </template>
 
 <template name="createPost">
@@ -38,7 +42,7 @@
 					{{#each imageIDs}}
 						<img id='image' src='http://i.imgur.com/{{this}}s.jpg'><br> &nbsp;&nbsp;&nbsp;
 					{{/each}}
-					<button id='imageUpload' class='button button-positive icon icon-left ion-plus'> Image</button>
+					<button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Image</button>
 				</label>
 
 				<ul class="list">
@@ -78,7 +82,8 @@
 </template>
 
 <template name="postPreview">
-	{{#ionItem iconLeft=true iconRight=true}}
+	{{#ionItem path="post" avatar=true iconRight=true class="item-icon-right" }}
+	 	<img src="http://i.imgur.com/{{imageIDs.[0]}}b.jpg">
 		<h2>{{title}}</h2> 
 		<p>{{text}}</p>
 		{{> ionIcon icon="ios-arrow-forward" class="positive"}}

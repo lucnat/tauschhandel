@@ -62,8 +62,6 @@ Template.createPost.events({
                 image: localData,
             }
 
-            console.log(localData);
-
             Imgur.upload(options, function(error, remoteData){
                 if(error){
                     alert(error);

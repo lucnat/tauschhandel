@@ -4,11 +4,16 @@
 		<h1 class="title">Profile</h1>
 	{{/contentFor}}
 
-	{{> loginButtons}}<br><br>
+	{{#ionView}}
+	  {{#ionContent class='padding'}}
+	  <br><br>
+		{{> loginButtons}}<br><br>
+		{{> konversationen}}
+		{{> benutzerdaten}}
+		{{> einstellungen}}
+	  {{/ionContent}}
+	{{/ionView}}
 
-	{{> konversationen}}
-	{{> benutzerdaten}}
-	{{> einstellungen}}
 </template>
 
 <template name="konversationen">

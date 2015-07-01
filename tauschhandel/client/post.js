@@ -1,7 +1,11 @@
 Template.post.helpers({
+    'post': function(){
+        return Posts.findOne({_id: Router.current().params._id});
+    },
+
     'discussions': function() {
         return PostDiscussions.find({
-            postID: this._id,
+            postID: Posts.findOne({_id: Router.current().params._id}),
             published: true
         }).fetch();
     },
@@ -12,7 +16,8 @@ Template.post.helpers({
 
     'hasInterest': function(arg){
         try{
-            if($.inArray(Meteor.user()._id, this.interessenten) >= 0) 
+            var interessenten = Posts.findOne({ _id: Router.current().params._id }).interessenten;
+            if($.inArray(Meteor.user()._id, interessenten) >= 0) 
                 return true;
         } catch(e) {}
         return false;
@@ -48,19 +53,31 @@ Template.post.events({
 
         $('#text').val('');
     },
-    'click #interesseMelden': function() {
-        console.log(this);
+    'click #like': function(event, template) {
+        var post = Posts.findOne({ '_id': Router.current().params._id });
         var notification = {
             triggerer:  Meteor.user()._id,
-            receiver:   this.userID,
+            receiver:   post.userID,
             message:    'Es wurde Interesse an einem deiner Posts gemolden von ' + Meteor.user().username,
-            link:       '/p/'+this._id,
+            link:       '/post/'+post._id,
             createdAt:  new Date(),
             readAt:     null,
         };
-        Posts.update({_id: this._id}, { $push: {interessenten: Meteor.user()._id} })
+        
+        // toggle interessenten:
+        var interessenten = Posts.findOne({ _id: post._id }).interessenten;
+        if($.inArray(Meteor.userId(), interessenten) >= 0){
+            // means is already there, let's remove it
+            Posts.update({_id: post._id}, { $pull: {interessenten: Meteor.userId()} })
+        } else {
+            // means doesn't exist yet, let's push to array
+            Posts.update({_id: post._id}, { $push: {interessenten: Meteor.userId()} })
+        }
+        
+
         Notifications.insert(notification);
-        alert('Du hast Interesse gemeldet.');
+
+        //alert('Du hast interesse gemolden');
     }
 });
 

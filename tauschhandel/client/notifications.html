@@ -4,16 +4,21 @@
 		<h1 class="title">Notifications</h1>
 	{{/contentFor}}
 
-	{{#each notifications}}
-		{{> notification}}
-	{{/each}}
+	{{#ionView}}
+	  {{#ionContent}}
+	  	<div class="list card">
+			{{#each notifications}}
+				{{> notification}}
+			{{/each}}
+		</div>
+	  {{/ionContent}}
+	{{/ionView}}
+
 </template>
 
 <template name="notification">
-	{{#if readAt}}
-		<a href="{{link}}">{{message}}</a>
-	{{else}}
-		<a href="{{link}}">{{message}} </a> <button class='btn btn-default'>Als gelesen markieren</button>
-	{{/if}}
-	<br>
+	<a href="#" class="item item-icon-left">
+	    <i class="icon ion-android-favorite"></i>
+	    {{message}}
+	</a>
 </template>
