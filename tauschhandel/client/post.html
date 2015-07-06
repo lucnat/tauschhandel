@@ -16,7 +16,7 @@
 					{{#ionSlideBox}}
 						{{#each post.imageIDs}}
 							{{#ionSlide class='light-bg'}}
-								<img src="http://i.imgur.com/{{this}}.jpg" width='100%'>
+								<img src="http://i.imgur.com/{{this}}l.jpg" width='100%'>
 							{{/ionSlide}}
 						{{/each}}
 				     {{/ionSlideBox}}
@@ -29,17 +29,12 @@
 
 				<p>tags: {{#each post.tags}} {{this}} {{/each}}</p>
 				<br>
-				{{#if isMyPost}}
-					{{#if vergebenAn}}
-						Vergeben an {{vergebenAn}}
-					{{else}}
-						Vergebe an: <br>
-						{{> interessenten}}
-					{{/if}}
-				{{/if}}
 
 			</div>
 
+			{{#if isMyPost}}
+				
+			{{else}}
 			<div class="item tabs tabs-secondary tabs-icon-left">
 				{{#if hasInterest}}
 					<a id='like' class="tab-item" href="#" style='background-color: #FF5C5C; border-radius: 5px'>
@@ -61,6 +56,7 @@
 					Share
 				</a>
 			</div>
+			{{/if}}
 		</div>
 	  {{/ionContent}}
 	{{/ionView}}

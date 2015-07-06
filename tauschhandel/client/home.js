@@ -36,7 +36,7 @@ Template.createPost.events({
             var newPost = {
                 title: $('#titel').val(),
                 text: $('#text').val(),
-                istAngebot: $('#istAngebot')[0].checked,
+                istAngebot: true,
                 imageIDs: Session.get('imageIDs'),
                 tags: tags,
                 userID: Meteor.user()._id,

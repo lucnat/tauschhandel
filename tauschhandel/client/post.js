@@ -24,7 +24,7 @@ Template.post.helpers({
     },
 
     'isMyPost': function(){
-        return isMyPost(this._id);
+        return isMyPost();
     }
 });
 
@@ -96,7 +96,7 @@ Template.discussion.helpers({
     },
 
     'isMyPost': function(){
-        return isMyPost(this._id);
+        return isMyPost();
     }
 });
 
@@ -122,7 +122,7 @@ Template.interessent.events({
 
 Template.discussionPair.helpers({
     'isMyPost': function(){
-        return isMyPost(this.postID);
+        return isMyPost();
     }
 });
 
@@ -156,8 +156,8 @@ Template.discussionPair.events({
     }
 });
 
-function isMyPost(postID){
-    var post = Posts.findOne({_id: postID});
+function isMyPost(){
+    var post = Posts.findOne({_id: Router.current().params._id});
     try{
         if(post.userID === Meteor.user()._id)
             return true;

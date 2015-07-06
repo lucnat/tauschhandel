@@ -24,19 +24,19 @@
 </template>
 
 <template name="createPost">
-	{{#ionModal title='Neuer Post'}}
+	{{#ionModal title='Neues Angebot hinzufügen'}}
+
 		<div class='padding'>
 
-			<h3>Neuen post erstellen:</h3>
 			<form>
 				<label class="item item-input">
 					<i class="icon ion-home placeholder-icon"></i>
-					<input id='titel' type="text" placeholder="titel"><br>
+					<input id='Titel' type="text" placeholder="titel"><br>
 				</label>
-				<label class="item item-input">
-					<i class="icon ion-document-text placeholder-icon"></i>
-					<input id='text'  type="text" placeholder="text"><br>
-				</label>
+					<label class="item item-input text" >
+						<i class="icon ion-document-text placeholder-icon"></i>
+						<textarea id='text' placeholder="\nBeschreibender Text" rows="10"></textarea>
+					</label>
 				<label class="item item-input">
 					<i class="icon ion-image placeholder-icon"></i>
 					{{#each imageIDs}}
@@ -44,19 +44,6 @@
 					{{/each}}
 					<button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Image</button>
 				</label>
-
-				<ul class="list">
-					<li class="item item-toggle">
-						Ist Angebot
-
-						<label class="toggle">
-							<input id='istAngebot' type="checkbox" checked='true'>
-							<div class="track">
-								<div class="handle"></div>
-							</div>
-						</label>
-					</li>
-				</ul>
 
 				<h4>Tags:</h4>
 				{{#each possibleTags}}
