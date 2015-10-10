@@ -45,7 +45,8 @@ Template.createPost.events({
                 viewCount: 0,
                 discussion: [],
                 interessenten: [],
-                vergebenAn: null
+                vergebenAn: '',
+                vergebenAnName: ''
             }
             Posts.insert(newPost);
 

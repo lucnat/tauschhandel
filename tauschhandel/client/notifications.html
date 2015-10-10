@@ -6,19 +6,22 @@
 
 	{{#ionView}}
 	  {{#ionContent}}
-	  	<div class="list card">
 			{{#each notifications}}
 				{{> notification}}
 			{{/each}}
-		</div>
 	  {{/ionContent}}
 	{{/ionView}}
 
 </template>
 
 <template name="notification">
-	<a href="#" class="item item-icon-left">
-	    <i class="icon ion-android-favorite"></i>
-	    {{message}}
-	</a>
+	<div class="card">
+		<div class="item item-text-wrap item-icon-left">
+		    <i class="icon ion-android-favorite"></i>
+		    {{message}} <a href="{{link}}">{{postTitle}}</a>
+		</div>
+	</div>
+
+
+
 </template>

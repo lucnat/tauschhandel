@@ -7,11 +7,12 @@
 	{{#ionView}}
 	  {{#ionContent}}
 		<div class="card">
-			<div class="item item-divider">
-				{{post.title}} - by {{post.userName}}
+			<div class="item item-avatar">
+				<img src="http://www.femto.it/wp-content/uploads/2014/04/default-user-avatar.png">
+				<h2>{{post.userName}}</h2>
+				<p>{{post.dateString}}</p>
 			</div>
 			<div class="item item-text-wrap">
-
 				<div id='slidebox' style='width: 100%'>
 					{{#ionSlideBox}}
 						{{#each post.imageIDs}}
@@ -21,53 +22,72 @@
 						{{/each}}
 				     {{/ionSlideBox}}
 				</div>
-				
-
 				<br>
 				<p>{{post.text}}</p>
 				<br>
-
 				<p>tags: {{#each post.tags}} {{this}} {{/each}}</p>
 				<br>
-
 			</div>
-
-			{{#if isMyPost}}
-				
-			{{else}}
-			<div class="item tabs tabs-secondary tabs-icon-left">
-				{{#if hasInterest}}
-					<a id='like' class="tab-item" href="#" style='background-color: #FF5C5C; border-radius: 5px'>
-				      <i class="icon ion-thumbsup"></i>
-				      Like
+			{{#unless isMyPost}}
+				<div class="item tabs tabs-secondary tabs-icon-left">
+						<a id="like" class="tab-item" href="#" style='{{#if hasInterest }}color: red {{/if}}'>
+					      <i class="icon ion-android-favorite"></i>
+					      Like
+						</a>
+					<a class="tab-item" href="#">
+						<i class="icon ion-chatbubble"></i>
+						Q&A
 					</a>
-				{{else}}
-					<a id='like' class="tab-item" href="#">
-				      <i class="icon ion-thumbsup"></i>
-				      Like
+					<a class="tab-item" href="#">
+						<i class="icon ion-share"></i>
+						Share
 					</a>
-				{{/if}}
-				<a class="tab-item" href="#">
-					<i class="icon ion-chatbox"></i>
-					Q&A
-				</a>
-				<a class="tab-item" href="#">
-					<i class="icon ion-share"></i>
-					Share
-				</a>
-			</div>
-			{{/if}}
+				</div>
+			{{/unless}}
 		</div>
+		{{#if isMyPost}}
+			{{#if esHatInteressenten}}
+				{{> giveAway}}
+			{{/if}}
+		{{/if}}
+
 	  {{/ionContent}}
 	{{/ionView}}
-
 </template>
 
-<template name="interessenten">
-	{{#each interessenten}}
-		{{> interessent}}
-	{{/each}}
+<template name="giveAway">
+	<div class="card">
+		<div class="item item-divider">
+			An jemanden vergeben
+		</div>
+		<div class="item item-text-wrap">
+			{{#if post.vergebenAn}}
+				<p>Wurde vergeben an <b>{{post.vergebenAnName}}</b></p>
+				<button id="revert" class="button button-block button-outline button-assertive">
+					Rückgängig machen
+				</button>
+			{{else}}
+				<p>Bitte wähle einen Interessenten aus.</p>
+				<div class="list">
+					<label class="item item-input item-select">
+						<div class="input-label">
+							User
+						</div>
+						<select>
+							{{#each interessenten}}
+								<option value="{{_id}}">{{username}}</option>
+							{{/each}}
+						</select>
+					</label>
+				</div>
+				<button id="giveAway" class="button button-block button-outline button-assertive">
+					Dieser Person geben
+				</button>
+			{{/if}}
+		</div>
+	</div>
 </template>
+
 
 <template name="interessent">
 	<button class='btn btn-default'>{{this}}</button> <br>

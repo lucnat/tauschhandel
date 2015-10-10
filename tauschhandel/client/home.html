@@ -27,15 +27,14 @@
 	{{#ionModal title='Neues Angebot hinzufügen'}}
 
 		<div class='padding'>
-
 			<form>
 				<label class="item item-input">
 					<i class="icon ion-home placeholder-icon"></i>
-					<input id='Titel' type="text" placeholder="titel"><br>
+					<input id='titel' type="text" placeholder="Titel"><br>
 				</label>
 					<label class="item item-input text" >
 						<i class="icon ion-document-text placeholder-icon"></i>
-						<textarea id='text' placeholder="\nBeschreibender Text" rows="10"></textarea>
+						<textarea id='text' placeholder="Beschreibender" rows="10"></textarea>
 					</label>
 				<label class="item item-input">
 					<i class="icon ion-image placeholder-icon"></i>
@@ -53,8 +52,6 @@
 				{{/each}}
 				<input id='submitButton' class='button button-positive' type="button" value="Submit Post"><br>
 			</form>
-
-
 		</div>
 	{{/ionModal}}
 </template>
@@ -70,7 +67,7 @@
 
 <template name="postPreview">
 	{{#ionItem path="post" avatar=true iconRight=true class="item-icon-right" }}
-	 	<img src="http://i.imgur.com/{{imageIDs.[0]}}b.jpg">
+	 	<img src="http://i.imgur.com/{{imageIDs.[0]}}b.jpg" height="50">
 		<h2>{{title}}</h2> 
 		<p>{{text}}</p>
 		{{> ionIcon icon="ios-arrow-forward" class="positive"}}
