@@ -28,6 +28,7 @@
 		- address
 		- verified
 	- profile
+		- watchlist
 		- terms
 	- username
 
