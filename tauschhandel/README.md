@@ -57,6 +57,7 @@
 
 ### Notifications
 	- _id
+	- type (interesseGemeldet, itemGewonnen, itemVerloren, frageGestellt, frageBeantwortet)
 	- triggerer
 	- receiver
 	- message
