@@ -17,15 +17,14 @@
 	{{/contentFor}}
 
 	{{#ionView}}
-	  {{#ionContent}}
-		{{> previewList}}
-	  {{/ionContent}}
+		{{#ionContent}}
+			{{> previewList}}
+		{{/ionContent}}
 	{{/ionView}}
 </template>
 
 <template name="createPost">
 	{{#ionModal title='Neues Angebot hinzufügen'}}
-
 		<div class='padding'>
 			<form>
 				<label class="item item-input">
@@ -34,7 +33,7 @@
 				</label>
 					<label class="item item-input text" >
 						<i class="icon ion-document-text placeholder-icon"></i>
-						<textarea id='text' placeholder="Beschreibender" rows="10"></textarea>
+						<textarea id='text' placeholder="Beschreibung" rows="10"></textarea>
 					</label>
 				<label class="item item-input">
 					<i class="icon ion-image placeholder-icon"></i>
@@ -56,7 +55,6 @@
 	{{/ionModal}}
 </template>
 
-
 <template name="previewList">
 	{{#ionList}}
 		{{#each posts}}
@@ -66,8 +64,12 @@
 </template>
 
 <template name="postPreview">
-	{{#ionItem path="post" avatar=true iconRight=true class="item-icon-right" }}
-	 	<img src="http://i.imgur.com/{{imageIDs.[0]}}b.jpg" height="50">
+	{{#ionItem path="post" iconRight=true class="item-icon-right item-thumbnail-left" }}
+		{{#if imageIDs.[0]}}
+	 		<img src="http://i.imgur.com/{{imageIDs.[0]}}b.jpg">
+	 	{{else}}
+	 		<img src="http://i.imgur.com/aIbR1xUb.jpg">
+	 	{{/if}}
 		<h2>{{title}}</h2> 
 		<p>{{text}}</p>
 		{{> ionIcon icon="ios-arrow-forward" class="positive"}}

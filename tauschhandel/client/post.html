@@ -8,11 +8,17 @@
 	  {{#ionContent}}
 		<div class="card">
 			<div class="item item-avatar">
-				<img src="http://www.femto.it/wp-content/uploads/2014/04/default-user-avatar.png">
+				{{#if post.userPicture}}
+					<img src="{{post.userPicture}}">
+				{{else}}
+					<img src="http://i.imgur.com/hzByj22b.jpg">
+				{{/if}}
 				<h2>{{post.userName}}</h2>
-				<p>{{post.dateString}}</p>
+				<p style="font-style: italic">{{post.dateString}}</p>
 			</div>
 			<div class="item item-text-wrap">
+				<h2>{{post.title}}</h2>
+				<br>
 				<div id='slidebox' style='width: 100%'>
 					{{#ionSlideBox}}
 						{{#each post.imageIDs}}
@@ -28,23 +34,52 @@
 				<p>tags: {{#each post.tags}} {{this}} {{/each}}</p>
 				<br>
 			</div>
-			{{#unless isMyPost}}
-				<div class="item tabs tabs-secondary tabs-icon-left">
-						<a id="like" class="tab-item" href="#" style='{{#if hasInterest }}color: red {{/if}}'>
-					      <i class="icon ion-android-favorite"></i>
-					      Like
-						</a>
-					<a class="tab-item" href="#">
-						<i class="icon ion-chatbubble"></i>
-						Q&A
+			<div class="item tabs tabs-secondary tabs-icon-left">
+				{{#if isMyPost}}
+					<a id="edit" class="tab-item" href="#" style=''>
+				      <i class="icon ion-edit"></i>
+				      Edit
 					</a>
-					<a class="tab-item" href="#">
-						<i class="icon ion-share"></i>
-						Share
+				{{else}}
+					<a id="like" class="tab-item" href="#" style='{{#if isOnWatchList }}color: red {{/if}}'>
+				      <i class="icon ion-android-favorite"></i>
+				      Like
 					</a>
-				</div>
-			{{/unless}}
+				{{/if}}
+				<a id="QAndAButton" class="tab-item" href="#" style='{{#if QAndAOpened}} color: blue {{/if}}'>
+					<i class="icon ion-chatbubble"></i>
+					Q&A
+				</a>
+				<a class="tab-item" href="#">
+					<i class="icon ion-share"></i>
+					Share
+				</a>
+			</div>
 		</div>
+
+		{{#if QAndAOpened}}
+			<div class='card'>
+				<div class="item item-divider">
+					Fragen & Antworten
+				</div>
+				<div class="item item-text-wrap">
+					{{> discussion}}
+				</div>
+			</div>
+		{{/if}}
+
+		{{#unless isMyPost}}
+			<div class="padding">
+				<button id="interesseMelden" class="button button-block button-outline button-assertive">
+					{{#if hasInterest}}
+						Interesse zurückziehen
+					{{else}}
+						Interesse anmelden
+					{{/if}}
+				</button>
+			</div>
+		{{/unless}}
+
 		{{#if isMyPost}}
 			{{#if esHatInteressenten}}
 				{{> giveAway}}
@@ -88,56 +123,52 @@
 	</div>
 </template>
 
-
-<template name="interessent">
-	<button class='btn btn-default'>{{this}}</button> <br>
-</template>
-
 <template name="discussion">
-	{{#if previewMode}}
-	{{else}}
+	{{#if discussions.[0]}}
 		{{#each discussions}}
 			{{> discussionPair}}
 		{{/each}}
-	{{/if}}
-
-	{{#if isMyPost}}
 	{{else}}
-		{{> createPostQuestion}}
+		<p>Hier scheint noch nichts zu sein. </p><br>
 	{{/if}}
+	{{#unless isMyPost}}	
+		{{> createPostQuestion}}
+	{{/unless}}
 </template>
 
-
 <template name="discussionPair">
-	<div class="panel panel-success">
-		<div class="panel-heading"><label>Frage:</label><br> {{question}}
-			<div class="panel-body">
-				{{#if answer}}
-					<label>Antwort: </label><br> {{answer}}
-				{{else}}
-					{{#if isMyPost}}
-						<form role='form'>
-							<label>Antwort: </label><br> <input id='antwort' class='form-control' type="text" placeholder="Antwort">
-						</form>
-					{{else}}
-						<p>Noch keine Antwort</p>
-					{{/if}}
-				{{/if}}
-			</div>
+	<p style="font-style: italic">Von {{questionerName}} am {{dateString}}</p>
+	<div class="card">
+		<div class="item item-text-wrap" style='background-color: #C18B8B'>
+			<p>{{question}}</p>
 		</div>
-
+		<div class="item item-text-wrap" style='background-color: #F4D09A'>
+			{{#if answer}}
+				<p>{{answer}}</p>
+			{{else}}
+				{{#if isMyPost}}
+					<label class="item item-input" style='display: none'>
+						<textarea id='antwort' placeholder="Stelle eine Frage" rows="5" ></textarea>
+					</label><br>
+					<button id="antwortVerfassenButton" class='button button-balanced button-outline'>Antwort verfassen</button>
+					<button id="frageBeantwortenButton" class='button button-balanced button-outline' style='display: none'>Antworten</button>
+					<button id="cancel" class='button button-assertive button-outline' style='display: none'>Abbrechen</button>
+				{{else}}
+					<p style="font-style: italic"> Noch keine Antwort </p>
+				{{/if}}
+			{{/if}}
+		</div>
 	</div>
 </template>
 
 <template name='createPostQuestion'>
+	<br>
 	<form role='form'>
 		<div class="input-group">
-		<label class="item item-input">
-			<textarea id='text' placeholder="Comments"></textarea>
+		<label class="item item-input" style="border: 1px solid black; border-color: green">
+			<textarea id='newQuestion' placeholder="Stelle eine Frage" rows="5"></textarea>
 		</label>
-		<label class="item item-input">
-			<button id='submitButton' class="button button-positive button-outline" type="button">Frage stellen!</button>
-		</label>
+		<button id='newQuestionButton' class="button button-balanced button-outline" type="button">Abschicken!</button>
 		</div>
 	</form>
 </template>

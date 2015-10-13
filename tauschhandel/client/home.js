@@ -18,7 +18,6 @@ Template.createPost.helpers({
     'possibleTags': function() {
         return Tags.find({}).fetch();
     },
-
     'imageIDs': function(){
         return Session.get('imageIDs');
     }
@@ -34,18 +33,19 @@ Template.createPost.events({
                 }
             }
             var newPost = {
-                title: $('#titel').val(),
-                text: $('#text').val(),
-                istAngebot: true,
-                imageIDs: Session.get('imageIDs'),
-                tags: tags,
-                userID: Meteor.user()._id,
-                userName: Meteor.user().username,
-                createdAt: new Date(),
-                viewCount: 0,
-                discussion: [],
-                interessenten: [],
-                vergebenAn: '',
+                title:          $('#titel').val(),
+                text:           $('#text').val(),
+                postleitzahl:   Meteor.user().profile.postleitzahl,
+                istAngebot:     true,
+                imageIDs:       Session.get('imageIDs'),
+                tags:           tags,
+                userID:         Meteor.user()._id,
+                userName:       Meteor.user().username,
+                createdAt:      new Date(),
+                viewCount:      0,
+                discussion:     [],
+                interessenten:  [],
+                vergebenAn:     '',
                 vergebenAnName: ''
             }
             Posts.insert(newPost);

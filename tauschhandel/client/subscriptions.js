@@ -11,6 +11,13 @@ Tracker.autorun(function(){
 Meteor.subscribe('messages');
 Meteor.subscribe('tags');
 Meteor.subscribe('adminshizzle');
+
 Tracker.autorun(function() {
     Meteor.subscribe('allUsers');
+});
+
+Tracker.autorun(function(){
+	try{
+		Meteor.subscribe('conversations', Meteor.user()._id);
+	} catch(e) {}
 });

@@ -1,0 +1,65 @@
+<template name="conversations">
+
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Konversationen</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		<a href="/profile" class="button button-clear pull-right" >
+			Profil
+		</a>
+	{{/contentFor}}
+	{{#ionView}}
+		{{#ionContent}}
+			{{#ionList}}
+				{{#each konversationen}}
+					{{> conversationListItem}}
+				{{/each}}
+			{{/ionList}}
+		{{/ionContent}}
+	{{/ionView}}
+</template>
+
+
+<template name="conversationListItem">
+	{{#ionItem path="conversation" avatar=true iconRight=true class="item-icon-right" }}
+	 	<img src=" {{#if other.profile.picture}} {{other.profile.picture}} {{else}} http://i.imgur.com/hzByj22b.jpg {{/if}} " height="50">
+		<h2>{{other.username}}</h2> 
+		<p>Übergabe von {{post.title}}</p>
+		{{> ionIcon icon="ios-arrow-forward" class="positive"}}
+	{{/ionItem}}
+</template>
+
+<template name="conversation">
+	{{#contentFor "headerButtonLeft"}}
+		{{>ionNavBackButton path="conversations" text="Konversationen"}}
+	{{/contentFor}}
+	{{#ionView}}
+		{{#ionContent}}
+			<div class="list">
+				{{#each conversation.messages}}
+					{{#if fromMe}}
+						<div class="item item-text-wrap" style="background-color: #158ffe; border-radius: 5px; margin: 10px 10px 10px {{margin}}%">
+							<p style="color: white; font-size: 17px">{{{message}}}</p>
+						</div>
+					{{else}}
+						<div class="item item-text-wrap " style="background-color: #EEE; border-radius: 5px; margin: 10px {{margin}}% 10px 10px">
+							<p style="font-size: 17px">{{{message}}}</p>
+						</div>
+					{{/if}}
+				{{/each}}
+
+
+				<div class="item item-input-inset">
+					<label class="item-input-wrapper">
+						<textarea id="message" type="text" placeholder="Type.." rows="4" style="background-color: #EEE"></textarea>
+					</label>
+					<button id="writeMessageButton" class="button button-small">
+						Send
+					</button>
+				</div>
+			</div>
+		{{/ionContent}}
+
+	{{/ionView}}
+</template>

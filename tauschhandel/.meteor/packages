@@ -27,6 +27,7 @@ ejson
 spacebars
 check
 
+useraccounts:core
+useraccounts:ionic
 accounts-password
-accounts-ui
 msavin:mongol

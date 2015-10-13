@@ -1,3 +1,11 @@
+<head>
+	<title>Tauschhandel</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+</head>
+
 <template name='layout'>
 	{{#ionBody}}
 
@@ -6,17 +14,21 @@
 		{{#contentFor "headerTitle"}}
 			<h1 class="title">Tauschhandel</h1>
 		{{/contentFor}}
-		
-		{{#ionNavView}}
-			{{> yield}}
-		{{/ionNavView}}
-
-      {{#ionTabs style="ios"}}
-        {{> ionTab title="Browse" path="home" iconOff="ios-browsers-outline" iconOn="ios-browsers" class="tab-item-positive"}}
-        {{> ionTab title="Watchlist" path="watchlist" iconOff="android-favorite-outline" iconOn="android-favorite" class="tab-item-positive"}}
-        {{> ionTab title="Notifications" path="notifications" iconOff="ios-bell-outline" iconOn="ios-bell" class="tab-item-positive"}}
-        {{> ionTab title="Profile" path="profile" iconOff="ios-person-outline" iconOn="ios-person" class="tab-item-positive"}}
-      {{/ionTabs}}
+		{{#if currentUser}}
+			{{#ionNavView}}
+				{{> yield}}
+			{{/ionNavView}}
+			{{#unless currentUser.profile.firstLogin}}
+				{{#ionTabs style="ios"}}
+					{{> ionTab title="Browse" path="home" iconOff="ios-browsers-outline" iconOn="ios-browsers" class="tab-item-positive"}}
+					{{> ionTab title="Watchlist" path="watchlist" iconOff="android-favorite-outline" iconOn="android-favorite" class="tab-item-positive"}}
+					{{> ionTab title="Notifications" path="notifications" iconOff="ios-bell-outline" iconOn="ios-bell" class="tab-item-positive"}}
+					{{> ionTab title="Konversationen" path="conversations" iconOff="ios-chatbubble-outline" iconOn="ios-chatbubble" class="tab-item-positive"}}
+				{{/ionTabs}}
+			{{/unless}}
+		{{else}}
+			{{> profile}}
+		{{/if}}
 
 	{{/ionBody}}
 </template>
