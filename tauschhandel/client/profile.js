@@ -5,6 +5,24 @@ Template.profile.helpers({
 });
 
 Template.profile.events({
+    'click #changeUsername': function(){
+        IonPopup.prompt({
+            title: 'Username ändern',
+            template: 'Bitte einen neuen Username eingeben',
+            okText: 'Ok',
+            inputType: 'text',
+            inputPlaceholder: 'Username',
+            onOk: function(event) {
+                var element = $(event.target);
+                console.log(element);
+            },
+            onCancel: function() {
+                console.log('Cancelled');
+            }
+
+        });
+
+    },
 	'click #changeProfilePicture': function(event){
 		event.preventDefault();
         changeProfilePicture();

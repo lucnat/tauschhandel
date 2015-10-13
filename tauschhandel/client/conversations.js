@@ -13,8 +13,20 @@ Template.conversations.helpers({
                 conversation.other = person1;
             }
             conversation.post = post;
+
+            var badgeCount = 0;
+            conversation.messages.forEach(function(message){
+                if(!message.readAt && message.to == Meteor.user()._id){
+                    badgeCount++;
+                }
+            })
+            conversation.badgeCount = badgeCount;
+            conversation.moreThanZero = badgeCount > 0;
         });
         return conversations;
+    },
+    'moreThanZero': function(){
+        return Conversations.find({}).count() > 0;
     }
 });
 
@@ -47,6 +59,25 @@ Template.conversation.helpers({
     }
 });
 
+Template.conversationListItem.events({
+    'click .conversation': function(event, template){
+        var conversationID = template.data._id;
+        var messages = Conversations.findOne(conversationID).messages;
+        messages.forEach(function(message){
+            if(!message.readAt){
+                message.readAt = new Date();
+            }
+        });
+        $('html, body').animate({ 
+           scrollTop: $(document).height()-$(window).height()}, 
+           1400, 
+           "swing"
+        );
+        Conversations.update({'_id': conversationID},{$set: {'messages': messages}})
+
+    }
+});
+
 Template.conversation.events({
     'click #writeMessageButton': function(){
         var conversation = Conversations.findOne(Router.current().params._id);
@@ -60,6 +91,7 @@ Template.conversation.events({
             to:         other, 
             message:    $('#message').val(),
             createdAt:  new Date(),
+            readAt:     null,
         }
 
         Conversations.update({'_id': conversation._id}, {$push: {messages: message}});

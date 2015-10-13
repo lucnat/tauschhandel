@@ -314,6 +314,7 @@ Template.giveAway.events({
                     to:         partner._id, 
                     message:    post.title + " wurde soeben von " + creator.username + " an " + partner.username + " vergeben. Hier kann die Übergabe besprochen werden. ",
                     createdAt:  new Date(),
+                    readAt:     null
                     }
                 ],
             }
