@@ -24,33 +24,33 @@
 </template>
 
 <template name="createPost">
-	{{#ionModal title='Neues Angebot hinzufügen'}}
-		<div class='padding'>
-			<form>
+	{{#ionModal title='Neues Item hinzufügen'}}
+		<div class='list card'>
+			<div class="item item-divider">Beschreibung</div>
+			<div class="item">
 				<label class="item item-input">
-					<i class="icon ion-home placeholder-icon"></i>
 					<input id='titel' type="text" placeholder="Titel"><br>
 				</label>
-					<label class="item item-input text" >
-						<i class="icon ion-document-text placeholder-icon"></i>
-						<textarea id='text' placeholder="Beschreibung" rows="10"></textarea>
-					</label>
-				<label class="item item-input">
-					<i class="icon ion-image placeholder-icon"></i>
-					{{#each imageIDs}}
-						<img id='image' src='http://i.imgur.com/{{this}}s.jpg'><br> &nbsp;&nbsp;&nbsp;
-					{{/each}}
-					<button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Image</button>
+				<label class="item item-input text" >
+					<textarea id='text' placeholder="Beschreibung" rows="10"></textarea>
 				</label>
-
-				<h4>Tags:</h4>
-				{{#each possibleTags}}
-					<div class='checkbox'>
-						<label> <input class="tag" id='{{tag}}' type="checkbox"> {{tag}} </label>
-					</div><br>
+			</div>
+			<div class="item item-divider">Bilder</div>
+			<div class="item">
+				{{#each imageIDs}}
+					<img id='image' style='margin-right: 10px' src='http://i.imgur.com/{{this}}s.jpg'>
 				{{/each}}
-				<input id='submitButton' class='button button-positive' type="button" value="Submit Post"><br>
-			</form>
+				<br><button id='imageUpload' class='button button-positive button-outline icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
+			</div>
+			<div class="item item-divider">Tags</div>
+			<div class="item">
+				{{#each possibleTags}}
+					<li class='item item-checkbox'>
+						<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
+					</li>
+				{{/each}}
+				<br><input id='submitButton' class='button button-balanced button-block button-outline' type="button" value="Absenden">
+			</div>
 		</div>
 	{{/ionModal}}
 </template>

@@ -14,6 +14,7 @@ Template.conversations.helpers({
             }
             conversation.post = post;
 
+            // attach badgeCount to counversation
             var badgeCount = 0;
             conversation.messages.forEach(function(message){
                 if(!message.readAt && message.to == Meteor.user()._id){

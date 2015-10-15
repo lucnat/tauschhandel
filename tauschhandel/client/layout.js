@@ -1,11 +1,18 @@
-Template.layout.events({
-	'click .notificationstab': function(){
-		alert('gotcha');
-	}
-});
 
 Template.layout.helpers({
 	'notificationsBadge': function(){
-		return Notifications.find({'readAt': null}).count();
+		return Notifications.find({'readAt': null}).count() > 0;
+	},
+	'conversationsBadge': function(){
+		var conversations = Conversations.find().fetch();
+		var badgeCount = 0;
+		conversations.forEach(function(conversation){
+			conversation.messages.forEach(function(message){
+				if(message.to == Meteor.user()._id && !message.readAt){
+					badgeCount++;
+				}
+			});
+		});
+		return badgeCount;
 	}
 });
