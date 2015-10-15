@@ -6,7 +6,12 @@ Template.home.rendered = function(){
 
 Template.previewList.helpers({
     'posts': function() {
-        return Posts.find({}).fetch();
+        var tags = Session.get('filter').tags;
+        if($.inArray('alleTags', tags) >= 0){
+            return Posts.find().fetch();
+        } else {
+            return Posts.find({'tags': {$in: tags}}).fetch();
+        }
     },
 });
 Template.previewList.events({
@@ -22,6 +27,7 @@ Template.createPost.helpers({
         return Session.get('imageIDs');
     }
 });
+
 Template.createPost.events({
     'click #submitButton': function() {
         if (isLoggedIn()) {
@@ -77,3 +83,41 @@ Template.createPost.events({
     }
 
 });
+
+
+Template.filterModal.helpers({
+    'possibleTags': function() {
+        return Tags.find({}).fetch();
+    }
+});
+
+Template.filterModal.events({
+    'click .tag': function(event, template){
+        checkboxes = document.getElementsByClassName('tag');
+        tags = [];
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                tags.push(checkboxes[i].id);
+            }
+        }
+        var filter = Session.get('filter');
+        filter.tags = tags;
+        Session.set('filter',filter);
+        Meteor.setTimeout(function() {
+            IonModal.close();
+        }, 300);
+    }
+});
+
+Template.filterModal.rendered = function(){
+    Meteor.setTimeout(function() {
+        var tags = Session.get('filter').tags;
+        checkboxes = document.getElementsByClassName('tag');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if ($.inArray(checkboxes[i].id, tags) >= 0) {
+                checkboxes[i].checked = true;
+            }
+        }
+    }, 500);
+}
+

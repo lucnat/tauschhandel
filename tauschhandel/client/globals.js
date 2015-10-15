@@ -12,3 +12,8 @@ if (Meteor.isCordova) {
     StatusBar.styleLightContent();
   }, false);
 }
+
+
+Meteor.startup(function(){
+	Session.set('filter', {'tags': ['alleTags']});
+});

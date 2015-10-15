@@ -10,7 +10,6 @@ fourseven:scss@2.0.0
 meteoric:ionic
 meteoric:ionicons-sass
 meteoric:ionic-sass
-mdg:camera
 simple:imgur
 standard-minifiers
 meteor-base
@@ -31,3 +30,4 @@ useraccounts:core
 useraccounts:ionic
 accounts-password
 msavin:mongol
+mdg:camera

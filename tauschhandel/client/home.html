@@ -5,9 +5,9 @@
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonLeft"}}
-		<button class="button button-clear pull-left" data-ion-modal="search">
-			{{> ionIcon icon='ios-search'}}
-		</button>
+		<a href="#" class="button button-clear pull-left" data-ion-modal="filterModal" >
+			Filter
+		</a>
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonRight"}}
@@ -51,6 +51,26 @@
 				{{/each}}
 				<br><input id='submitButton' class='button button-balanced button-block button-outline' type="button" value="Absenden">
 			</div>
+		</div>
+	{{/ionModal}}
+</template>
+
+<template name="filterModal">
+	{{#ionModal title='Filter'}}
+		<div class='list card'>
+			<div class="item item-divider">Tags</div>
+			<label class="item item-radio">
+				<input type="radio" class="tag" id="alleTags" name="tagGroup">
+				<div class="item-content">Alle</div>
+				<i class="radio-icon ion-checkmark"></i>
+			</label>
+			{{#each possibleTags}}
+				<label class="item item-radio">
+					<input type="radio" class="tag" id='{{tag}}' name="tagGroup">
+					<div class="item-content">{{tag}}</div>
+					<i class="radio-icon ion-checkmark"></i>
+				</label>
+			{{/each}}
 		</div>
 	{{/ionModal}}
 </template>
