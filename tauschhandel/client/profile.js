@@ -13,15 +13,12 @@ Template.profile.events({
             inputType: 'text',
             inputPlaceholder: 'Username',
             onOk: function(event) {
-                var element = $(event.target);
-                console.log(element);
+                var inputElement = $('input');
             },
             onCancel: function() {
-                console.log('Cancelled');
+                // console.log('Cancelled');
             }
-
         });
-
     },
 	'click #changeProfilePicture': function(event){
 		event.preventDefault();
@@ -40,7 +37,6 @@ Template.profile.events({
         });
     }
 });
-
 
 changeProfilePicture = function(){
     // takes photo and saves it in user profile. Handles backdrop as well. 

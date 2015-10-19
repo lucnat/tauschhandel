@@ -109,7 +109,7 @@ Template.post.events({
             destructiveText: 'Löschen',
             cancelText: 'Cancel',
             cancel: function() {
-                console.log('Cancelled!');
+                // console.log('Cancelled!');
             },
             buttonClicked: function(index) {
                 if (index === 0) {

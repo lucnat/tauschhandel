@@ -9,7 +9,6 @@ Template.firstLogin1.events({
 
 Template.firstLogin2.events({
     'click #weiter2':  function(){
-        console.log($('#postleitzahl').val());
         if( 1000 <= $('#postleitzahl').val() && $('#postleitzahl').val() <= 10000){
             Users.update({'_id': Meteor.user()._id },{$set: {'profile.postleitzahl': $('#postleitzahl').val()}})
             Users.update({'_id': Meteor.user()._id },{$set: {'profile.firstLogin': false}});
