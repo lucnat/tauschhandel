@@ -100,9 +100,109 @@ Template.post.events({
         }
     },
 
+    'click #editButton': function(){
+        IonActionSheet.show({
+            titleText: 'Bearbeiten',
+            buttons: [
+                { text: '<i class="icon ion-edit"></i> Ändern' },
+            ],
+            destructiveText: 'Löschen',
+            cancelText: 'Cancel',
+            cancel: function() {
+                console.log('Cancelled!');
+            },
+            buttonClicked: function(index) {
+                if (index === 0) {
+                    IonModal.open('editPost');
+                    onEditPost();
+                    function onEditPost(){
+                        var post = Posts.findOne(Router.current().params._id);
+                        Meteor.setTimeout(function(){
+                            $('#titel').val(post.title);
+                            $('#text').val(post.text);
+                            Session.set('imageIDs', post.imageIDs);
+                            var checkboxes = $('.tag');
+                            for(var i=0; i<checkboxes.length; i++){
+                                if($.inArray(checkboxes[i].id, post.tags) >= 0){
+                                    checkboxes[i].checked = true;
+                                }
+                            }
+                        },200);
+                    }
+                }
+                return true;
+            },
+            destructiveButtonClicked: function() {
+
+                IonPopup.confirm({
+                    title: 'Löschen',
+                    template: 'Bist du sicher, dass du den Beitrag entfernen möchtest?',
+                    onOk: function() {
+                        Posts.remove(Router.current().params._id);
+                        Router.go('/');
+                        Meteor.setTimeout(function(){
+                            IonPopup.alert({
+                                title: 'Gelöscht',
+                                template: 'Beitrag wurde erfolgreich gelöscht.',
+                                okText: 'Ok',
+                            });
+                        }, 500)
+                    },
+                    onCancel: function() {
+                    }
+                });
+                return true;
+            }
+
+        });
+    },
+
     'click #QAndAButton': function(){
         var opened = Session.get('QAndAOpened') == true;
         Session.set('QAndAOpened', !opened);
+    },
+
+    'click #shareButton': function(event){
+        event.preventDefault();
+        IonActionSheet.show({
+            titleText: 'Share',
+            buttons: [
+                { text: '<i class="icon ion-email"></i> Email' },
+                { text: '<i class="icon ion-social-facebook"></i> Facebook' },
+                { text: '<i class="icon ion-social-whatsapp"></i> Whatsapp' },                
+                { text: '<i class="icon ion-link"></i> Copy Link' },                
+            ],
+            cancelText: 'Cancel',
+            cancel: function() {
+                console.log('Cancelled!');
+            },
+            buttonClicked: function(index) {
+                if (index === 0) {  // mail
+                    var post = Posts.findOne(Router.current().params._id);
+                    var subject = "Check out " + post.title + " auf tauschhandel";
+                    var body = "Sieh dir den shit hier an: \n" + window.location.href;
+                    var mailto = "mailto:?subject="+subject+"&body="+body;
+                    window.location.href = mailto;
+                }
+                if (index === 1) {  // facebook
+                    var post = Posts.findOne(Router.current().params._id);
+                    FB.ui({
+                      method: 'feed',
+                      link: 'tauschhandel.meteor.com/post/'+'qGiz9rE8bqoWKGnBE',    // wohl eher post._id
+                      caption: post.title+' zu vergeben',
+                      display: 'popup',
+                    }, function(response){});
+                }
+                if(index === 2){
+                    window.location.href = "whatsapp://send?text=The text to share!";
+                }
+                if(index === 3){
+                    window.prompt("Copy the following link: ", 'loremipsumdolorsitamet');                
+                }
+                return true;
+            },
+        });
+
     }
 });
 
@@ -346,6 +446,66 @@ Template.giveAway.events({
 
         Notifications.insert(notification);
         */
+    }
+});
+
+Template.editPost.helpers({
+    'possibleTags': function() {
+        return Tags.find({}).fetch();
+    },
+    'imageIDs': function(){
+        var post = Posts.findOne(Router.current().params._id);
+        return Session.get('imageIDs');
+    }
+});
+
+Template.editPost.events({
+    'click #speichern': function(){
+        checkboxes = document.getElementsByClassName('tag');
+        tags = [];
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                tags.push(checkboxes[i].id);
+            }
+        }
+        var post = {
+            title:          $('#titel').val(),
+            text:           $('#text').val(),
+            postleitzahl:   Meteor.user().profile.postleitzahl,
+            istAngebot:     true,
+            imageIDs:       Session.get('imageIDs'),
+            tags:           tags,
+            userID:         Meteor.user()._id,
+            userName:       Meteor.user().username,
+            createdAt:      new Date(),
+            viewCount:      0,
+            discussion:     [],
+            interessenten:  [],
+            vergebenAn:     '',
+            vergebenAnName: ''
+        }
+        Posts.update({'_id': Router.current().params._id}, post);
+        alert('gespeichert');
+        Session.set('imageIDs', []);
+        IonModal.close();
+    },
+    'click #imageUpload': function(){
+        event.preventDefault();
+        MeteorCamera.getPicture(function(error, localData){
+            var options = {
+                apiKey: '9c96a9ec19cc485',
+                image: localData,
+            }
+            Imgur.upload(options, function(error, remoteData){
+                if(error){
+                    alert(error);
+                }
+                var image = $('#image');
+                var ids = Session.get('imageIDs');
+                ids.push(remoteData.id);
+                Session.set('imageIDs', ids);
+            });
+        });
     }
 });
 

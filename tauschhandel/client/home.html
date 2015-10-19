@@ -57,21 +57,18 @@
 
 <template name="filterModal">
 	{{#ionModal title='Filter'}}
-		<div class='list card'>
-			<div class="item item-divider">Tags</div>
-			<label class="item item-radio">
-				<input type="radio" class="tag" id="alleTags" name="tagGroup">
-				<div class="item-content">Alle</div>
-				<i class="radio-icon ion-checkmark"></i>
-			</label>
-			{{#each possibleTags}}
-				<label class="item item-radio">
-					<input type="radio" class="tag" id='{{tag}}' name="tagGroup">
-					<div class="item-content">{{tag}}</div>
-					<i class="radio-icon ion-checkmark"></i>
-				</label>
-			{{/each}}
+		<div id="alleTags" class="tag">
+			{{#ionRadio class="tag" id="alleTags"}}
+				Alle
+			{{/ionRadio}}		
 		</div>
+		{{#each possibleTags}}
+			<div id="{{tag}}" class="tag">
+				{{#ionRadio}}
+					{{tag}}
+				{{/ionRadio}}
+			</div>
+		{{/each}}
 	{{/ionModal}}
 </template>
 

@@ -36,7 +36,7 @@
 			</div>
 			<div class="item tabs tabs-secondary tabs-icon-left">
 				{{#if isMyPost}}
-					<a id="edit" class="tab-item" href="#" style=''>
+					<a id="editButton" class="tab-item" href="#" style=''>
 				      <i class="icon ion-edit"></i>
 				      Edit
 					</a>
@@ -50,7 +50,7 @@
 					<i class="icon ion-chatbubble"></i>
 					Q&A
 				</a>
-				<a class="tab-item" href="#">
+				<a  id="shareButton" class="tab-item" href="#">
 					<i class="icon ion-share"></i>
 					Share
 				</a>
@@ -88,6 +88,38 @@
 
 	  {{/ionContent}}
 	{{/ionView}}
+</template>
+
+<template name="editPost">
+	{{#ionModal title='Bearbeiten'}}
+		<div class='list card'>
+			<div class="item item-divider">Beschreibung</div>
+			<div class="item">
+				<label class="item item-input">
+					<input id='titel' type="text" placeholder="Titel"><br>
+				</label>
+				<label class="item item-input text" >
+					<textarea id='text' placeholder="Beschreibung" rows="10"></textarea>
+				</label>
+			</div>
+			<div class="item item-divider">Bilder</div>
+			<div class="item">
+				{{#each imageIDs}}
+					<img id='image' style='margin-right: 10px' src='http://i.imgur.com/{{this}}s.jpg'>
+				{{/each}}
+				<br><button id='imageUpload' class='button button-positive button-outline icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
+			</div>
+			<div class="item item-divider">Tags</div>
+			<div class="item">
+				{{#each possibleTags}}
+					<li class='item item-checkbox'>
+						<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
+					</li>
+				{{/each}}
+				<br><input id='speichern' class='button button-balanced button-block button-outline' type="button" value="Speichern">
+			</div>
+		</div>
+	{{/ionModal}}
 </template>
 
 <template name="giveAway">

@@ -13,7 +13,16 @@ if (Meteor.isCordova) {
   }, false);
 }
 
-
 Meteor.startup(function(){
 	Session.set('filter', {'tags': ['alleTags']});
+  if(Meteor.isClient) {
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '453508028170763',
+        status     : true,
+        version    : 'v2.5',
+        xfbml      : true
+      });
+    };
+  }
 });

@@ -30,45 +30,41 @@ Template.createPost.helpers({
 
 Template.createPost.events({
     'click #submitButton': function() {
-        if (isLoggedIn()) {
-            checkboxes = document.getElementsByClassName('tag');
-            tags = [];
-            for (var i = 0; i < checkboxes.length; i++) {
-                if (checkboxes[i].checked) {
-                    tags.push(checkboxes[i].id);
-                }
+        checkboxes = document.getElementsByClassName('tag');
+        tags = [];
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                tags.push(checkboxes[i].id);
             }
-            var newPost = {
-                title:          $('#titel').val(),
-                text:           $('#text').val(),
-                postleitzahl:   Meteor.user().profile.postleitzahl,
-                istAngebot:     true,
-                imageIDs:       Session.get('imageIDs'),
-                tags:           tags,
-                userID:         Meteor.user()._id,
-                userName:       Meteor.user().username,
-                createdAt:      new Date(),
-                viewCount:      0,
-                discussion:     [],
-                interessenten:  [],
-                vergebenAn:     '',
-                vergebenAnName: ''
-            }
-            Posts.insert(newPost);
-
-            Session.set('imageIDs', []);
-            IonModal.close();
         }
+        var newPost = {
+            title:          $('#titel').val(),
+            text:           $('#text').val(),
+            postleitzahl:   Meteor.user().profile.postleitzahl,
+            istAngebot:     true,
+            imageIDs:       Session.get('imageIDs'),
+            tags:           tags,
+            userID:         Meteor.user()._id,
+            userName:       Meteor.user().username,
+            createdAt:      new Date(),
+            viewCount:      0,
+            discussion:     [],
+            interessenten:  [],
+            vergebenAn:     '',
+            vergebenAnName: ''
+        }
+        Posts.insert(newPost);
+
+        Session.set('imageIDs', []);
+        IonModal.close();
     },
     'click #imageUpload': function(event){
         event.preventDefault();
         MeteorCamera.getPicture(function(error, localData){
-
-            options = {
+            var options = {
                 apiKey: '9c96a9ec19cc485',
                 image: localData,
             }
-
             Imgur.upload(options, function(error, remoteData){
                 if(error){
                     alert(error);
@@ -93,11 +89,12 @@ Template.filterModal.helpers({
 
 Template.filterModal.events({
     'click .tag': function(event, template){
-        checkboxes = document.getElementsByClassName('tag');
+
+        var divs = $('.tag');
         tags = [];
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                tags.push(checkboxes[i].id);
+        for (var i = 0; i < divs.length; i++) {
+            if (divs[i].firstElementChild.firstElementChild.checked) {
+                tags.push(divs[i].id);
             }
         }
         var filter = Session.get('filter');
@@ -106,16 +103,20 @@ Template.filterModal.events({
         Meteor.setTimeout(function() {
             IonModal.close();
         }, 300);
+    },
+    
+    'click .label': function(event, template){
+        alert('gotcha');
     }
 });
 
 Template.filterModal.rendered = function(){
     Meteor.setTimeout(function() {
         var tags = Session.get('filter').tags;
-        checkboxes = document.getElementsByClassName('tag');
-        for (var i = 0; i < checkboxes.length; i++) {
-            if ($.inArray(checkboxes[i].id, tags) >= 0) {
-                checkboxes[i].checked = true;
+        var divs = $('.tag');
+        for (var i = 0; i < divs.length; i++) {
+            if ($.inArray(divs[i].id, tags) >= 0) {
+                divs[i].firstElementChild.firstElementChild.checked = true;
             }
         }
     }, 500);

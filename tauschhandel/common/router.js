@@ -1,5 +1,6 @@
 Router.configure({
 	layoutTemplate: 'layout',
+	notFoundTemplate: 'notFound',
 });
 
 Router.route('/', {name: 'home'});
@@ -35,5 +36,5 @@ use default shit on each route:
 		{{> actual content}}
 	  {{/ionContent}}
 	{{/ionView}}
-s
+
 */
