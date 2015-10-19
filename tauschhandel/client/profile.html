@@ -1,4 +1,8 @@
 <template name="profile">
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Willkommen</h1>
+	{{/contentFor}}
+
 	{{#if currentUser}}
 		{{#contentFor "headerButtonLeft"}}
 			{{>ionNavBackButton path="conversations" text="Chats"}}
@@ -13,7 +17,7 @@
 						Mein Profil
 					</div>
 					<div class="item">
-						<img src=" {{#if currentUser.profile.picture}} {{currentUser.profile.picture}} {{else}} http://i.imgur.com/hzByj22b.jpg {{/if}} " alt="" style="border-radius: 80px; box-shadow: 3px 3px 5px #888888;" /> 
+					<img src=" {{#if currentUser.profile.picture}} {{currentUser.profile.picture}} {{else}} http://i.imgur.com/pOrWSDRb.jpg {{/if}} " alt="" style="border-radius: 80px; box-shadow: 2px 2px 10px #888888;" /> 
 						<button id="changeProfilePicture" class="button button-clear icon-left ion-edit" style="margin: 56px 0px 0px 20px"> </button>
 					</div>
 					<a id="changeUsername" class="item item-icon-left">
@@ -32,16 +36,11 @@
 					</div>
 				</div>
 				<div class="padding">
-					<p>Hier kannst du Veränderungen an deinem Profil vornehmen. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+					<p>Hier kannst du Änderungen an deinem Profil vornehmen.</p>
+					<p></p>
 					<a href="#">Read Terms</a>
 				</div>
 			{{else}}
-				<h4 style="text-align: center; margin-top: 20px">Willkommen.</h4>
 				{{> atForm}}
 			{{/if}}
 		{{/ionContent}}

@@ -135,18 +135,17 @@
 				</button>
 			{{else}}
 				<p>Bitte wähle einen Interessenten aus.</p>
-				<div class="list">
-					<label class="item item-input item-select">
-						<div class="input-label">
-							User
-						</div>
-						<select>
-							{{#each interessenten}}
-								<option value="{{_id}}">{{username}}</option>
-							{{/each}}
-						</select>
-					</label>
-				</div>
+				<label class="item item-input item-select">
+					<div class="input-label">
+						User
+					</div>
+					<select required>
+        				<option selected disabled value="">Auswählen</option>
+						{{#each interessenten}}
+							<option value="{{_id}}">{{username}}</option>
+						{{/each}}
+					</select>
+				</label>
 				<button id="giveAway" class="button button-block button-outline button-assertive">
 					Dieser Person geben
 				</button>

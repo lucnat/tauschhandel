@@ -15,6 +15,7 @@ AccountsTemplates.addFields([
 	}
 ]);
 
+T9n.setLanguage('de');
 
 
 AccountsTemplates.configure({

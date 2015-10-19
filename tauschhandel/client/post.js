@@ -346,8 +346,8 @@ Template.giveAway.helpers({
 Template.giveAway.events({
     'click #giveAway': function(event){
         IonPopup.confirm({
-            title: 'Interesse bestätigen',
-            template: '  Lorem ipsum dolor sit  deserunt mollit anim id est laborum.  ?',
+            title: 'Wirklich vergeben?',
+            template: 'Möchtest du das Item wirklich an diese Person vergeben?',
             onOk: function() {
                 giveAway();
                 startConversation();
