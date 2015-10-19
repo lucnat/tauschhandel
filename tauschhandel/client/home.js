@@ -1,5 +1,16 @@
 Session.set('imageIDs', []);
 
+Template.home.helpers({
+    'nothingHereYet': function(){
+        var tags = Session.get('filter').tags;
+        if($.inArray('alleTags', tags) >= 0){
+            return Posts.find().count() == 0;
+        } else {
+            return Posts.find({'tags': {$in: tags}}).count() == 0;
+        }    
+    }
+});
+
 Template.home.rendered = function(){
     Session.set('previewMode', true);
 }
@@ -12,7 +23,7 @@ Template.previewList.helpers({
         } else {
             return Posts.find({'tags': {$in: tags}}).fetch();
         }
-    },
+    }
 });
 Template.previewList.events({
     'click .post': function() {

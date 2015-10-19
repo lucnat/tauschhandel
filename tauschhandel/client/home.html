@@ -18,7 +18,11 @@
 
 	{{#ionView}}
 		{{#ionContent}}
-			{{> previewList}}
+			{{#if nothingHereYet}}
+				{{> noPostsHereYet}}
+			{{else}}
+				{{> previewList}}
+			{{/if}}
 		{{/ionContent}}
 	{{/ionView}}
 </template>
@@ -93,4 +97,9 @@
 	{{/ionItem}}
 </template>
 
-
+<template name="noPostsHereYet">
+	<div class="card padding">
+		<h2>Noch nichts vorhanden.</h2>
+		<p>Es gibt in dieser Gemeinde noch keine Items, welche deinen Filterkriterien entsprechen. Sei die erste Person, die hier etwas anbietet. <br> Um ein Item hinzuzufügen, drücke auf das kleine Plus oben rechts. </p>
+	</div>
+</template>
