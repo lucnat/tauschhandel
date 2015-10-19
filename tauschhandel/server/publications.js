@@ -4,8 +4,9 @@ Meteor.publish('allUsers', function() {
 	return Users.find({},  {fields: {'username': 1, 'profile': 1}});
 });
 
-Meteor.publish('posts', function(){
-	return Posts.find({});
+Meteor.publish('posts', function(postleitzahl){
+	console.log(postleitzahl);
+	return Posts.find({'postleitzahl': postleitzahl});
 });
 
 Meteor.publish('postdiscussions', function(){
@@ -14,7 +15,7 @@ Meteor.publish('postdiscussions', function(){
 
 Meteor.publish('notifications', function(userID){
 	return Notifications.find({ receiver: userID });
-})
+});
 
 Meteor.publish('messages', function(){
 	//TODO: do not publish all messages, but only if current user is sender or recipient

@@ -1,10 +1,10 @@
 //Meteor.subscribe('allUsers');
-Meteor.subscribe('posts');
 Meteor.subscribe('postdiscussions');
 
 Tracker.autorun(function(){
 	try{
-		Meteor.subscribe('notifications', Meteor.user()._id);
+		Meteor.subscribe('notifications', Meteor.userId());
+		Meteor.subscribe('posts', Meteor.user().profile.postleitzahl);
 	} catch(e) {}	
 });
 
@@ -18,6 +18,6 @@ Tracker.autorun(function() {
 
 Tracker.autorun(function(){
 	try{
-		Meteor.subscribe('conversations', Meteor.user()._id);
+		Meteor.subscribe('conversations', Meteor.userId());
 	} catch(e) {}
 });

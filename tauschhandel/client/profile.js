@@ -13,11 +13,42 @@ Template.profile.events({
             inputType: 'text',
             inputPlaceholder: 'Username',
             onOk: function(event) {
-                var inputElement = $('input');
+                var newUsername = $('input').val();
+                if(newUsername.length < 3) {
+                    alert('Eingabe zu kurz. Konnte nicht gespeichert werden.');
+                } else {
+                    Meteor.call('changeUsername', Meteor.userId(), newUsername, function(error){
+                        if(error){
+                            //handle error
+                        } else {
+                            alert('gespeichert');
+                        }
+                    });
+                }
             },
             onCancel: function() {
                 // console.log('Cancelled');
             }
+        });
+    },
+    'click #changePostleitzahl': function(){
+        IonPopup.prompt({
+            title: 'Postleitzahl ändern',
+            template: 'Neue Postleitzahl eingeben. ',
+            okText: 'Ok',
+            inputType: 'number',
+            inputPlaceholder: 'Postleitzahl',
+            onOk: function(event) {
+                var newPLZ = $('input').val();
+                if(newPLZ.length != 4) {
+                    alert('Postleitzahl muss 4 zeichen lang sein. Konnte nicht speichern.');
+                } else {
+                    var profile = Meteor.user().profile;
+                    profile.postleitzahl = newPLZ;
+                    Users.update({'_id': Meteor.userId()},{$set: {'profile': profile}});
+                    alert('Gespeichert');
+                }
+            },
         });
     },
 	'click #changeProfilePicture': function(event){
