@@ -1,23 +1,13 @@
 {
   "apn": {
-    "passphrase": "xxxxxxxxx",  
-    "key": "apnProdKey.pem",
-    "cert": "apnProdCert.pem"
+    "passphrase": "tauschhandel44",  
+    "key": "tauschhandelKey.pem",
+    "cert": "tauschhandelCertificate.pem",
+    "gateway": "gateway.sandbox.push.apple.com"
   },
-  "apn-dev": {
-    "passphrase": "xxxxxxxxx",
-    "key": "apnDevKey.pem",
-    "cert": "apnDevCert.pem"
-  },  
   "gcm": {
-    "apiKey": "AIzaSyDToOOo_59ps_kFzhBicESapPE5pkdk_XI",
-    "projectNumber": xxxxxxxxxxxx
+    "apiKey": "AIzaSyBrSUYlMDDYkekt-zExGS1-nV9fmitlvuQ",
+    "projectNumber": 619554918518
   },
-  "production": true,
-  // "badge": true,
-  // "sound": true,
-  // "alert": true,
-  // "vibrate": true,
-  // "sendInterval": 15000,  Configurable interval between sending notifications
-  // "sendBatchSize": 1  Configurable number of notifications to send per batch
+  "production": false
 }

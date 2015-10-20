@@ -1,6 +1,6 @@
 
 App.info({
-  id: 'com.naterop.tauschhandel',
+  id: 'tauschhandel',
   version: '1.0',
   name: 'Tauschhandel',
   description: 'lorem ipsum',

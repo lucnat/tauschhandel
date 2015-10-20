@@ -41,6 +41,10 @@ Template.createPost.helpers({
 
 Template.createPost.events({
     'click #submitButton': function() {
+        if($('#titel').val().length < 3){
+            alert('Titel zu kurz.');
+            return;
+        }
         checkboxes = document.getElementsByClassName('tag');
         tags = [];
         for (var i = 0; i < checkboxes.length; i++) {
