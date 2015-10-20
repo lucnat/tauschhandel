@@ -5,7 +5,6 @@ Meteor.publish('allUsers', function() {
 });
 
 Meteor.publish('posts', function(postleitzahl){
-	console.log(postleitzahl);
 	return Posts.find({'postleitzahl': postleitzahl});
 });
 
@@ -32,12 +31,3 @@ Meteor.publish('tags', function(){
 });
 
 // TODO: publish adminShizzle database only to admins / mods
-
-
-Accounts.onCreateUser(function(options, user) {
-	user.profile = {};
-	user.profile.watchlist = [];
-	user.profile.postleitzahl = null;
-	user.profile.firstLogin = true;
-	return user;
-});

@@ -96,6 +96,8 @@ Template.post.events({
                     readAt:     null,
                 };
                 Notifications.insert(notification);
+                Meteor.call('pushFromNotification', notification);
+
             }
         }
     },
@@ -247,7 +249,7 @@ Template.createPostQuestion.events({
             icon:       'ion-help',
             triggerer:  Meteor.user()._id,
             receiver:   post.userID,
-            message:    'neue Frage wurde gestellt zu deinem Post',
+            message:    'Neue Frage wurde gestellt zu deinem Post',
             link:       '/post/'+post._id,
             postTitle:  post.title,
             createdAt:  new Date(),
@@ -255,7 +257,7 @@ Template.createPostQuestion.events({
         };
 
         Notifications.insert(notification);
-
+        Meteor.call('pushFromNotification', notification);
     }
 });
 
@@ -304,6 +306,7 @@ Template.discussionPair.events({
             };
 
             Notifications.insert(notification);
+            Meteor.call('pushFromNotification', notification);
 
             $(event.target).prev().prev().prev().css('display','none');
             $(event.target).prev().css('display','none');
@@ -365,7 +368,6 @@ Template.giveAway.events({
 
             var message = 'Der Gegenstand ' + '<a href="/post/' + post._id + '">'+ post.title +'</a> wurde an dich vergeben.';
 
-
             var notification = {
                 type:       'itemGewonnen',
                 icon:       'ion-happy',
@@ -379,6 +381,9 @@ Template.giveAway.events({
             };
 
             Notifications.insert(notification);
+
+            var message = 'Glückwunsch! Der Gegenstand ' + post.title +' wurde an dich vergeben.';
+            Meteor.call('pushFromItemGewonnen', receiver._id, message);
 
             var nichtBekommen = post.interessenten;
             nichtBekommen.forEach(function(id){
@@ -395,8 +400,8 @@ Template.giveAway.events({
                         createdAt:  new Date(),
                         readAt:     null,
                     };
-                    console.log(notification);
                     Notifications.insert(notification);
+                    Meteor.call('pushFromNotification', notification);
                 }
             });
         }
@@ -445,6 +450,8 @@ Template.giveAway.events({
         };
 
         Notifications.insert(notification);
+        Meteor.call('pushFromNotification', notification);
+
         */
     }
 });

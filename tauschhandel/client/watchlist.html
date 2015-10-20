@@ -13,14 +13,20 @@
 	  	{{#ionList}}
 			
 			<div class="item item-divider">
-				My interests
+				Merkliste
 			</div>
 			{{#each watchList}}
 				{{>postPreview}}
 			{{/each}}
 
 			<div class="item item-divider">
-				My own posts
+				An mich gegeben
+			</div>
+			{{#each wonByMe}}
+				{{>postPreview}}
+			{{/each}}
+			<div class="item item-divider">
+				Meine Angebote
 			</div>
 			{{#each myPosts}}
 				{{>postPreview}}

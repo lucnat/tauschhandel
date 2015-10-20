@@ -65,7 +65,7 @@ Template.conversationListItem.events({
         var conversationID = template.data._id;
         var messages = Conversations.findOne(conversationID).messages;
         messages.forEach(function(message){
-            if(!message.readAt){
+            if(message.to == Meteor.userId() && !message.readAt){
                 message.readAt = new Date();
             }
         });
@@ -94,8 +94,8 @@ Template.conversation.events({
             createdAt:  new Date(),
             readAt:     null,
         }
-
         Conversations.update({'_id': conversation._id}, {$push: {messages: message}});
+        Meteor.call('pushFromMessage', message);
         $('#message').val('');
     }
 });

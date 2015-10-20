@@ -30,4 +30,4 @@ App.accessRule('http://i.imgur.com/*');
 App.accessRule('https://api.imgur.com/*');
 App.accessRule('http://www.femto.it/wp-content/*');
 */
-App.accessRule('*');
+App.accessRule('*', {external: false});

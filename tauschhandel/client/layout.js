@@ -1,6 +1,7 @@
 
 Template.layout.helpers({
 	'notificationsBadge': function(){
+		updateBadge();
 		return Notifications.find({'readAt': null}).count();
 	},
 	'conversationsBadge': function(){
@@ -13,6 +14,7 @@ Template.layout.helpers({
 				}
 			});
 		});
+		updateBadge();
 		return badgeCount;
 	}
 });

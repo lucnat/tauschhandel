@@ -46,3 +46,5 @@ function onLogout(){
 	//alert('on Logout called, going to profile');
 	//Router.go('/profile');
 }
+
+
