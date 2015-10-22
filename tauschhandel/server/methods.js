@@ -3,7 +3,9 @@ Meteor.methods({
 		Users.update({'_id': id},{$set: {'username': username}});
 	},
 	'pushTest': function(){
+		console.log('performing push test...');
 		Push.send({from: 'push',title: 'Congratulations',text: 'Push Test!!!!!', badge: 1, query: {}});	
+		console.log('send function called');
 	},
 	'pushFromNotification': function(notification){
 		var profile = Users.findOne(notification.receiver).profile;

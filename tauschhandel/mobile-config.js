@@ -6,7 +6,7 @@ App.info({
   description: 'lorem ipsum',
   author: 'Luca Naterop',
   email: 'luca@naterop.net',
-  website: 'tauschhandel.meteor.com'
+  website: 'http://tauschhandel-53585.onmodulus.net/'
 });
 
 
@@ -30,4 +30,4 @@ App.accessRule('http://i.imgur.com/*');
 App.accessRule('https://api.imgur.com/*');
 App.accessRule('http://www.femto.it/wp-content/*');
 */
-App.accessRule('*', {external: false});
+App.accessRule('*');

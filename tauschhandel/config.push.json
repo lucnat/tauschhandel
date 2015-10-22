@@ -1,15 +1,21 @@
 {
   "apn": {
     "passphrase": "tauschhandel44",  
-    "key": "tauschhandelKey.pem",
-    "cert": "tauschhandelCertificate.pem",
+    "key": "prodKey.pem",
+    "cert": "prodCert.pem",
     "gateway": "gateway.sandbox.push.apple.com"
+  },
+  "apn-dev": {
+    "passphrase": "tauschhandel44",
+    "key": "devKey.pem",
+    "cert": "devCert.pem"
   },
   "gcm": {
     "apiKey": "AIzaSyBrSUYlMDDYkekt-zExGS1-nV9fmitlvuQ",
     "projectNumber": 619554918518
   },
-  "production": false,
+  "production": true,
+  "debug": true,
   "sound": true,
   "alert": true,
   "vibrate": true

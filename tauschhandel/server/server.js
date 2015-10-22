@@ -1,6 +1,3 @@
-Meteor.startup(function () {
-	Push.debug=true;
-});
 
 Accounts.onCreateUser(function(options, user) {
 	user.profile 				= {};
@@ -11,3 +8,4 @@ Accounts.onCreateUser(function(options, user) {
 	return user;
 });
 
+Push.debug = true;
