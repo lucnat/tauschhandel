@@ -2,7 +2,6 @@
 	{{#contentFor "headerTitle"}}
 		<h1 class="title">Chats</h1>
 	{{/contentFor}}
-
 	{{#contentFor "headerButtonRight"}}
 		<a href="/profile" class="button button-clear pull-right" >
 			Profil
@@ -10,22 +9,26 @@
 	{{/contentFor}}
 	{{#ionView}}
 		{{#ionContent}}
-			{{#ionList}}
-				{{#if moreThanZero}}
-					{{#each konversationen}}
-						{{> conversationListItem}}
-					{{/each}}
-				{{else}}
-					{{> nothingHere}}
-				{{/if}}
-			{{/ionList}}
+			{{#if Template.subscriptionsReady}}
+				{{#ionList}}
+					{{#if moreThanZero}}
+						{{#each konversationen}}
+							{{> conversationListItem}}
+						{{/each}}
+					{{else}}
+						{{> nothingHere}}
+					{{/if}}
+				{{/ionList}}
+			{{else}}
+				{{> loader}}
+			{{/if}}
 		{{/ionContent}}
 	{{/ionView}}
 </template>
 
 <template name="conversationListItem">
 	{{#ionItem path="conversation" avatar=true iconRight=true class="item-icon-right conversation" }}
-	 	<img src=" {{#if other.profile.picture}} {{other.profile.picture}} {{else}} http://i.imgur.com/hzByj22b.jpg {{/if}} " height="50">
+	 	<img src="{{other.profile.picture}}" height="50">
 		<h2>{{other.username}}</h2> 
 		<p>Übergabe von {{post.title}}</p>
 		{{#if moreThanZero}}

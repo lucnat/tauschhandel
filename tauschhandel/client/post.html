@@ -8,11 +8,7 @@
 	  {{#ionContent}}
 		<div class="card">
 			<div class="item item-avatar">
-				{{#if post.userPicture}}
-					<img src="{{post.userPicture}}">
-				{{else}}
-					<img src="http://i.imgur.com/hzByj22b.jpg">
-				{{/if}}
+				<img src="{{post.userPicture}}">
 				<h2>{{post.userName}}</h2>
 				<p style="font-style: italic">{{post.dateString}}</p>
 			</div>
@@ -74,15 +70,19 @@
 					{{#if hasInterest}}
 						Interesse zurückziehen
 					{{else}}
-						Interesse anmelden
+						Interesse melden
 					{{/if}}
 				</button>
 			</div>
 		{{/unless}}
 
 		{{#if isMyPost}}
-			{{#if esHatInteressenten}}
-				{{> giveAway}}
+			{{#if post.istVergeben}}
+				<div class="card padding"> <p style="text-align: center"> Wurde vergeben an {{post.vergebenAnName}}</p> </div>
+			{{else}}
+				{{#if esHatInteressenten}}
+					{{> giveAway}}
+				{{/if}}
 			{{/if}}
 		{{/if}}
 
@@ -128,28 +128,14 @@
 			An jemanden vergeben
 		</div>
 		<div class="item item-text-wrap">
-			{{#if post.vergebenAn}}
-				<p>Wurde vergeben an <b>{{post.vergebenAnName}}</b></p>
-				<button id="revert" class="button button-block button-outline button-assertive">
-					Rückgängig machen
-				</button>
-			{{else}}
-				<p>Bitte wähle einen Interessenten aus.</p>
-				<label class="item item-input item-select">
-					<div class="input-label">
-						User
-					</div>
-					<select required>
-        				<option selected disabled value="">Auswählen</option>
-						{{#each interessenten}}
-							<option value="{{_id}}">{{username}}</option>
-						{{/each}}
-					</select>
-				</label>
-				<button id="giveAway" class="button button-block button-outline button-assertive">
-					Dieser Person geben
-				</button>
-			{{/if}}
+			<div class="list">
+				{{#each interessenten}}
+				    <a class="item item-avatar item-button-right giveAway" href="#" id="{{_id}}">
+						<img src="{{profile.picture}}">
+						<h2 id="{{_id}}" style="margin-top: 10px">{{username}}</h2>
+				    </a>
+			    {{/each}}
+			</div>
 		</div>
 	</div>
 </template>

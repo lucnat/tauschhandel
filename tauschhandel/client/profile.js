@@ -60,7 +60,9 @@ Template.profile.events({
             title: 'Abmelden',
             template: 'Bist du sicher, dass du dich abmelden möchtest?',
             onOk: function() {
-                Accounts.logout();
+                Meteor.logout(function(){
+                    Router.go('/');
+                });
             },
             onCancel: function() {
 

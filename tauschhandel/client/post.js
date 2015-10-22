@@ -4,7 +4,9 @@ Template.post.helpers({
         if(post){
             post.dateString = new Date(post.createdAt).toDateString();
             post.userPicture = Users.findOne(post.userID).profile.picture;
+            post.istVergeben = post.vergebenAn.length > 0;
         }
+        console.log(post);
         return post;
     },
 
@@ -63,7 +65,7 @@ Template.post.events({
     'click #interesseMelden': function() {
         IonPopup.confirm({
             title: 'Interesse bestätigen',
-            template: '  Lorem ipsum dolor sit  deserunt mollit anim id est laborum.  ?',
+            template: '  Willst du wirklich Interesse an diesem Gegenstand melden?',
             onOk: function() {
                 toggleInteressenten();
             },
@@ -78,6 +80,7 @@ Template.post.events({
             var interessenten = Posts.findOne({ _id: post._id }).interessenten; 
 
             if($.inArray(Meteor.userId(), interessenten) >= 0){
+                // Interesse zurückziehen
                 // means is already there, let's remove it
                 Posts.update({_id: post._id}, { $pull: {interessenten: Meteor.userId()} })
 
@@ -330,10 +333,7 @@ Template.giveAway.helpers({
         var ids = Posts.findOne({_id: Router.current().params._id}).interessenten;
         var interessenten = [];
         ids.forEach(function (id) {
-            interessenten.push({
-                '_id': id,
-                username: Users.findOne({'_id': id}).username,
-            });
+            interessenten.push(Users.findOne(id));
         });
         return interessenten;
     },
@@ -347,21 +347,23 @@ Template.giveAway.helpers({
 });
 
 Template.giveAway.events({
-    'click #giveAway': function(event){
+    'click .giveAway': function(event){
+        var id = event.target.id;
+        var username = Users.findOne(id).username;
         IonPopup.confirm({
             title: 'Wirklich vergeben?',
-            template: 'Möchtest du das Item wirklich an diese Person vergeben?',
+            template: 'Möchtest du das Item wirklich an '+ username +' vergeben?',
             onOk: function() {
-                giveAway();
+                giveAway(id);
                 startConversation();
             },
             onCancel: function() {
             }
         });
 
-        function giveAway(){
+        function giveAway(id){
             var post = Posts.findOne({_id: Router.current().params._id});
-            var receiver = Users.findOne({'_id' : $('select').val() });
+            var receiver = Users.findOne({'_id' : id});
             var postId = Router.current().params._id;
             Posts.update({'_id': postId}, {$set: {'vergebenAn': receiver._id}});
             Posts.update({'_id': postId}, {$set: {'vergebenAnName': receiver.username}});

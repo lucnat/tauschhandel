@@ -77,11 +77,16 @@
 </template>
 
 <template name="previewList">
-	{{#ionList}}
-		{{#each posts}}
-			{{> postPreview}}
-		{{/each}}
-	{{/ionList}}
+	{{#if Template.subscriptionsReady}}
+		{{#ionList}}
+			{{#each posts}}
+				{{> postPreview}}
+			{{/each}}
+		{{/ionList}}
+	{{else}}
+		{{> loader}}
+	{{/if}}
+
 </template>
 
 <template name="postPreview">
