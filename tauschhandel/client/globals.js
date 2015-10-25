@@ -14,7 +14,6 @@ if (Meteor.isCordova) {
 }
 
 Meteor.startup(function(){
-
 	Session.set('filter', {'tags': ['alleTags']});
   if(Meteor.isClient) {
     window.fbAsyncInit = function() {
@@ -27,8 +26,6 @@ Meteor.startup(function(){
     };
   }
 });
-
-
 
 updateBadge = function(){
   var badgeCount = Notifications.find({'readAt': null}).count();
@@ -45,3 +42,33 @@ updateBadge = function(){
   Users.update({'_id': Meteor.userId()}, {$set: {'profile': profile}});
   Push.setBadge(badgeCount);
 };
+
+getImgurPicture = function(callback){
+  // takes a picture, loads it to imgur, and calls callback with imgur id as argument
+    MeteorCamera.getPicture(function(error, localData){
+        options = {
+            apiKey: '9c96a9ec19cc485',
+            image: localData,
+        }
+        if(localData){
+            console.log('retain...');
+            IonBackdrop.retain();
+            IonLoading.show();
+        }
+        Imgur.upload(options, function(error, remoteData){
+            if(error){
+                alert(error);
+                IonBackdrop.release();
+                IonLoading.hide();
+
+            } else{
+                console.log('release');
+                IonBackdrop.release();
+                IonLoading.hide();
+                callback(remoteData.id);
+            }
+        });
+    });
+}
+
+

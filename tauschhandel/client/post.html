@@ -3,9 +3,14 @@
 	{{#contentFor "headerButtonLeft"}}
 		{{>ionNavBackButton path="home" text="Posts"}}
 	{{/contentFor}}
-
+	{{#if hasInterest}}
+		<div class="bar bar-subheader bar-positive">
+		  <h2 class="title">Interesse gemeldet</h2>
+		</div>
+	{{/if}}
 	{{#ionView}}
 	  {{#ionContent}}
+		{{#if hasInterest}}<br><br>{{/if}}
 		<div class="card">
 			<div class="item item-avatar">
 				<img src="{{post.userPicture}}">
@@ -37,12 +42,12 @@
 				      Edit
 					</a>
 				{{else}}
-					<a id="like" class="tab-item" href="#" style='{{#if isOnWatchList }}color: red {{/if}}'>
+					<a id="like" class="tab-item" href="#" style='{{#if isOnWatchList }}color: #D6665A {{/if}}'>
 				      <i class="icon ion-android-favorite"></i>
 				      Like
 					</a>
 				{{/if}}
-				<a id="QAndAButton" class="tab-item" href="#" style='{{#if QAndAOpened}} color: blue {{/if}}'>
+				<a id="QAndAButton" class="tab-item" href="#" style='{{#if QAndAOpened}} color: #75A48B {{/if}}'>
 					<i class="icon ion-chatbubble"></i>
 					Q&A
 				</a>
@@ -66,13 +71,12 @@
 
 		{{#unless isMyPost}}
 			<div class="padding">
-				<button id="interesseMelden" class="button button-block button-outline button-assertive">
-					{{#if hasInterest}}
-						Interesse zurückziehen
-					{{else}}
-						Interesse melden
-					{{/if}}
-				</button>
+				{{#if hasInterest}}
+					<button id="interesseZurueckziehen" class="button button-block button-assertive button-clear">Interesse zurückziehen</button>
+				{{else}}
+					<button id="interesseMelden" class="button button-block button-balanced">Interesse melden</button>
+				{{/if}}
+				
 			</div>
 		{{/unless}}
 
@@ -116,7 +120,7 @@
 						<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
 					</li>
 				{{/each}}
-				<br><input id='speichern' class='button button-balanced button-block button-outline' type="button" value="Speichern">
+				<br><input id='speichern' class='button button-balanced button-block' type="button" value="Speichern">
 			</div>
 		</div>
 	{{/ionModal}}
@@ -156,20 +160,22 @@
 <template name="discussionPair">
 	<p style="font-style: italic">Von {{questionerName}} am {{dateString}}</p>
 	<div class="card">
-		<div class="item item-text-wrap" style='background-color: #C18B8B'>
-			<p>{{question}}</p>
+		<div class="item item-text-wrap" style=''>
+			<div style="text-align: right"><i class="icon ion-help"></i></div>
+			<p><b>{{question}}</b></p>
 		</div>
-		<div class="item item-text-wrap" style='background-color: #F4D09A'>
+		<div class="item item-text-wrap" style=''>
 			{{#if answer}}
+				<div style="text-align: right"><i class="icon ion-alert"></i></div>
 				<p>{{answer}}</p>
 			{{else}}
 				{{#if isMyPost}}
 					<label class="item item-input" style='display: none'>
-						<textarea id='antwort' placeholder="Stelle eine Frage" rows="5" ></textarea>
+						<textarea id='antwort' placeholder="Schreibe eine Antwort" rows="5" ></textarea>
 					</label><br>
-					<button id="antwortVerfassenButton" class='button button-balanced button-outline'>Antwort verfassen</button>
-					<button id="frageBeantwortenButton" class='button button-balanced button-outline' style='display: none'>Antworten</button>
-					<button id="cancel" class='button button-assertive button-outline' style='display: none'>Abbrechen</button>
+					<button id="antwortVerfassenButton" class='button button-balanced button'>Antwort verfassen</button>
+					<button id="frageBeantwortenButton" class='button button-balanced button' style='display: none'>Antworten</button>
+					<button id="cancel" class='button button-assertive button-clear' style='display: none'>Abbrechen</button>
 				{{else}}
 					<p style="font-style: italic"> Noch keine Antwort </p>
 				{{/if}}
@@ -182,10 +188,10 @@
 	<br>
 	<form role='form'>
 		<div class="input-group">
-		<label class="item item-input" style="border: 1px solid black; border-color: green">
+		<label class="item item-input">
 			<textarea id='newQuestion' placeholder="Stelle eine Frage" rows="5"></textarea>
 		</label>
-		<button id='newQuestionButton' class="button button-balanced button-outline" type="button">Abschicken!</button>
+		<button id='newQuestionButton' class="button button-balanced button-clear" type="button">Abschicken!</button>
 		</div>
 	</form>
 </template>

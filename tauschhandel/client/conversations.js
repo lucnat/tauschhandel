@@ -1,6 +1,6 @@
 Template.conversations.helpers({
     'konversationen': function() {
-        var conversations = Conversations.find({}, { sort: {createdAt: -1} }).fetch();
+        var conversations = Conversations.find({}, { sort: {'createdAt': -1} }).fetch();
         conversations.forEach(function(conversation){
             // figure out which name to show (other person than currently logged in person)
             var person1 = Users.findOne(conversation.creator);
@@ -75,7 +75,10 @@ Template.conversationListItem.events({
            "swing"
         );
         Conversations.update({'_id': conversationID},{$set: {'messages': messages}})
-
+    },
+    'click .greyClick': function(event) {
+        e = event;
+        $(event.currentTarget).css('background-color', '#E5E5E5');
     }
 });
 
@@ -95,6 +98,7 @@ Template.conversation.events({
             readAt:     null,
         }
         Conversations.update({'_id': conversation._id}, {$push: {messages: message}});
+        Conversations.update({'_id': conversation._id}, {$set: {'changedAt': new Date()}});
         Meteor.call('pushFromMessage', message);
         $('#message').val('');
     }

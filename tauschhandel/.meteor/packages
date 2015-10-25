@@ -29,6 +29,7 @@ check
 useraccounts:core
 useraccounts:ionic
 accounts-password
+email
 msavin:mongol
 mdg:camera
 biasport:facebook-sdk

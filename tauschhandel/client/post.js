@@ -6,7 +6,6 @@ Template.post.helpers({
             post.userPicture = Users.findOne(post.userID).profile.picture;
             post.istVergeben = post.vergebenAn.length > 0;
         }
-        console.log(post);
         return post;
     },
 
@@ -67,25 +66,8 @@ Template.post.events({
             title: 'Interesse bestätigen',
             template: '  Willst du wirklich Interesse an diesem Gegenstand melden?',
             onOk: function() {
-                toggleInteressenten();
-            },
-            onCancel: function() {
-            }
-        });
-        function toggleInteressenten(){
-            //toggles currentUser's Id in the interessenten array of this post. 
-            // Also, generates notification
-           
-            var post = Posts.findOne({ '_id': Router.current().params._id });
-            var interessenten = Posts.findOne({ _id: post._id }).interessenten; 
-
-            if($.inArray(Meteor.userId(), interessenten) >= 0){
-                // Interesse zurückziehen
-                // means is already there, let's remove it
-                Posts.update({_id: post._id}, { $pull: {interessenten: Meteor.userId()} })
-
-            } else {
-                // means doesn't exist yet, let's push to array
+                // ins array der interessenten, und notification auslösen. 
+                var post = Posts.findOne({ '_id': Router.current().params._id });
                 Posts.update({_id: post._id}, { $push: {interessenten: Meteor.userId()} })
                 var notification = {
                     type:       'interesseGemeldet',
@@ -100,11 +82,25 @@ Template.post.events({
                 };
                 Notifications.insert(notification);
                 Meteor.call('pushFromNotification', notification);
-
+            },
+            onCancel: function() {
             }
-        }
+        });
     },
-
+    'click #interesseZurueckziehen': function(){
+        IonPopup.confirm({
+            title: 'Interesse zurückziehen',
+            template: 'Bist du sicher, dass du dein Interesse an diesem Gegenstand zurückziehen möchtest?',
+            onOk: function() {
+                // Aus dem array der interessenten  
+                var post = Posts.findOne({ '_id': Router.current().params._id });
+                var interessenten = Posts.findOne({ _id: post._id }).interessenten; 
+                Posts.update({_id: post._id}, { $pull: {interessenten: Meteor.userId()} });
+            },
+            onCancel: function() {
+            }
+        });
+    },
     'click #editButton': function(){
         IonActionSheet.show({
             titleText: 'Bearbeiten',
@@ -114,7 +110,6 @@ Template.post.events({
             destructiveText: 'Löschen',
             cancelText: 'Cancel',
             cancel: function() {
-                // console.log('Cancelled!');
             },
             buttonClicked: function(index) {
                 if (index === 0) {
@@ -179,7 +174,6 @@ Template.post.events({
             ],
             cancelText: 'Cancel',
             cancel: function() {
-                console.log('Cancelled!');
             },
             buttonClicked: function(index) {
                 if (index === 0) {  // mail
@@ -416,6 +410,7 @@ Template.giveAway.events({
                 'creator':  creator._id,
                 'partner':  partner._id,
                 'postID':     post._id,
+                'changedAt': new Date(), 
                 messages: [ {
                     from:       creator._id,
                     to:         partner._id, 
@@ -425,7 +420,6 @@ Template.giveAway.events({
                     }
                 ],
             }
-            console.log(conversation);
             Conversations.insert(conversation);
         }
     },
@@ -500,20 +494,11 @@ Template.editPost.events({
     },
     'click #imageUpload': function(){
         event.preventDefault();
-        MeteorCamera.getPicture(function(error, localData){
-            var options = {
-                apiKey: '9c96a9ec19cc485',
-                image: localData,
-            }
-            Imgur.upload(options, function(error, remoteData){
-                if(error){
-                    alert(error);
-                }
-                var image = $('#image');
-                var ids = Session.get('imageIDs');
-                ids.push(remoteData.id);
-                Session.set('imageIDs', ids);
-            });
+        getImgurPicture(function(id){
+            var image = $('#image');
+            var ids = Session.get('imageIDs');
+            ids.push(id);
+            Session.set('imageIDs', ids);
         });
     }
 });

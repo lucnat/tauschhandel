@@ -17,11 +17,11 @@
 				{{> yield}}
 			{{/ionNavView}}
 			{{#unless currentUser.profile.firstLogin}}
-				{{#ionTabs style="ios" class="has-badge"}}
-					{{> ionTab title="Browse" path="home" iconOff="ios-browsers-outline" iconOn="ios-browsers" class="tab-item-positive"}}
-					{{> ionTab title="Watchlist" path="watchlist" iconOff="android-favorite-outline" iconOn="android-favorite" class="tab-item-positive"}}
-					{{> ionTab title="Notifications" path="notifications" iconOff="ios-bell-outline" badgeNumber=notificationsBadge iconOn="ios-bell" class="tab-item-positive notificationstab" }}
-					{{> ionTab title="Chats" path="conversations" iconOff="ios-chatbubble-outline" iconOn="ios-chatbubble" class="tab-item-positive" badgeNumber=conversationsBadge}}
+				{{#ionTabs style="ios" class="has-badge tabs-striped tabs-color-positive"}}
+					{{> ionTab path="home" iconOff="home" iconOn="home" class="tab-item-positive"}}
+					{{> ionTab path="watchlist" iconOff="star" iconOn="star" class="tab-item-positive"}}
+					{{> ionTab path="notifications" iconOff="ios-bell" badgeNumber=notificationsBadge iconOn="ios-bell" class="tab-item-positive notificationstab" }}
+					{{> ionTab path="conversations" iconOff="ios-chatbubble" iconOn="ios-chatbubble" class="tab-item-positive" badgeNumber=conversationsBadge}}
 				{{/ionTabs}}
 			{{/unless}}
 		{{else}}

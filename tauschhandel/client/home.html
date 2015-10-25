@@ -1,7 +1,7 @@
 
 <template name='home'>
 	{{#contentFor "headerTitle"}}
-		<h1 class="title">Home</h1>
+		<h1 class="title">Browse</h1>
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonLeft"}}
@@ -28,7 +28,7 @@
 </template>
 
 <template name="createPost">
-	{{#ionModal title='Neues Item hinzufügen'}}
+	{{#ionModal title='Neues Item hinzufügen' barClass="bar-dark"}}
 		<div class='list card'>
 			<div class="item item-divider">Beschreibung</div>
 			<div class="item">
@@ -39,13 +39,17 @@
 					<textarea id='text' placeholder="Beschreibung" rows="10"></textarea>
 				</label>
 			</div>
+		</div>
+		<div class='list card'>
 			<div class="item item-divider">Bilder</div>
 			<div class="item">
 				{{#each imageIDs}}
 					<img id='image' style='margin-right: 10px' src='http://i.imgur.com/{{this}}s.jpg'>
 				{{/each}}
-				<br><button id='imageUpload' class='button button-positive button-outline icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
+				<br><button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
 			</div>
+		</div>
+		<div class='list card'>
 			<div class="item item-divider">Tags</div>
 			<div class="item">
 				{{#each possibleTags}}
@@ -53,7 +57,7 @@
 						<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
 					</li>
 				{{/each}}
-				<br><input id='submitButton' class='button button-balanced button-block button-outline' type="button" value="Absenden">
+				<br><input id='submitButton' class='button button-balanced button-block' type="button" value="Absenden">
 			</div>
 		</div>
 	{{/ionModal}}
@@ -90,7 +94,7 @@
 </template>
 
 <template name="postPreview">
-	{{#ionItem path="post" iconRight=true class="item-icon-right item-thumbnail-left" }}
+	{{#ionItem path="post" iconRight=true class="greyClick item-icon-right item-thumbnail-left" }}
 		{{#if imageIDs.[0]}}
 	 		<img src="http://i.imgur.com/{{imageIDs.[0]}}b.jpg">
 	 	{{else}}

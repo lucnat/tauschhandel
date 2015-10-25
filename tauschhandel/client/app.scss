@@ -2,15 +2,14 @@
 // -------------------------------
 
 $light:                           #fff !default;
-$stable:                          #f8f8f8 !default;
-$positive:                        #4a87ee !default;
+$stable:                          #fff !default;
+$positive:                        #75A48B !default;
 $calm:                            #43cee6 !default;
-$balanced:                        #66cc33 !default;
+$balanced:                        #DC9B74 !default;
 $energized:                       #f0b840 !default;
-$assertive:                       #ef4e3a !default;
+$assertive:                       #D6665A !default;
 $royal:                           #8a6de9 !default;
-$dark:                            #444 !default;
-
+$dark:                            #665056 !default;
 
 // Base
 // -------------------------------
@@ -18,6 +17,14 @@ $dark:                            #444 !default;
 $font-family-sans-serif:          "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !default;
 $font-family-light-sans-serif:    "Helvetica Neue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !default;
 $font-family-serif:               Georgia, "Times New Roman", Times, serif !default;
+
+.item-divider{
+	background-color: #9A8D90 !important;
+	color: white !important;
+}
+h3{
+	color: white !important;
+}
 
 // Ionic
 @import '.meteor/local/build/programs/server/assets/packages/meteoric_ionic-sass/ionic';

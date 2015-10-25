@@ -20,6 +20,7 @@ T9n.setLanguage('de');
 
 AccountsTemplates.configure({
     showLabels: false,
+   	showForgotPasswordLink: true,
 });
 
 Tracker.autorun(function () {

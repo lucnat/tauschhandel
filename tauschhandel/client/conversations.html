@@ -27,7 +27,7 @@
 </template>
 
 <template name="conversationListItem">
-	{{#ionItem path="conversation" avatar=true iconRight=true class="item-icon-right conversation" }}
+	{{#ionItem path="conversation" avatar=true iconRight=true class="greyClick item-icon-right conversation" }}
 	 	<img src="{{other.profile.picture}}" height="50">
 		<h2>{{other.username}}</h2> 
 		<p>Übergabe von {{post.title}}</p>
@@ -48,11 +48,11 @@
 			<div class="list">
 				{{#each conversation.messages}}
 					{{#if fromMe}}
-						<div class="item item-text-wrap" style="background-color: #158ffe; border-radius: 5px; margin: 10px 10px 10px {{margin}}%">
+						<div class="item item-text-wrap" style="background-color: #158ffe; border-radius: 15px; margin: 10px 10px 10px {{margin}}%">
 							<p style="color: white; font-size: 17px">{{{message}}}</p>
 						</div>
 					{{else}}
-						<div class="item item-text-wrap " style="background-color: #EEE; border-radius: 5px; margin: 10px {{margin}}% 10px 10px">
+						<div class="item item-text-wrap " style="background-color: #EEE; border-radius: 15px; margin: 10px {{margin}}% 10px 10px">
 							<p style="font-size: 17px">{{{message}}}</p>
 						</div>
 					{{/if}}

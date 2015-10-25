@@ -19,15 +19,16 @@ Template.previewList.helpers({
     'posts': function() {
         var tags = Session.get('filter').tags;
         if($.inArray('alleTags', tags) >= 0){
-            return Posts.find().fetch();
+            return Posts.find({'vergebenAn': ''}, { sort: {'createdAt': -1} }).fetch();
         } else {
-            return Posts.find({'tags': {$in: tags}}).fetch();
+            return Posts.find({'tags': {$in: tags}, 'vergebenAn': ''},{ sort: {'createdAt': -1} }).fetch();
         }
     }
 });
 Template.previewList.events({
-    'click .post': function() {
-        Router.go('/p/' + this._id);
+    'click .greyClick': function(event) {
+        e = event;
+        $(event.currentTarget).css('background-color', '#E5E5E5');
     },
 });
 Template.createPost.helpers({
@@ -75,26 +76,14 @@ Template.createPost.events({
     },
     'click #imageUpload': function(event){
         event.preventDefault();
-        MeteorCamera.getPicture(function(error, localData){
-            var options = {
-                apiKey: '9c96a9ec19cc485',
-                image: localData,
-            }
-            Imgur.upload(options, function(error, remoteData){
-                if(error){
-                    alert(error);
-                }
-                var image = $('#image');
-                var ids = Session.get('imageIDs');
-                ids.push(remoteData.id);
-                Session.set('imageIDs', ids);
-            });
-
+        getImgurPicture(function(id){
+            var image = $('#image');
+            var ids = Session.get('imageIDs');
+            ids.push(id);
+            Session.set('imageIDs', ids);
         });
     }
-
 });
-
 
 Template.filterModal.helpers({
     'possibleTags': function() {

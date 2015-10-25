@@ -27,7 +27,6 @@ Template.profile.events({
                 }
             },
             onCancel: function() {
-                // console.log('Cancelled');
             }
         });
     },
@@ -73,22 +72,16 @@ Template.profile.events({
 
 changeProfilePicture = function(){
     // takes photo and saves it in user profile. Handles backdrop as well. 
-    MeteorCamera.getPicture(function(error, localData){
-        options = {
-            apiKey: '9c96a9ec19cc485',
-            image: localData,
-        }
-        Imgur.upload(options, function(error, remoteData){
-            IonBackdrop.retain();
-            if(error){
-                alert(error);
-                IonBackdrop.release();
-
-            }
-            var link = "http://i.imgur.com/" + remoteData.id + "b.jpg";
-            Users.update({_id: Meteor.user()._id}, { $set: { 'profile.picture': link} });
-            IonBackdrop.release();
-        });
-
+    getImgurPicture(function(id){
+        var link = "http://i.imgur.com/" + id + "b.jpg";
+        Users.update({_id: Meteor.user()._id}, { $set: { 'profile.picture': link} });
     });
+}
+
+Template.atForm.rendered = function(){
+    Meteor.setTimeout(function(){
+        console.log('trying to focus');
+        $('.at-input').first().children().first().focus();
+    }, 500);
+    
 }

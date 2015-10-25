@@ -1,7 +1,7 @@
 
 App.info({
   id: 'tauschhandel',
-  version: '1.0',
+  version: '0.5',
   name: 'Tauschhandel',
   description: 'lorem ipsum',
   author: 'Luca Naterop',
