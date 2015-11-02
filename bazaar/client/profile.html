@@ -1,0 +1,81 @@
+<template name="profile">
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Willkommen</h1>
+	{{/contentFor}}
+
+	{{#if currentUser}}
+		{{#contentFor "headerButtonLeft"}}
+			{{>ionNavBackButton path="conversations" text="Chats"}}
+		{{/contentFor}}
+	{{/if}}
+
+	{{#ionView}}
+		{{#ionContent}}
+			{{#if currentUser}}
+				<div class="list card">
+					<div class="item item-divider">
+						Mein Profil
+					</div>
+					<div class="item">
+					<img src="{{currentUser.profile.picture}}" alt="" style="border-radius: 80px; box-shadow: 2px 2px 10px #888888;" /> 
+						<button id="changeProfilePicture" class="button button-clear icon-left ion-edit" style="margin: 56px 0px 0px 20px"> </button>
+					</div>
+					<a id="changeUsername" class="item item-icon-left">
+						 <i class="icon ion-person"></i>
+						{{currentUser.username}}
+					<span class="item-note">Click to Edit</span>
+					</a>
+					<a id="changePostleitzahl" class="item item-icon-left">
+						 <i class="icon ion-home"></i>
+						{{currentUser.profile.postleitzahl}}
+					<span class="item-note">Click to Edit</span>
+					</a>
+					<div class="item item-icon-left">
+						 <i class="icon ion-power"></i>
+						<button id="logout" class="button button-assertive button-outline"> Mich Abmelden </button>
+					</div>
+				</div>
+
+				{{> faq}}
+				<br>
+				<div style="text-align:center"><a href="#">Read Terms</a></div>
+
+			{{else}}
+				{{> loader}}
+			{{/if}}
+		{{/ionContent}}
+	{{/ionView}}
+</template>
+
+<template name="faq">
+	<div class="card padding">
+		<h2 style="font-size: 25px">Häufig gestellte Fragen</h2>
+		
+		<b><p>Kann ich für meine Items auf Bazaar Geld verlangen?</p></b>
+		<p style="font-style: italic">Nein, alle Bazaar Items werden verschenkt. Keine Bezahlung, keinen Warentausch.</p>
+
+		<b><p>Wie kann ich ein Item von einer anderen Person erhalten?</p></b>
+		<p style="font-style: italic">Dazu musst du zuerst dein Interesse anmelden. Sobald du Interesse gemeldet hast, bekommt der Eigentümer eine Benachrichtigung. Er kann dir das Item dann vergeben.</p>
+
+		<b><p>Wie funktioniert die Übergabe?</p></b>
+		<p style="font-style: italic">Nachdem ein Gegenstand vergeben wurde, wird die Übergabe per Chat geregelt. Es ist auch möglich die gewünschte Art der Übergabe im Inserat zu vermerken.</p>
+
+		<b><p>Wie finanziert sich Bazaar?</p></b>
+		<p style="font-style: italic">Gar nicht. Wir haben kein Geld zum essen mehr.</p>
+
+		<b><p>Ist Bazaar die nützlichste App auf der Welt?</p></b>
+		<p style="font-style: italic">Ja.</p>
+
+	</div>
+</template>
+
+
+<template name="login">
+	{{#ionView}}
+		{{#ionContent class="padding"}}
+			
+			{{> atForm}}
+		{{/ionContent}}
+	{{/ionView}}
+</template>
+

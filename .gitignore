@@ -1,10 +1,2 @@
 .DS_Store
-*.pem
 
-tauschhandel/mup.json
-
-*.pem
-
-tauschhandel/private/Certificates.p12
-
-tauschhandel/private/aps_development.cer

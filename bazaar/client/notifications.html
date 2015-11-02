@@ -1,0 +1,31 @@
+<template name="notifications">
+	
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Notifications</h1>
+	{{/contentFor}}
+	{{#contentFor "headerButtonRight"}}
+		<a href="/profile" class="button button-clear pull-right" >
+			Profil
+		</a>
+	{{/contentFor}}
+	{{#ionView}}
+	  {{#ionContent}}
+			{{#each notifications}}
+				{{> notification}}
+			{{/each}}
+	  {{/ionContent}}
+	{{/ionView}}
+
+</template>
+
+<template name="notification">
+	<div class="card">
+		<div class="item item-text-wrap item-icon-left">
+		    <i class="icon {{icon}}"></i>
+		    {{{message}}} <a href="{{link}}">{{postTitle}}</a>
+		</div>
+	</div>
+
+
+
+</template>

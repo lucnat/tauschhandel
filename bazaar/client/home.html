@@ -1,0 +1,122 @@
+
+<template name='home'>
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Browse</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		<a href="#" class="button button-clear pull-left" data-ion-modal="filterModal" >
+			Filter
+		</a>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		<button class="button button-clear pull-right" data-ion-modal="createPost">
+			{{> ionIcon icon='ios-plus-empty'}}
+		</button>
+	{{/contentFor}}
+
+	{{#ionView}}
+		{{#ionContent}}
+			{{> previewList}}
+			{{#if nothingHereYet}}
+				{{> noPostsHereYet}}
+			{{/if}}
+		{{/ionContent}}
+	{{/ionView}}
+</template>
+
+<template name="createPost">
+	{{#ionModal title='Neues Item hinzufügen' barClass="bar-dark"}}
+		<div class='list card'>
+			<div class="item item-divider">Beschreibung</div>
+			<div class="item">
+				<label class="item item-input">
+					<input id='titel' type="text" placeholder="Titel"><br>
+				</label>
+				<label class="item item-input text" >
+					<textarea id='text' placeholder="Beschreibung" rows="10"></textarea>
+				</label>
+			</div>
+		</div>
+		<div class='list card'>
+			<div class="item item-divider">Bilder</div>
+			<div class="item">
+				{{#each imageIDs}}
+					<img id='image' style='margin-right: 10px' src='http://i.imgur.com/{{this}}s.jpg'>
+				{{/each}}
+				<br><button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
+			</div>
+		</div>
+		<div class='list card'>
+			<div class="item item-divider">Tags</div>
+			<div class="item">
+				{{#each possibleTags}}
+					<li class='item item-checkbox'>
+						<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
+					</li>
+				{{/each}}
+				<br><input id='submitButton' class='button button-balanced button-block' type="button" value="Absenden">
+			</div>
+		</div>
+	{{/ionModal}}
+</template>
+
+<template name="filterModal">
+	{{#ionModal title='Filter'}}
+		<div id="alleTags" class="tag">
+			{{#ionRadio class="tag" id="alleTags"}}
+				Alle
+			{{/ionRadio}}		
+		</div>
+		{{#each possibleTags}}
+			<div id="{{tag}}" class="tag">
+				{{#ionRadio}}
+					{{tag}}
+				{{/ionRadio}}
+			</div>
+		{{/each}}
+	{{/ionModal}}
+</template>
+
+<template name="previewList">
+	{{#if Template.subscriptionsReady}}
+		{{#ionList}}
+			{{#if filterNotAll}}
+				{{#ionItem}}
+					<div style="text-align: center">
+						<button id="removeFilter" class='button button-balanced button-clear'>Filter {{filterTag}} entfernen</button>
+					</div>
+				{{/ionItem}}
+			{{/if}}
+			{{#each gemeinden}}
+				<div class="item item-divider">{{plz}} {{ORT}}</div>
+				{{#each posts}}
+					{{> postPreview}}
+				{{/each}}
+			{{/each}}
+		{{/ionList}}
+	{{else}}
+		{{> loader}}
+	{{/if}}
+
+</template>
+
+<template name="postPreview">
+	{{#ionItem path="post" iconRight=true class="greyClick item-icon-right item-thumbnail-left" }}
+		{{#if imageIDs.[0]}}
+	 		<img src="http://i.imgur.com/{{imageIDs.[0]}}b.jpg">
+	 	{{else}}
+	 		<img src="http://i.imgur.com/63f1Hotb.jpg">
+	 	{{/if}}
+		<h2>{{title}}</h2> 
+		<p>{{text}}</p>
+		{{> ionIcon icon="ios-arrow-forward" class="positive"}}
+	{{/ionItem}}
+</template>
+
+<template name="noPostsHereYet">
+	<div class="card padding">
+		<p style="font-style: italic">Es gibt noch keine Items, welche deinen Filterkriterien entsprechen <br> Um ein Item hinzuzufügen, drücke auf das kleine Plus oben rechts. </p>
+	</div>
+</template>

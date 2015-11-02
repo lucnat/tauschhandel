@@ -1,0 +1,41 @@
+<template name='watchlist'>
+	
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">My Interests</h1>
+	{{/contentFor}}
+	{{#contentFor "headerButtonRight"}}
+		<a href="/profile" class="button button-clear pull-right" >
+			Profil
+		</a>
+	{{/contentFor}}
+
+	{{#ionView}}
+	  {{#ionContent}}
+	  	{{#ionList}}
+			
+			<div class="item item-divider">
+				Merkliste
+			</div>
+			{{#each watchList}}
+				{{>postPreview}}
+			{{/each}}
+
+			<div class="item item-divider">
+				An mich vergeben
+			</div>
+			{{#each wonByMe}}
+				{{>postPreview}}
+			{{/each}}
+			<div class="item item-divider">
+				Meine Angebote
+			</div>
+			{{#each myPosts}}
+				{{>postPreview}}
+			{{/each}}
+
+		{{/ionList}}
+	  {{/ionContent}}
+	{{/ionView}}
+
+</template>
+
