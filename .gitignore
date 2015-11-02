@@ -1,2 +1,16 @@
 .DS_Store
 
+
+bazaar/config.push.json
+
+bazaar/private/prodKey.pem
+
+bazaar/private/prodCert.pem
+
+bazaar/private/devKey.pem
+
+bazaar/private/devCert.pem
+
+bazaar/mup.json
+
+tauschhandel/config.push.json
