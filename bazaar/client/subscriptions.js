@@ -9,7 +9,6 @@ Tracker.autorun(function(){
 		Meteor.user().profile.umgebung.forEach(function(gemeinde){
 			umgebung.push(gemeinde.plz);
 		});
-		console.log(umgebung);
 		Meteor.subscribe('posts', umgebung);
 	} catch(e) {}	
 });

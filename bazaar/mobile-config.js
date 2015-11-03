@@ -1,7 +1,7 @@
 
 App.info({
-  id: 'tauschhandel',
-  version: '0.5',
+  id: 'com.naterop.dorfbazaar',
+  version: '0.7',
   name: 'DorfBazaar',
   description: 'lorem ipsum',
   author: 'Luca Naterop',

@@ -219,6 +219,13 @@ Template.post.events({
     }
 });
 
+Template.post.rendered = function(){
+    $('.bild').on('load', function(e){
+        element = e.target;
+        $(element).fadeIn('slow');
+    });
+};
+
 Template.discussion.helpers({
 
     'discussions': function(){
