@@ -158,13 +158,9 @@
 	<p style="font-style: italic">Von {{questionerName}} am {{dateString}}</p>
 	<div class="card">
 		<div class="item item-text-wrap" style=''>
-			<div style="text-align: right"><i class="icon ion-help"></i></div>
-			<p><b>{{question}}</b></p>
-		</div>
-		<div class="item item-text-wrap" style=''>
+			<b><p>{{question}}</p></b>
 			{{#if answer}}
-				<div style="text-align: right"><i class="icon ion-alert"></i></div>
-				<p>{{answer}}</p>
+				<p style="font-style: italic">{{answer}}</p>
 			{{else}}
 				{{#if isMyPost}}
 					<label class="item item-input" style='display: none'>

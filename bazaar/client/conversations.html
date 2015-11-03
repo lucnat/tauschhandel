@@ -50,27 +50,38 @@
 					{{#if fromMe}}
 						<div class="item item-text-wrap" style="background-color: #158ffe; border-radius: 15px; margin: 10px 10px 10px {{margin}}%">
 							<p style="color: white; font-size: 17px">{{{message}}}</p>
+							<p style="color: white; font-style: italic; font-size: 9px"><b>{{currentUser.username}}</b> - {{dateString}}</p>
 						</div>
 					{{else}}
 						<div class="item item-text-wrap " style="background-color: #EEE; border-radius: 15px; margin: 10px {{margin}}% 10px 10px">
 							<p style="font-size: 17px">{{{message}}}</p>
+							<p style="font-style: italic; font-size: 9px"><b>{{conversation.other.username}}</b> - {{dateString}}</p>
 						</div>
 					{{/if}}
 				{{/each}}
-
-
+				<div style="height: 100px"></div>
+				<!--
 				<div class="item item-input-inset">
-					<label class="item-input-wrapper">
-						<textarea id="message" type="text" placeholder="Type.." rows="4" style="background-color: #EEE"></textarea>
+					<label height="100px" id="textareaWrapper" class="item-input-wrapper" style="background-color: #FFF">
+					<textarea rows="5" id="message" placeholder="Send {{conversation.other.username}} a messaage..." minlength="1" maxlength="1500"></textarea>
 					</label>
-					<button id="writeMessageButton" class="button button-small">
-						Send
-					</button>
+						<button id="writeMessageButton" class="button button-icon icon ion-android-send footer-btn" type="submit">
+						</button>
+				</div>
+				-->
+				<div class="bar bar-footer item-input-inset message-footer" style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; height: 100px">
+					<label height="100px" id="textareaWrapper" class="item-input-wrapper" style="background-color: #FFF">
+					<textarea rows="5" id="message" placeholder="Schreibe {{conversation.other.username}} eine Nachricht..." minlength="1" maxlength="1500"></textarea>
+					</label>
+					<div class="footer-btn-wrap">
+						<button id="writeMessageButton" class="button button-icon icon ion-android-send footer-btn" type="submit">
+						</button>
+					</div>
 				</div>
 			</div>
 		{{/ionContent}}
-
 	{{/ionView}}
+
 </template>
 
 <template name="nothingHere">

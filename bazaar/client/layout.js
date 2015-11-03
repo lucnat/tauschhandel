@@ -16,5 +16,8 @@ Template.layout.helpers({
 		});
 		updateBadge();
 		return badgeCount;
+	},
+	'hideTabs': function(){
+		return !!Session.get('hideTabs');
 	}
 });

@@ -53,8 +53,9 @@ Template.conversation.helpers({
                 message.fromMe = false;
             }
             var length = message.message.length;
-            message.margin = Math.min(60,100*Math.exp(-1*length/50));        // exponential model
+            message.margin = Math.min(40,100*Math.exp(-1*length/50));        // exponential model
             message.margin = Math.max(6, message.margin);                   // delimited by 10, 60
+            message.dateString = new Date(message.createdAt).toDateString();
         });
         return conversation;
     }
@@ -84,29 +85,36 @@ Template.conversationListItem.events({
 
 Template.conversation.events({
     'click #writeMessageButton': function(){
-        var conversation = Conversations.findOne(Router.current().params._id);
-        if(Meteor.user()._id == conversation.creator){
-            var other = conversation.partner;
-        } else {
-            var other = conversation.creator;
+        if($('#message').val().length >= 1){
+            var conversation = Conversations.findOne(Router.current().params._id);
+            if(Meteor.user()._id == conversation.creator){
+                var other = conversation.partner;
+            } else {
+                var other = conversation.creator;
+            }
+            var message = {
+                from:       Meteor.user()._id,
+                to:         other, 
+                message:    $('#message').val(),
+                createdAt:  new Date(),
+                readAt:     null,
+            }
+            Conversations.update({'_id': conversation._id}, {$push: {messages: message}});
+            Conversations.update({'_id': conversation._id}, {$set: {'changedAt': new Date()}});
+            Meteor.call('pushFromMessage', message);
+            $('#message').val('');
         }
-        var message = {
-            from:       Meteor.user()._id,
-            to:         other, 
-            message:    $('#message').val(),
-            createdAt:  new Date(),
-            readAt:     null,
-        }
-        Conversations.update({'_id': conversation._id}, {$push: {messages: message}});
-        Conversations.update({'_id': conversation._id}, {$set: {'changedAt': new Date()}});
-        Meteor.call('pushFromMessage', message);
-        $('#message').val('');
     }
 });
 
+Template.conversation.rendered = function(){
+    Session.set('hideTabs', true);
+    console.log('hide tabs');
+}
 
-
-
-
+Template.conversation.destroyed = function(){
+    Session.set('hideTabs', false);
+    console.log('show tabs');
+}
 
 

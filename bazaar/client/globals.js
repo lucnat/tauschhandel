@@ -57,8 +57,7 @@ updateBadge = function(){
 };
 
 getImgurPicture = function(callback){
-    // takes a picture, loads it to imgur, and calls callback with imgur id as argument
-
+  // takes a picture, loads it to imgur, and calls callback with imgur id as argument
   IonActionSheet.show({
       titleText: 'Picture',
       buttons: [
@@ -114,7 +113,7 @@ getImgurPicture = function(callback){
 }
 
 lucPopup = function(text){
-IonPopup.alert({
+  IonPopup.alert({
       template: text,
       okText: 'OK.'
     });

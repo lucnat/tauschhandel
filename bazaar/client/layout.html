@@ -15,12 +15,14 @@
 			{{> yield}}
 		{{/ionNavView}}
 		{{#unless currentUser.profile.firstLogin}}
-			{{#ionTabs style="ios" class="has-badge tabs-striped tabs-color-positive"}}
-				{{> ionTab path="home" iconOff="home" iconOn="home" class="tab-item-positive"}}
-				{{> ionTab path="watchlist" iconOff="star" iconOn="star" class="tab-item-positive"}}
-				{{> ionTab path="notifications" iconOff="ios-bell" badgeNumber=notificationsBadge iconOn="ios-bell" class="tab-item-positive notificationstab" }}
-				{{> ionTab path="conversations" iconOff="ios-chatbubble" iconOn="ios-chatbubble" class="tab-item-positive" badgeNumber=conversationsBadge}}
-			{{/ionTabs}}
+			{{#unless hideTabs}}
+				{{#ionTabs style="ios" class="has-badge tabs-striped tabs-color-positive"}}
+					{{> ionTab path="home" iconOff="home" iconOn="home" class="tab-item-positive"}}
+					{{> ionTab path="watchlist" iconOff="star" iconOn="star" class="tab-item-positive"}}
+					{{> ionTab path="notifications" iconOff="ios-bell" badgeNumber=notificationsBadge iconOn="ios-bell" class="tab-item-positive notificationstab" }}
+					{{> ionTab path="conversations" iconOff="ios-chatbubble" iconOn="ios-chatbubble" class="tab-item-positive" badgeNumber=conversationsBadge}}
+				{{/ionTabs}}
+			{{/unless}}
 		{{/unless}}
 	{{/ionBody}}
 </template>
