@@ -82,8 +82,8 @@ getImgurPicture = function(callback){
 
         MeteorCamera.getPicture(cameraOptions, function(error, localData){
             options = {
-                apiKey: '391ebba772242a6',
-                mashapeKey: 'gpIfI6aXh9msh6PWcG6gK3IRWkHkp1eXlxBjsnZKZzqWwifuOH',
+                apiKey: "391ebba772242a6",
+                mashapeKey: "gpIfI6aXh9msh6PWcG6gK3IRWkHkp1eXlxBjsnZKZzqWwifuOH",
                 image: localData,
             }
             if(localData){

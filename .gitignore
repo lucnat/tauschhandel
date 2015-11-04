@@ -14,3 +14,5 @@ bazaar/private/devCert.pem
 bazaar/mup.json
 
 tauschhandel/config.push.json
+
+bazaar/settings.json
