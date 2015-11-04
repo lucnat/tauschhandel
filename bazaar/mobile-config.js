@@ -1,27 +1,26 @@
 
 App.info({
   id: 'com.naterop.dorfbazaar',
-  version: '0.7',
+  version: '0.9',
   name: 'DorfBazaar',
   description: 'lorem ipsum',
   author: 'Luca Naterop',
   email: 'luca@naterop.net',
-  website: 'http://tauschhandel-53585.onmodulus.net/'
+  website: 'http://46.101.207.204'
 });
 
 
 App.icons({
   
-  'iphone':     'icons/iphone/Icon.png',
-  'iphone_2x':  'icons/iphone/Icon-60@2x.png',
-  'ipad':       'icons/iphone/icon-72.png',
-  'ipad_2x':    'icons/iphone/icon-72@2x.png',
+  'iphone':     'icons/ios/Icon.png',
+  'iphone_2x':  'icons/ios/Icon-60@2x.png',
+  'ipad':       'icons/ios/Icon-72.png',
+  'ipad_2x':    'icons/ios/Icon-72@2x.png',
 
   'android_ldpi': 'icons/android/drawable-ldpi/ic_launcher.png',
   'android_mdpi': 'icons/android/drawable-mdpi/ic_launcher.png',
   'android_hdpi': 'icons/android/drawable-hdpi/ic_launcher.png',
   'android_xhdpi': 'icons/android/drawable-xhdpi/ic_launcher.png'
-
 });
 
 /*
