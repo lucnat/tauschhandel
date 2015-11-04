@@ -14,8 +14,8 @@ App.icons({
   
   'iphone':     'icons/ios/Icon.png',
   'iphone_2x':  'icons/ios/Icon-60@2x.png',
-  'ipad':       'icons/ios/Icon-72.png',
-  'ipad_2x':    'icons/ios/Icon-72@2x.png',
+  'ipad':       'icons/ios/Icon-76.png',
+  'ipad_2x':    'icons/ios/Icon-76@2x.png',
 
   'android_ldpi': 'icons/android/drawable-ldpi/ic_launcher.png',
   'android_mdpi': 'icons/android/drawable-mdpi/ic_launcher.png',

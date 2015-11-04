@@ -29,7 +29,6 @@ check
 useraccounts:core
 useraccounts:ionic
 accounts-password
-accounts-google
 accounts-facebook
 accounts-ui
 email

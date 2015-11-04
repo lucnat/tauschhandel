@@ -68,9 +68,9 @@ getImgurPicture = function(callback){
       },
       buttonClicked: function(index) {
         var cameraOptions = {  
-          width: 350,
-          height: 350,
-          quality: 75
+          width: 500,
+          height: 500,
+          quality: 100
         }
         if (index === 1) {  // From Library
             if(Meteor.isCordova){

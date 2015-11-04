@@ -8,6 +8,11 @@ Accounts.onCreateUser(function(options, user) {
 	user.profile.badgeCount 	= 0;
 	user.profile.picture 		= "http://i.imgur.com/hzByj22b.jpg";
 	user.profile.umgebung 		= [];
+	if(!user.username){
+		// user used facebook login
+		user.username = user.services.facebook.name;
+		user.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?width=400&height=400"; 
+	}
 	return user;
 });
 
