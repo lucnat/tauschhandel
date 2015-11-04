@@ -15,8 +15,8 @@ Push.debug = true;
 
 Meteor.startup(function(){
 	smtp = {
-		username: 'tauschhandelapp',   // eg: server@gentlenode.com
-		password: 'tauschhandel44',   // eg: 3eeP1gtizk5eziohfervU
+		username: 'noreplydorfbazaar',   // eg: server@gentlenode.com
+		password: 'dorfbazaar44',   // eg: 3eeP1gtizk5eziohfervU
 		server:   'smtp.gmail.com',  // eg: mail.gandi.net
 		port: 465
 	}

@@ -29,9 +29,13 @@ check
 useraccounts:core
 useraccounts:ionic
 accounts-password
+accounts-google
+accounts-facebook
+accounts-ui
 email
 msavin:mongol
 mdg:camera
 raix:push
 matb33:collection-hooks
 useraccounts:iron-routing
+service-configuration

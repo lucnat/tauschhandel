@@ -38,11 +38,19 @@
 
 				{{> faq}}
 				<br>
-				<div style="text-align:center"><a href="#">Read Terms</a></div>
+				<div style="text-align:center"><button class="button button-clear button-default" data-ion-modal="terms">Read Terms</button></div><br>
 
 			{{else}}
 				{{> loader}}
 			{{/if}}
+		{{/ionContent}}
+	{{/ionView}}
+</template>
+
+<template name="login">
+	{{#ionView}}
+		{{#ionContent class="padding"}}
+			{{> atForm}}
 		{{/ionContent}}
 	{{/ionView}}
 </template>
@@ -77,13 +85,31 @@
 	</div>
 </template>
 
+<template name="terms">
+	{{#ionModal title='terms'}}
+		<div class="padding">
+			<h3>I. Anwendungsbereich</h3>
+			<p>
+				Gegenstand der vorliegenden Nutzungsbedingungen und der Datenschutzerklärung bilden die Beziehungen zwischen DorfBazaar (nachfolgend „Anbieter“) und den Benutzer und Benutzerinnen (nachfolgend „Nutzer“) von DorfBazaar (nachfolgend „App“). Die vorliegenden Nutzungsbedingungen und die Datenschutzerklärung sind für sämtliche Nutzer verbindlich. Mit der Nutzung der App akzeptieren die Nutzer die vorliegenden Nutzungsbedingungen und die Datenschutzerklärung. Diese werden damit integrierender Bestandteil jedes abgeschlossenen Vertrages zwischen den Nutzern und dem Anbieter sofern keine abweichenden Vereinbarungen zwischen den Parteien getroffen werden. Von den vorliegenden Nutzungsbedingungen und der Datenschutzerklärung abweichende Bestimmungen eines Nutzers haben keine Geltung. Allfällige Abweichungen benötigen die ausdrückliche schriftliche Zustimmung des Anbieters.
+			</p>
 
-<template name="login">
-	{{#ionView}}
-		{{#ionContent class="padding"}}
-			
-			{{> atForm}}
-		{{/ionContent}}
-	{{/ionView}}
+			<h3>II. Nutzungsbedingungen</h3>
+			<h4>1. Nutzungsumfang und Nutzungsvoraussetzungen</h4>
+			<p>
+				Das Produkt dient ausschliesslich der persönlichen, nicht kommerziellen Nutzung durch natürliche Personen zu privaten Zwecken. 
+				DorfBazaar steht ausschliesslich auf iPhone, iPads und iPod-Touch ab iOS Version 6 und allen Android Tablets und Smartphones ab Version 4.03 oder höher zur Verfügung. Die Nutzung von DorfBazaar erfordert ein Apple iTunes-Store oder Google Play-Store-Konto. Das vom Nutzer in Anspruch genommene kostenpflichtige/gratis App wird vom Anbieter zu den jeweils bei Vertragsschluss gültigen Tarifen abgerechnet. Sämtliche Zahlungsmodalitäten wie Bezahlung, Rückerstattung oder Stornierungen richten sich nach den Bestimmungen des jeweiligen App Stores. Der Anbieter hat darauf keinen Einfluss. Der Nutzer verpflichtet sich, seine Zugangsdaten (insbesondere Passwort) zum App-Store ohne schriftliche Zustimmung des Anbieters keinem Dritten zugänglich zu machen. Der Nutzer ist für den Schutz seiner Zugangsdaten verantwortlich. 
+				<br><br>Für Probleme bei der Ausführung oder Darstellung der App und damit zusammenhängenden Programmen, welche mit der Hardware- oder Softwareumgebung zusammenhängen (also nicht unmittelbar der App zuzurechnen sind und damit ausserhalb des Einflussbereichs des Anbieters sind) wird vom Anbieter kein Support geboten. Dies gilt insbesondere, aber nicht ausschliesslich, bei Problemen, die auf die Regeln und Einstellungen der IT-Sicherheit des Nutzers oder veraltete Betriebssysteme des Nutzers zurückzuführen sind. Jede Haftung des Anbieters diesbezüglich wird zudem ausdrücklich ausgeschlossen. Der Anbieter hält sich die Geltendmachung jeglicher Schadenersatzforderungen gegenüber dem Nutzer ausdrücklich vor.
+			</p>
+			<h4>2. Leistungen des Anbieters</h4>
+			<h4>3. Haftung</h4>
+			<h4>4. Urheber- und weitere immaterielle Rechte</h4>
+			<h4>5. Zahlungsarten, Vertragsabschluss, Vertragsdauer und Vertragsauflösung</h4>
+			<h3>III. Datenschutzerklärung</h3>
+			<h4>1. Allgemeines</h4>
+			<h4>2. Erheben, Speichern und Verwenden von Personendaten</h4>
+			<h4>2.1 Erheben von Personendaten</h4>
+			<h4>2.2 Verwendungszweck der erhobenen Personendaten</h4>
+		</div>
+	{{/ionModal}}
 </template>
 

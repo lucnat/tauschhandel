@@ -1,4 +1,4 @@
-rootURL = 'http://46.101.207.204/';
+rootURL = 'http://dorfbazaar.ch/';
 
 isLoggedIn = function() {
     if (!Meteor.user()) {
@@ -53,7 +53,6 @@ updateBadge = function(){
     Users.update({'_id': Meteor.userId()}, {$set: {'profile': profile}});
     Push.setBadge(badgeCount);
   } catch(e) {}
-  
 };
 
 getImgurPicture = function(callback){
@@ -83,7 +82,8 @@ getImgurPicture = function(callback){
 
         MeteorCamera.getPicture(cameraOptions, function(error, localData){
             options = {
-                apiKey: '9c96a9ec19cc485',
+                apiKey: '391ebba772242a6',
+                mashapeKey: 'gpIfI6aXh9msh6PWcG6gK3IRWkHkp1eXlxBjsnZKZzqWwifuOH',
                 image: localData,
             }
             if(localData){
@@ -93,7 +93,7 @@ getImgurPicture = function(callback){
             }
             Imgur.upload(options, function(error, remoteData){
                 if(error){
-                    alert(error);
+                    console.log(error);
                     IonBackdrop.release();
                     IonLoading.hide();
 
@@ -119,5 +119,3 @@ lucPopup = function(text){
     });
 }
     
-
-

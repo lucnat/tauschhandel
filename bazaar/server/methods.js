@@ -50,7 +50,6 @@ Meteor.methods({
 	},
 	'getUmgebung': function(plz){
 		// returns Umgebung of given plz
-		console.log('returning umgebung...');
 		return Gemeinden.findOne({'plz': ''+plz}).umgebung;
 	},
 	'getOrt': function(plz){
