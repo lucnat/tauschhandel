@@ -85,10 +85,19 @@
 			{{#if filterNotAll}}
 				{{#ionItem}}
 					<div style="text-align: center">
-						<button id="removeFilter" class='button button-balanced button-clear'>Filter {{filterTag}} entfernen</button>
+						<button id="removeFilter" class='button button-balanced button-clear'>Filter und Suchkriterium entfernen</button>
 					</div>
 				{{/ionItem}}
 			{{/if}}
+			<div class="bar bar-header item-input-inset">
+			  <label class="item-input-wrapper">
+			    <i class="icon ion-ios-search placeholder-icon"></i>
+			    <input id="search" type="search" placeholder="Suchen">
+			  </label>
+			  <button id="cancelSearch" class="button button-clear">
+			    Cancel
+			  </button>
+			</div>
 			{{#each gemeinden}}
 				<div class="item item-divider">{{plz}} {{ORT}}</div>
 				{{#each posts}}

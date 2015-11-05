@@ -17,6 +17,7 @@ if (Meteor.isCordova) {
 
 Meteor.startup(function(){
 	Session.set('filter', {'tags': ['alleTags']});
+  Session.set('searchString', '');
   if(Meteor.isClient) {
     window.fbAsyncInit = function() {
       FB.init({

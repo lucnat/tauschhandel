@@ -36,10 +36,19 @@ Template.previewList.helpers({
     'gemeinden': function() {
         var tags = Session.get('filter').tags;
         if($.inArray('alleTags', tags) >= 0){
-            var posts = Posts.find({'vergebenAn': ''}, { sort: {'createdAt': -1} }).fetch();
+            // we show all that are not given away
+            var posts = Posts.find({
+                'vergebenAn': '',
+                'title': {$regex : '.*'+Session.get('searchString')+'.*', $options: 'i'}
+            }, { 'sort': {'createdAt': -1} }).fetch();
             return constructGemeindenArray(posts);
         } else {
-            var posts = Posts.find({'tags': {$in: tags}, 'vergebenAn': ''},{ sort: {'createdAt': -1} }).fetch();
+            // we show only those with the filter criteria
+            var posts = Posts.find({
+                'tags': {$in: tags}, 
+                'vergebenAn': '',
+                'title': {$regex : '.*'+Session.get('searchString')+'.*', $options: 'i'}
+            },{ 'sort': {'createdAt': -1} }).fetch();
             return constructGemeindenArray(posts);
         }
     },
@@ -62,6 +71,15 @@ Template.previewList.events({
     },
     'click #removeFilter': function(){
         Session.set('filter', {tags: ['alleTags']});
+        Session.set('searchString', '');
+        $('#search').val('');
+    },
+    'keyup #search': function(){
+        Session.set('searchString', $('#search').val());
+    },
+    'click #cancelSearch': function(){
+        $('#search').val('');
+        Session.set('searchString', '');
     }
 });
 Template.createPost.helpers({
