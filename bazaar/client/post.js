@@ -524,6 +524,10 @@ Template.editPost.events({
     }
 });
 
+Template.editPost.destroyed = function(){
+    Session.set('imageIDs', []); 
+}
+
 function isMyPost(){
     var post = Posts.findOne({_id: Router.current().params._id});
     try{

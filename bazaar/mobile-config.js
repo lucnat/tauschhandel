@@ -1,8 +1,8 @@
 
 App.info({
   id: 'com.naterop.dorfbazaar',
-  version: '0.10',
-  name: 'DorfBazaar',
+  version: '0.11',
+  name: 'Basaar',
   description: 'lorem ipsum',
   author: 'Luca Naterop',
   email: 'luca@naterop.net',

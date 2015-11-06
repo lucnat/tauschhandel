@@ -1,4 +1,4 @@
-rootURL = 'http://dorfbazaar.ch/';
+rootURL = 'http://basaar.ch/';
 
 isLoggedIn = function() {
     if (!Meteor.user()) {
