@@ -16,8 +16,6 @@ Accounts.onCreateUser(function(options, user) {
 	return user;
 });
 
-Push.debug = true;
-
 Meteor.startup(function(){
 	smtp = {
 		username: 'noreplydorfbazaar',   // eg: server@gentlenode.com

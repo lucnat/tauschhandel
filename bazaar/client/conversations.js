@@ -70,11 +70,6 @@ Template.conversationListItem.events({
                 message.readAt = new Date();
             }
         });
-        $('html, body').animate({ 
-           scrollTop: $(document).height()-$(window).height()}, 
-           1400, 
-           "swing"
-        );
         Conversations.update({'_id': conversationID},{$set: {'messages': messages}})
     },
     'click .greyClick': function(event) {

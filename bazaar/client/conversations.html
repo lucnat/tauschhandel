@@ -9,19 +9,15 @@
 	{{/contentFor}}
 	{{#ionView}}
 		{{#ionContent}}
-			{{#if Template.subscriptionsReady}}
-				{{#ionList}}
-					{{#if moreThanZero}}
-						{{#each konversationen}}
-							{{> conversationListItem}}
-						{{/each}}
-					{{else}}
-						{{> nothingHere}}
-					{{/if}}
-				{{/ionList}}
-			{{else}}
-				{{> loader}}
-			{{/if}}
+			{{#ionList}}
+				{{#if moreThanZero}}
+					{{#each konversationen}}
+						{{> conversationListItem}}
+					{{/each}}
+				{{else}}
+					{{> nothingHere}}
+				{{/if}}
+			{{/ionList}}
 		{{/ionContent}}
 	{{/ionView}}
 </template>

@@ -1,8 +1,4 @@
 <template name="profile">
-	{{#contentFor "headerTitle"}}
-		<h1 class="title">Willkommen</h1>
-	{{/contentFor}}
-
 	{{#if currentUser}}
 		{{#contentFor "headerButtonLeft"}}
 			{{>ionNavBackButton path="conversations" text="Chats"}}
@@ -53,6 +49,7 @@
 <template name="login">
 	{{#ionView}}
 		{{#ionContent class="padding"}}
+			<p>BUILD 15</p>
 			{{> atForm}}
 		{{/ionContent}}
 	{{/ionView}}

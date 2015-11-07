@@ -28,35 +28,37 @@
 
 <template name="createPost">
 	{{#ionModal title='Neues Item hinzufügen' barClass="bar-dark"}}
-		<div class='list card'>
-			<div class="item item-divider">Beschreibung</div>
-			<div class="item">
-				<label class="item item-input">
-					<input id='titel' type="text" placeholder="Titel"><br>
-				</label>
-				<label class="item item-input text" >
-					<textarea id='text' placeholder="Beschreibung" rows="10"></textarea>
-				</label>
+		<div class="list">
+			<div class='list card'>
+				<div class="item item-divider">Beschreibung</div>
+				<div class="item">
+					<label class="item item-input">
+						<input id='titel' type="text" placeholder="Titel"><br>
+					</label>
+					<label class="item item-input text" >
+						<textarea id='text' placeholder="Beschreibung" rows="10"></textarea>
+					</label>
+				</div>
 			</div>
-		</div>
-		<div class='list card'>
-			<div class="item item-divider">Bilder</div>
-			<div class="item">
-				{{#each imageIDs}}
-					<img id='image' style='margin-right: 10px' src='http://i.imgur.com/{{this}}s.jpg'>
-				{{/each}}
-				<br><button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
+			<div class='list card'>
+				<div class="item item-divider">Bilder</div>
+				<div class="item">
+					{{#each imageIDs}}
+						<img id='image' style='margin-right: 10px' src='http://i.imgur.com/{{this}}s.jpg'>
+					{{/each}}
+					<br><button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
+				</div>
 			</div>
-		</div>
-		<div class='list card'>
-			<div class="item item-divider">Tags</div>
-			<div class="item">
-				{{#each possibleTags}}
-					<li class='item item-checkbox'>
-						<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
-					</li>
-				{{/each}}
-				<br><input id='submitButton' class='button button-balanced button-block' type="button" value="Absenden">
+			<div class='list card'>
+				<div class="item item-divider">Tags</div>
+				<div class="item">
+					{{#each possibleTags}}
+						<li class='item item-checkbox'>
+							<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
+						</li>
+					{{/each}}
+					<br><input id='submitButton' class='button button-balanced button-block' type="button" value="Absenden">
+				</div>
 			</div>
 		</div>
 	{{/ionModal}}
@@ -80,34 +82,30 @@
 </template>
 
 <template name="previewList">
-	{{#if Template.subscriptionsReady}}
-		{{#ionList}}
-			{{#if filterNotAll}}
-				{{#ionItem}}
-					<div style="text-align: center">
-						<button id="removeFilter" class='button button-balanced button-clear'>Filter und Suchkriterium entfernen</button>
-					</div>
-				{{/ionItem}}
-			{{/if}}
-			<div class="bar bar-header item-input-inset">
-			  <label class="item-input-wrapper">
-			    <i class="icon ion-ios-search placeholder-icon"></i>
-			    <input id="search" type="search" placeholder="Suchen">
-			  </label>
-			  <button id="cancelSearch" class="button button-clear">
-			    Cancel
-			  </button>
-			</div>
-			{{#each gemeinden}}
-				<div class="item item-divider">{{plz}} {{ORT}}</div>
-				{{#each posts}}
-					{{> postPreview}}
-				{{/each}}
+	{{#ionList}}
+		{{#if filterNotAll}}
+			{{#ionItem}}
+				<div style="text-align: center">
+					<button id="removeFilter" class='button button-balanced button-clear'>Filter und Suchkriterium entfernen</button>
+				</div>
+			{{/ionItem}}
+		{{/if}}
+		<div class="bar bar-header item-input-inset">
+		  <label class="item-input-wrapper">
+		    <i class="icon ion-ios-search placeholder-icon"></i>
+		    <input id="search" type="search" placeholder="Suchen">
+		  </label>
+		  <button id="cancelSearch" class="button button-clear">
+		    Cancel
+		  </button>
+		</div>
+		{{#each gemeinden}}
+			<div class="item item-divider">{{plz}} {{ORT}}</div>
+			{{#each posts}}
+				{{> postPreview}}
 			{{/each}}
-		{{/ionList}}
-	{{else}}
-		{{> loader}}
-	{{/if}}
+		{{/each}}
+	{{/ionList}}
 
 </template>
 
