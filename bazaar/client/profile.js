@@ -70,13 +70,6 @@ Template.profile.events({
     }
 });
 
-Template.login.events({
-    'click #fblogin': function(){
-        Meteor.loginWithFacebook({ loginStyle: "redirect" });
-    }
-});
-
-
 changeProfilePicture = function(){
     // takes photo and saves it in user profile. Handles backdrop as well. 
     getImgurPicture(function(id){
