@@ -77,3 +77,16 @@ changeProfilePicture = function(){
         Users.update({_id: Meteor.user()._id}, { $set: { 'profile.picture': link} });
     });
 }
+
+Template.login.rendered = function(){
+    var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+    var browser = !Meteor.isCordova;
+    var isAndroid = !(iOS || browser);
+    if(isAndroid){
+        Meteor.setInterval(function(){
+            $('.at-oauth').remove();
+            $('.at-sep').remove();
+        }, 100);
+    }
+}
+

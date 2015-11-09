@@ -28,6 +28,7 @@ meteoric:ionic-sass
 simple:imgur
 useraccounts:core
 useraccounts:ionic
+accounts-facebook
 accounts-password
 accounts-ui
 email
