@@ -105,9 +105,18 @@ Template.conversation.events({
 Template.conversation.rendered = function(){
     Session.set('hideTabs', true);
     console.log('hide tabs');
+    Session.set('currentID', Router.current().params._id);
 }
 
 Template.conversation.destroyed = function(){
+    var id = Session.get('currentID');
+    var messages = Conversations.findOne(id).messages;
+    messages.forEach(function(message){
+        if(!message.readAt) {
+            message.readAt = new Date();
+        }
+    });
+    Conversations.update({'_id': id}, {$set: {'messages': messages }});
     Session.set('hideTabs', false);
     console.log('show tabs');
 }
