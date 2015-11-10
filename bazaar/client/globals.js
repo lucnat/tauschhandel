@@ -38,6 +38,13 @@ Meteor.startup(function () {
   } 
 });
 
+Template.registerHelper('isAndroid', function(){
+    var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+    var browser = !Meteor.isCordova;
+    var isAndroid = !(iOS || browser);
+    return isAndroid
+});
+
 updateBadge = function(){
   try{
     var badgeCount = Notifications.find({'readAt': null}).count();
@@ -71,7 +78,8 @@ getImgurPicture = function(callback){
         var cameraOptions = {  
           width: 500,
           height: 500,
-          quality: 100
+          quality: 80,
+          correctOrientation: true
         }
         if (index === 1) {  // From Library
             if(Meteor.isCordova){
@@ -85,7 +93,7 @@ getImgurPicture = function(callback){
             options = {
                 apiKey: "391ebba772242a6",
                 mashapeKey: "gpIfI6aXh9msh6PWcG6gK3IRWkHkp1eXlxBjsnZKZzqWwifuOH",
-                image: localData,
+                image: localData
             }
             if(localData){
                 console.log('retain...');

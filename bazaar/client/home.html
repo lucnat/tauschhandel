@@ -38,10 +38,17 @@
 			</div>
 			<div class='list card'>
 				<div class="item item-divider">Bilder</div>
-				<div class="item">
-					{{#each imageIDs}}
+
+				{{#each imageIDs}}
+					<div class="item item-button-right">
 						<img id='image' style='margin-right: 10px' src='http://i.imgur.com/{{this}}s.jpg'>
-					{{/each}}
+						<button id="{{this}}" class="removeImage button button-assertive button-clear">
+							<i class="icon ion-close-round"></i>
+						</button>
+					</div>
+				{{/each}}
+
+				<div class="item">
 					<br><button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
 				</div>
 			</div>

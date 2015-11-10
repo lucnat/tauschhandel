@@ -21,3 +21,17 @@ Template.layout.helpers({
 		return !!Session.get('hideTabs');
 	}
 });
+
+Template.layout.rendered = function(){
+	document.addEventListener("backbutton", onBackButtonDown, false);
+
+	function onBackButtonDown(event) {
+		var modalOpen = $('body').hasClass('modal-open');
+		if(modalOpen){
+			IonModal.close();
+		} else {
+			event.preventDefault();
+			event.stopPropagation();
+		}
+	}
+}

@@ -133,6 +133,15 @@ Template.createPost.events({
             ids.push(id);
             Session.set('imageIDs', ids);
         });
+    },
+    'click .removeImage': function(event){
+        var imageID = event.target.id;
+        var array = Session.get('imageIDs');
+        var removeItem = imageID;
+        array = jQuery.grep(array, function(value) {
+          return value != removeItem;
+        });
+        Session.set('imageIDs', array);
     }
 });
 
