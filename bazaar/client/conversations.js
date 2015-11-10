@@ -35,6 +35,27 @@ Template.conversations.helpers({
     }
 });
 
+Template.conversationListItem.events({
+    'click .conversation': function(event, template){
+        var conversationID = template.data._id;
+        var messages = Conversations.findOne(conversationID).messages;
+        messages.forEach(function(message){
+            if(message.to == Meteor.userId() && !message.readAt){
+                message.readAt = new Date();
+            }
+        });
+        Conversations.update({'_id': conversationID},{$set: {'messages': messages}})
+    },
+    'click .greyClick': function(event) {
+        e = event;
+        $(event.currentTarget).css('background-color', '#E5E5E5');
+    }
+});
+
+Template.conversations.rendered = function(){
+    $('.tab-item').get(3).click();
+}
+
 Template.conversation.helpers({
     'conversation': function(){
         var conversation = Conversations.findOne(Router.current().params._id);
@@ -62,23 +83,6 @@ Template.conversation.helpers({
             message.dateString = new Date(message.createdAt).toDateString();
         });
         return conversation;
-    }
-});
-
-Template.conversationListItem.events({
-    'click .conversation': function(event, template){
-        var conversationID = template.data._id;
-        var messages = Conversations.findOne(conversationID).messages;
-        messages.forEach(function(message){
-            if(message.to == Meteor.userId() && !message.readAt){
-                message.readAt = new Date();
-            }
-        });
-        Conversations.update({'_id': conversationID},{$set: {'messages': messages}})
-    },
-    'click .greyClick': function(event) {
-        e = event;
-        $(event.currentTarget).css('background-color', '#E5E5E5');
     }
 });
 

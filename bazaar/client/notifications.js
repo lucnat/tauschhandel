@@ -5,6 +5,7 @@ Template.notifications.helpers({
 });
 
 Template.notifications.rendered = function(){
+    $('.tab-item').get(2).click();
 	var unread = Notifications.find({readAt: null}).fetch();
 	unread.forEach(function(e){
 		Notifications.update({'_id': e._id},{$set: {readAt: new Date()}});

@@ -236,11 +236,6 @@ Template.discussion.helpers({
         });
         return discussions;
     },
-
-    'previewMode': function(){
-        return Session.get('previewMode');
-    },
-
     'isMyPost': function(){
         return isMyPost();
     }

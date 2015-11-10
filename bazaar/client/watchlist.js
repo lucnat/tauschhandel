@@ -14,3 +14,7 @@ Template.watchlist.helpers({
  		return Posts.find({userID: Meteor.userId() }).fetch();
  	}
  });
+
+Template.watchlist.rendered = function(){
+	$('.tab-item').get(1).click();
+};

@@ -29,7 +29,7 @@ Template.home.helpers({
 });
 
 Template.home.rendered = function(){
-    Session.set('previewMode', true);
+    $('.tab-item').get(0).click();
 }
 
 Template.previewList.helpers({

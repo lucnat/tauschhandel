@@ -15,11 +15,13 @@ OnBeforeActions = {
       }
     },
     firstLogin: function(){
-    	if(Meteor.user().profile.firstLogin == true){
-    		this.render('firstLogin1');
-    	} else {
-    		this.next();
-    	}
+    	try{
+	    	if(Meteor.user().profile.firstLogin == true){
+	    		this.render('firstLogin1');
+	    	} else {
+	    		this.next();
+	    	}
+    	} catch(e) {};
     }
 };
 
