@@ -29,7 +29,6 @@ Template.layout.rendered = function(){
 		var modalOpen = $('body').hasClass('modal-open');
 		if(modalOpen){
 			IonModal.close();
-		} else {
 			event.preventDefault();
 			event.stopPropagation();
 		}
