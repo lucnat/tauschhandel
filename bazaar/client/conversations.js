@@ -1,6 +1,10 @@
 Template.conversations.helpers({
     'konversationen': function() {
-        var conversations = Conversations.find({}, { sort: {'createdAt': -1} }).fetch();
+        var conversations = Conversations.find({}, { sort: {'createdAt': 1} }).fetch();
+        conversations.sort(function(c1, c2){
+            return c2.changedAt - c1.changedAt;
+        });
+        console.log(conversations);
         conversations.forEach(function(conversation){
             // figure out which name to show (other person than currently logged in person)
             var person1 = Users.findOne(conversation.creator);
