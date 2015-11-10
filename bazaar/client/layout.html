@@ -17,7 +17,7 @@
 		{{#unless currentUser.profile.firstLogin}}
 			{{#unless hideTabs}}
 				{{#ionTabs style="ios" class="has-badge tabs-striped tabs-color-positive"}}
-					{{> ionTab path="home" title="Browse" iconOff="home" iconOn="home" class="tab-item-positive"}}
+					{{> ionTab path="home" title="Browse / Add" iconOff="home" iconOn="home" class="tab-item-positive"}}
 					{{> ionTab path="watchlist" title="Favorites" iconOff="star" iconOn="star" class="tab-item-positive"}}
 					{{> ionTab path="notifications" title="Notifications" iconOff="ios-bell" badgeNumber=notificationsBadge iconOn="ios-bell" class="tab-item-positive notificationstab" }}
 					{{> ionTab path="conversations" title="Chats" iconOff="ios-chatbubble" iconOn="ios-chatbubble" class="tab-item-positive" badgeNumber=conversationsBadge}}
