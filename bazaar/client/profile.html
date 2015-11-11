@@ -1,10 +1,7 @@
 <template name="profile">
-	{{#if currentUser}}
-		{{#contentFor "headerButtonLeft"}}
-			{{>ionNavBackButton path="conversations" text="Chats"}}
-		{{/contentFor}}
-	{{/if}}
-
+	{{#contentFor "headerButtonLeft"}}
+		{{>ionNavBackButton text="Back"}}
+	{{/contentFor}}
 	{{#ionView}}
 		{{#ionContent}}
 			{{#if currentUser}}

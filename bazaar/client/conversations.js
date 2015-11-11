@@ -60,29 +60,31 @@ Template.conversation.helpers({
     'conversation': function(){
         var conversation = Conversations.findOne(Router.current().params._id);
         // figure out which name to show (other person than currently logged in person)
-        var person1 = Users.findOne(conversation.creator);
-        var person2 = Users.findOne(conversation.partner);
-        var post = Posts.findOne(conversation.postID);
+        if(conversation){
+            var person1 = Users.findOne(conversation.creator);
+            var person2 = Users.findOne(conversation.partner);
+            var post = Posts.findOne(conversation.postID);
 
-        if(Meteor.user()._id == person1._id){
-            conversation.other = person2; 
-        } else{
-            conversation.other = person1;
-        }
-        conversation.post = post;
-
-        conversation.messages.forEach(function(message){
-            if(message.from == Meteor.user()._id){
-                message.fromMe = true;
-            } else {
-                message.fromMe = false;
+            if(Meteor.user()._id == person1._id){
+                conversation.other = person2; 
+            } else{
+                conversation.other = person1;
             }
-            var length = message.message.length;
-            message.margin = Math.min(40,100*Math.exp(-1*length/50));        // exponential model
-            message.margin = Math.max(6, message.margin);                   // delimited by 10, 60
-            message.dateString = new Date(message.createdAt).toDateString();
-        });
-        return conversation;
+            conversation.post = post;
+
+            conversation.messages.forEach(function(message){
+                if(message.from == Meteor.user()._id){
+                    message.fromMe = true;
+                } else {
+                    message.fromMe = false;
+                }
+                var length = message.message.length;
+                message.margin = Math.min(40,100*Math.exp(-1*length/50));        // exponential model
+                message.margin = Math.max(6, message.margin);                   // delimited by 10, 60
+                message.dateString = new Date(message.createdAt).toDateString();
+            });
+            return conversation;
+        }
     }
 });
 
@@ -114,6 +116,40 @@ Template.conversation.rendered = function(){
     Session.set('hideTabs', true);
     console.log('hide tabs');
     Session.set('currentID', Router.current().params._id);
+
+    $('#moreButton').on('click', function(){
+            var conversation = Conversations.findOne(Router.current().params._id);
+            // figure out which name to show (other person than currently logged in person)
+            if(conversation){
+                var person1 = Users.findOne(conversation.creator);
+                var person2 = Users.findOne(conversation.partner);
+                var post = Posts.findOne(conversation.postID);
+
+                if(Meteor.user()._id == person1._id){
+                    conversation.other = person2; 
+                } else{
+                    conversation.other = person1;
+                }
+            }
+          IonActionSheet.show({
+              titleText: 'Picture',
+              buttons: [
+                  { text: '<i class="icon ion-person"></i> Profil von ' + conversation.other.username },
+                  { text: '<i class="icon ion-forward"></i> Als übergeben markieren' },
+              ],
+              cancelText: 'Cancel',
+              cancel: function() {
+              },
+              buttonClicked: function(index) {
+                if (index === 0) { 
+                    Router.go('/user/' + conversation.other._id);
+                    return true;
+                } else {
+
+                }  
+              }
+          });
+    });
 }
 
 Template.conversation.destroyed = function(){

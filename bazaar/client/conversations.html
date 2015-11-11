@@ -36,6 +36,12 @@
 	{{#contentFor "headerButtonLeft"}}
 		{{>ionNavBackButton path="conversations" text="Chats"}}
 	{{/contentFor}}
+	{{#contentFor "headerButtonRight"}}
+		<button id="moreButton" class="button button-clear pull-right">
+			{{> ionIcon icon='more'}}
+		</button>
+	{{/contentFor}}
+
 	{{#ionView}}
 		{{#ionContent}}
 			<div class="list">
