@@ -44,6 +44,8 @@ Router.route('/notifications', {name: 'notifications'});
 
 Router.route('/profile', {name: 'profile'});
 
+Router.route('/user/:_id', {name: 'user'});
+
 Router.route('/login', {name: 'login'});
 
 Router.route('/conversations', {name: 'conversations'});

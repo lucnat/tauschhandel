@@ -1,0 +1,47 @@
+<template name="user">
+	{{#ionView}}
+		{{#ionContent}}
+			<div class="list card">
+				<div style="text-align: center" class="item">
+					<img src="{{user.profile.picture}}" alt="" style="width: 160px; height: 160px; border-radius: 80px; box-shadow: 2px 2px 10px #888888;" /> 
+				</div>
+				<a id="changeUsername" class="item item-icon-left">
+					 <i class="icon ion-person"></i>
+					{{user.username}}
+				</a>
+				<a id="changePostleitzahl" class="item item-icon-left">
+					 <i class="icon ion-home"></i>
+					{{user.profile.postleitzahl}} {{user.profile.ORT}}
+				</a>
+				<div class="item item-divider">
+					Angebote von {{user.username}}
+				</div>
+				{{#each angebote}}
+					{{> postPreview}}
+				{{/each}}
+			</div>
+		{{/ionContent}}
+	{{/ionView}}
+</template>
+
+
+<template name="profilePost">
+	<div class="item item-text-wrap">
+		<h2>{{title}}</h2>
+		<br>
+		<div id='slidebox' style='width: 100%'>
+			{{#ionSlideBox}}
+				{{#each imageIDs}}
+					{{#ionSlide class='light-bg'}}
+						<img src="http://i.imgur.com/{{this}}l.jpg" class="bild" width='100%' style="display: none">
+					{{/ionSlide}}
+				{{/each}}
+		     {{/ionSlideBox}}
+		</div>
+		<br>
+		<p>{{text}}</p>
+		<br>
+		<p>tags: {{#each tags}} {{this}} {{/each}}</p>
+		<br>
+	</div>
+</template>

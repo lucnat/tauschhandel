@@ -12,11 +12,11 @@
 	  {{#ionContent}}
 		{{#if hasInterest}}<br><br>{{/if}}
 		<div class="card">
-			<div class="item item-avatar">
+			<a style="text-decoration: none" href="/user/{{post.userID}}"><div class="item item-avatar">
 				<img src="{{post.userPicture}}">
 				<h2>{{post.userName}}</h2>
 				<p style="font-style: italic">{{post.dateString}}</p>
-			</div>
+			</div></a>
 			<div class="item item-text-wrap">
 				<h2>{{post.title}}</h2>
 				<br>

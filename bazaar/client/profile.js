@@ -76,7 +76,14 @@ changeProfilePicture = function(){
         var link = "http://i.imgur.com/" + id + "b.jpg";
         Users.update({_id: Meteor.user()._id}, { $set: { 'profile.picture': link} });
     });
-}
+};
+
+Template.profile.rendered = function(){
+    Session.set('hideTabs', true);
+};
+Template.profile.destroyed = function(){
+    Session.set('hideTabs', false);
+};
 
 Template.login.rendered = function(){
     var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
@@ -88,5 +95,9 @@ Template.login.rendered = function(){
             $('.at-sep').remove();
         }, 100);
     }
+    Session.set('hideTabs', true);
 }
 
+Template.login.destroyed = function(){
+    Session.set('hideTabs', false);
+};
