@@ -2,14 +2,18 @@
 	{{#ionView}}
 	  {{#ionContent}}
 	  	{{#ionList}}
-			
 			<div class="item item-divider">
 				Interesse gemeldet
+			</div>
+			{{#each interesseGemeldet}}
+				{{>postPreview}}
+			{{/each}}
+			<div class="item item-divider">
+				Gemerkt
 			</div>
 			{{#each watchList}}
 				{{>postPreview}}
 			{{/each}}
-
 			<div class="item item-divider">
 				An mich vergeben
 			</div>

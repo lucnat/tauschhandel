@@ -4,10 +4,11 @@
 			<br>
 			<h3 style="text-align: center">Willkommen, {{currentUser.username}}. </h3>
 			<div class='padding'>
+				<p>Du kannst direkt mit der Kamera deines Smartphones/Tablets einen Schnappschuss machen oder ein Bild aus der Galerie auswählen. Das Profilbild kann jederzeit im Profil geändert werden.</p><br>
 				<img src="{{currentUser.profile.picture}}" alt="" style="width: 160px; height: 160px; border-radius: 80px; box-shadow: 2px 2px 10px #888888;" /> 
 				<button id="changeProfilePicture" class="button button button-balanced icon-left ion-camera" style="margin: 56px 0px 0px 20px">Profilbild</button>
 				<br><br>
-				<p> Das Profilbild erhöht deine Vertrauenswürdigkeit. Wähle es deshalb geschickt aus. Eine hohe Vertrauenswürdigkeit hilft dir dabei, mehr Items von anderen Leuten zu bekommen. Ausserdem wirst du mehr Items loswerden, wenn dir andere Benutzer vertrauen.</p>
+				<p> Das Profilbild erhöht deine Vertrauenswürdigkeit. Wähle es deshalb geschickt aus. Eine hohe Vertrauenswürdigkeit hilft dir dabei, mehr Angebote von anderen Leuten zu bekommen. Ausserdem wirst du mehr Angebote loswerden, wenn dir andere Benutzer vertrauen.</p>
 				<br>
 				<button id="weiter1" class="button button-balanced button-block button-outline">weiter</button>
 			</div>
@@ -29,7 +30,7 @@
 					<i class="icon ion-home placeholder-icon"></i>
 					<input id="postleitzahl" type="number" placeholder="Postleitzahl eingeben">
 				</label>
-				<br><p>Die Postleitzahl wird benötigt damit die Angebote von der jeweiligen Gemeinde angezeigt werden und die eigenen für die Bewohner ersichtlich sind. Die Postleitzahl kann jederzeit im Profil geändert werden.</p>
+				<br><p>Diese wird benötigt, damit du möglichst viele Angebote siehst, die in deiner Nähe aufgeschaltet wurden, und Nutzer aus der Umgebung Interesse an deinen Angeboten melden können. Die Postleitzahl kann jederzeit im Profil geändert werden.</p><br>
 				<button id="weiter2" class="button button-balanced button-block button-outline">weiter</button>
 			</div>
 		{{/ionContent}}
@@ -46,6 +47,7 @@
 			<div class='padding'>
 				<h2>Nachbarsgemeinden</h2>
 				<p>Bitte wähle all die Orte in deiner Umgebung aus, von denen du die Angebote sehen möchtest. </p>
+				<button id="alle" class="button button-positive">Alle auswählen</button><br>
 				{{> umgebung}}
 				<button id="weiter3" class="button button-balanced button-block button-outline">weiter</button>
 			</div>
@@ -54,7 +56,6 @@
 </template>
 
 <template name="umgebung">
-	<button id="alle" class="button button-positive">Alle auswählen</button><br>
 	<div class='list card'>
 		<div class="item">
 			<div class="item item-divider">Umgebung von {{currentUser.profile.postleitzahl}} {{currentUser.profile.ORT}}</div>

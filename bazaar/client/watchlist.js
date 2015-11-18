@@ -7,6 +7,9 @@ Template.watchlist.helpers({
     	} catch(e) {};
     	return [];
  	},
+ 	'interesseGemeldet': function(){
+ 		return Posts.find({'interessenten': Meteor.userId()}).fetch();
+ 	},
  	'wonByMe': function(){
  		return Posts.find({'vergebenAn': Meteor.userId()});
  	},

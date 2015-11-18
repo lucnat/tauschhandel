@@ -12,7 +12,7 @@ Template.firstLogin2.events({
         if( 1000 <= $('#postleitzahl').val() && $('#postleitzahl').val() <= 10000){
             Users.update({'_id': Meteor.user()._id },{$set: {'profile.postleitzahl': $('#postleitzahl').val()}})
             Users.update({'_id': Meteor.user()._id },{$set: {'profile.firstLogin': false}});
-            Meteor.call('getOrt', $('#postleitzahl').val(), function(error, result){
+            Meteor.call('getOrt', $('#postleitzahl').val()/1, function(error, result){
                 if(error) console.log(error)
                 else {
                     Users.update({'_id': Meteor.user()._id },{$set: {'profile.ORT': result}});
@@ -20,10 +20,10 @@ Template.firstLogin2.events({
             });
             
             IonBackdrop.retain();
-            Meteor.call('getUmgebung', $('#postleitzahl').val(), function(error, result){
+            Meteor.call('getUmgebung', $('#postleitzahl').val()/1, function(error, result){
                 if(error){
                     console.log(error);
-                    alert('Error: check your connection');
+                    alert('Invalid Zip Code');
                     IonBackdrop.release();
                 } else {
                     var umgebung = result;
@@ -47,10 +47,9 @@ Template.firstLogin2.events({
 
 Template.firstLogin3.events({
     'click #weiter3': function(){
+        IonBackdrop.retain();
         var checkboxes = document.getElementsByClassName('tag');
         var umgebung = Meteor.user().profile.umgebung;
-
-        IonBackdrop.retain();
         for (var i = 0; i < checkboxes.length; i++) {
             for(var j=0; j < umgebung.length; j++){
                 if(checkboxes[i].id == umgebung[j].plz){

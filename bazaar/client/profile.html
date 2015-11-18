@@ -31,9 +31,8 @@
 				</div>
 
 				{{> faq}}
-				<br>
+				{{> kontakt}}
 				<div style="text-align:center">
-				<a href="mailto:dorfbazaar@gmail.com" class="button button-positive">Kontakt aufnehmen</a><br><br>
 					<button class="button button-clear button-default" data-ion-modal="terms">Read Terms</button>
 				</div><br>
 
@@ -42,6 +41,16 @@
 			{{/if}}
 		{{/ionContent}}
 	{{/ionView}}
+</template>
+
+<template name="changePLZ">
+	{{#ionModal title='Postleitzahl ändern'}}
+		<div class="padding">
+			<p>Achtung: Falls deine neue Gemeinde nicht in der Nähe der alten ist, kann es sein, dass deine eigenen Angebote für dich unsichtbar werden. Der Grund dafür ist, dass jeweils nur Angebote in deiner Umgebung sichtbar sind (inklusive deiner Angebote)</p>
+			{{> umgebung}}
+			<button id="save" class="button button-positive button-outline button-block">Speichern</button>
+		</div>
+	{{/ionModal}}
 </template>
 
 <template name="login">
@@ -56,31 +65,42 @@
 	<div class="card padding">
 		<h2 style="font-size: 25px">Häufig gestellte Fragen</h2>
 		
-		<b><p>Was kann ich auf DorfBazaar stellen?</p></b>
-		<p style="font-style: italic">Neue wie auch alte aber noch intakte Gegenstände können auf Bazaar zum Verschenken angeboten werden. Zum Beispiel Haushaltsgeräte, Kleider, Möbel, elektronische Geräte und sonstige Sachen die sich im Laufe der Zeit zuhause angestaut haben und für jemand anders von Nutzen sein könnten. Dienstleistungen und ähnliche Angebote sind auf DorfBazaar nicht erlaubt.</p>
+		<b><p> &nbsp;&nbsp; 1. Was kann ich auf Basaar stellen?</p></b>
+		<p style="font-style: italic">Im Prinzip alles. Egal ob die Kaffeetasse deiner Grossmutter, neue Schulbücher oder einen Barhocker, der ein wenig schief steht. Basaar kombiniert Brockenhaus, Flohmarkt und Internetauktionshaus – das Besondere dabei: Es wird alles verschenkt. Als Faustregel gilt: Solange man es anfassen kann, gibt es auf Basaar Platz dafür. Je hochwertiger der Gegenstand und je besser die Präsentation, desto wahrscheinlicher wirst du ihn auch los. Dienstleistungen oder ähnliche Angebote sind bei uns nicht erlaubt.</p>
 
-		<b><p>Wieso muss man bei der Anmeldung die Postleitzahl des Wohnortes angeben werden? Wie kann man diese nachträglich verändern?</p></b>
-		<p style="font-style: italic">Die Postleitzahl wird benötigt damit die Inserate von der jeweiligen Gemeinde angezeigt werden und die eigenen für die Bewohner ersichtlich sind. Die Postleitzahl kann jederzeit im Profil geändert werden.</p>
+		<b><p> &nbsp;&nbsp; 2. Wie kann ich ein Angebot melden, welches gegen die Regeln verstösst?</p></b>
+		<p style="font-style: italic">Dafür wählst du zuerst im Browse/Add-Menü das betroffene Angebot aus. Dort hast du über den Share-Button unten rechts die Möglichkeit, auf Missbrauch melden zu drücken. Daraufhin wird automatisch eine Benachrichtigung ans Basaar-Team geschickt und wir kümmern uns darum.</p>
 
-		<b><p>Kann ich für meine Items auf Bazaar Geld verlangen?</p></b>
-		<p style="font-style: italic">Nein, alle Bazaar Items werden verschenkt. Keine Bezahlung, keinen Warentausch.</p>
+		<b><p> &nbsp;&nbsp; 3. Wieso muss ich bei der Registrierung die Postleitzahl meines Wohnortes angeben und wie kann ich diese nachträglich verändern?</p></b>
+		<p style="font-style: italic">Deine Postleitzahl wird benötigt, damit du möglichst viele Angebote siehst, die in deiner Nähe aufgeschaltet wurden. Zudem können dadurch andere User aus der Umgebung Interesse an deinen Angeboten melden. Deine Postleitzahl kann jederzeit im Profil geändert werden.</p>
 
-		<b><p>Wie kann ich ein Item von einer anderen Person erhalten?</p></b>
-		<p style="font-style: italic">Dazu müssen Sie zuerst Interesse melden bei dem jeweiligen Inserat. Der Besitzer entscheidet sich dann für einen Interessenten und eine Benachrichtigung wird an alle Beteiligten geschickt. Falls Sie ausgewählt wurden, wird automatisch ein Chat für die Übergabe eröffnet (siehe nächste Frage).</p>
+		<b><p> &nbsp;&nbsp; 4. Kann ich für meine Angebote auf Basaar Geld verlangen?</p></b>
+		<p style="font-style: italic">Nein, alle Gegenstände auf Basaar werden verschenkt. Ausserdem funktioniert Basaar nicht über Tauschhandel: Das bedeutet, dass du nicht etwas auf Basaar stellen musst, um Interesse an anderen Angeboten melden zu können.</p>
 
-		<b><p>Wie funktioniert die Übergabe?</p></b>
-		<p style="font-style: italic">Nachdem ein Gegenstand vergeben wurde, wird die Übergabe per Chat geregelt. Es ist auch möglich die gewünschte Art der Übergabe bereits im Inserat zu vermerken. Es sollte jedoch zuerst immer die Bestätigung über die App/Website erfolgen damit das Inserat automatisch entfernt wird.</p>
+		<b><p> &nbsp;&nbsp; 5. Wie kann ich einen Gegenstand von einer anderen Person erhalten?</p></b>
+		<p style="font-style: italic">Wenn du im Browse/Add-Menü ein Angebot auswählst, kannst du dort Interesse daran melden. Daraufhin kann der Besitzer entscheiden, ob er dir den Gegenstand verschenkt oder nicht – in beiden Fällen wirst du benachrichtigt. Falls du ausgewählt wurdest, öffnet sich automatisch ein Chat zwischen dir und dem Besitzer (siehe nächste Frage).</p>
 
-		<b><p>Wie kann man ein Inserat melden welches gegen die Regeln verstösst?</p></b>
-		<p style="font-style: italic">Man klickt zuerst im Browse Tab auf das betroffene Inserat und dann auf das Share Logo unten rechts. Es erscheint eine Auswahl und wenn man auf Missbrauch melden drückt wird eine Benachrichtigung an die Betreiber von DorfBazaar geschickt.</p>
+		<b><p> &nbsp;&nbsp; 6. Wie funktioniert die Übergabe?</p></b>
+		<p style="font-style: italic">Der Ablauf der Übergabe erfolgt ausschliesslich zwischen den beiden Usern; Basaar hält sich da raus. Im Chat-Menü könnt ihr die nötigen Details wie z.B. den Ort der Übergabe besprechen. Im Idealfall hat der Besitzer bereits im Angebot selbst den gewünschten Ablauf vermerkt.</p>
 
-		<b><p>Wie finanziert sich Bazaar?</p></b>
-		<p style="font-style: italic">Gar nicht. Wir haben kein Geld zum essen mehr.</p>
+		<b><p> &nbsp;&nbsp; 7. Wie finanziert sich Bazaar?</p></b>
+		<p style="font-style: italic">Basaar finanziert sich durch Werbung und durch die Verkäufe der Pro-Version.</p>
 
-		<b><p>Ist Bazaar die nützlichste App auf der Welt?</p></b>
+		<b><p> &nbsp;&nbsp; 8. Ist Bazaar die nützlichste App auf der Welt?</p></b>
 		<p style="font-style: italic">Ja.</p>
 	</div>
 </template>
+
+<template name="kontakt">
+	<div class="card padding">
+		<h2 style="font-size: 25px">Kontakt</h2>
+		<p>
+			Bei Fragen zur Benutzung von Basaar kannst du dich per Mail direkt ans Basaar-Team wenden. Natürlich freuen wir uns auch über konstruktive Kritik und Verbesserungsvorschläge! Wenn dir Angebote  missbräuchlich erscheinen, kannst du dies direkt im Angebot selbst melden (siehe Punkt 2 unter Häufig gestellte Fragen).
+		</p>
+		<a href="mailto:basaarschweiz@gmail.com" class="button button-positive">Kontakt aufnehmen</a><br><br>
+	</div>
+</template>
+
 
 <template name="terms">
 	{{#ionModal title='terms'}}

@@ -162,7 +162,7 @@ Template.conversation.destroyed = function(){
     });
     Conversations.update({'_id': id}, {$set: {'messages': messages }});
     Session.set('hideTabs', false);
-    console.log('show tabs');
+    updateBadge();
 }
 
 

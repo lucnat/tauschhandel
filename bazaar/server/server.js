@@ -18,27 +18,28 @@ Accounts.onCreateUser(function(options, user) {
 
 Meteor.startup(function(){
 	smtp = {
-		username: 'noreplydorfbazaar',   // eg: server@gentlenode.com
-		password: 'dorfbazaar44',   // eg: 3eeP1gtizk5eziohfervU
-		server:   'smtp.gmail.com',  // eg: mail.gandi.net
+		username: 'infobasaar',   		// eg: server@gentlenode.com
+		password: 'basaar44',   		// eg: 3eeP1gtizk5eziohfervU
+		server:   'smtp.gmail.com',  	// eg: mail.gandi.net
 		port: 465
 	}
-
 	process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 });
 
-Accounts.emailTemplates.siteName = "Bazaar";
+Accounts.emailTemplates.siteName = "Basaar";
 
-Accounts.emailTemplates.from = "Bazaar <support@mysite.com>";
+Accounts.emailTemplates.from = "Basaar <info.basaar@gmail.com>";
 
 Accounts.emailTemplates.resetPassword.subject = function (user) {
-    return "Reset password for " + user.username;
+    return "Passwort zurücksetzen:  " + user.username;
 };
 
 Accounts.emailTemplates.resetPassword.text = function (user, url) {
 	var splitUrl = url.split('/');
-	console.log(splitUrl);
-	return url;
+	var text = "Hallo " + user.username + " \n\n Du hast vor Kurzem das Zurücksetzen des Passworts deines Basaar-Accounts veranlasst. Klicke unten auf den Link, um fortzufahren.\n\n"
+	text = text + url + "\n\n";
+	text = text + "Mit freundlichen Grüssen \n das Basaar-Team"
+	return text;
     /*
     var token = url.split('/')[url.split('/').length -1];
     var url = splitUrl[0] + '/' + splitUrl[2] + '/reset-password/' + token;
@@ -47,3 +48,18 @@ Accounts.emailTemplates.resetPassword.text = function (user, url) {
     return message;
     */
 };
+
+/*
+
+Meteor.startup(function(){
+	smtp = {
+		username: 'basaarschweiz',   		// eg: server@gentlenode.com
+		password: 'basaar44',   		// eg: 3eeP1gtizk5eziohfervU
+		server:   'smtp.gmail.com',  	// eg: mail.gandi.net
+		port: 465
+	}
+	process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
+});
+
+
+*/

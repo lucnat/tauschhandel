@@ -7,7 +7,7 @@ Tracker.autorun(function(){
 
 		var umgebung = [Meteor.user().profile.postleitzahl];
 		Meteor.user().profile.umgebung.forEach(function(gemeinde){
-			umgebung.push(gemeinde.plz);
+			umgebung.push(gemeinde.plz + '');
 		});
 		Meteor.subscribe('posts', umgebung);
 	} catch(e) {}	

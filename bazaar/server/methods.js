@@ -49,11 +49,13 @@ Meteor.methods({
 		Users.update({'_id': message.to}, {$set: {'profile': profile}});
 	},
 	'getUmgebung': function(plz){
+		plz = plz/1.0;
 		// returns Umgebung of given plz
-		return Gemeinden.findOne({'plz': ''+plz}).umgebung;
+		return Gemeinden.findOne({'plz': plz}).umgebung;
 	},
 	'getOrt': function(plz){
-		return Gemeinden.findOne({'plz': ''+plz}).ORT;
+		plz = plz/1.0;
+		return Gemeinden.findOne({'plz': plz}).ORT;
 	},
 	'reportSpam': function(id, userId){
 		Reported.insert({
@@ -62,9 +64,9 @@ Meteor.methods({
 			'fromUser': userId,
 		});
 	    Email.send({
-	      to: 'luca.naterop@bluewin.ch',
+	      to: 'basaarschweiz@gmail.com',
 	      subject: 'Spam wurde gemeldet',
-	      text: 'lueg id: ' + id,
+	      text: 'Post: \n http://46.101.207.204/post/'+id + " \n\n Gemeldet von user\n http://basaar.ch/user/"+userId,
 	    });
 	}
 });

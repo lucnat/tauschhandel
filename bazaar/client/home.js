@@ -7,7 +7,13 @@ constructGemeindenArray = function(posts){
         'distance': 0,
         'selected': true
     }];
-    var gemeinden = meineGemeinde.concat(Meteor.user().profile.umgebung);
+    var selected = [];
+    Meteor.user().profile.umgebung.forEach(function(gemeinde){
+        if(gemeinde.selected){
+            selected.push(gemeinde);
+        }
+    });
+    var gemeinden = meineGemeinde.concat(selected);
     gemeinden.forEach(function(gemeinde){
         gemeinde.posts = [];
         posts.forEach(function(post){
