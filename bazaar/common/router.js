@@ -36,6 +36,8 @@ Router.route('/', {name: 'home'});
 
 Router.route('/hello', {name: 'hello'});
 
+Router.route('/stats', {name: 'stats'});
+
 Router.route('/post/:_id', {name: 'post'});
 
 Router.route('/conversation/:_id', {name: 'conversation'});

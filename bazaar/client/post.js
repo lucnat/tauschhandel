@@ -52,11 +52,11 @@ Template.post.events({
 
             if($.inArray(postId, watchList) >= 0){
                 // means is already there, let's remove it
-                Users.update({_id: Meteor.user()._id}, { $pull: { 'profile.watchlist': postId } });
+                Users.update({_id: Meteor.user()._id}, { $pull: {'profile.watchlist': postId} });
 
             } else {
                 // means doesn't exist yet, let's push to array
-                Users.update({_id: Meteor.user()._id}, { $push: { 'profile.watchlist': postId} });
+                Users.update({_id: Meteor.user()._id}, { $push: {'profile.watchlist': postId} });
             }
         }
     },
@@ -85,6 +85,9 @@ Template.post.events({
                 if(Meteor.isCordova){
                     if(AdMob) AdMob.showInterstitial();
                 }
+
+                // and remove from watchlist (starred) because it is listed in interested posts
+                Users.update({_id: Meteor.user()._id}, { $pull: { 'profile.watchlist': post._id }});
             },
             onCancel: function() {
             }
@@ -196,7 +199,7 @@ Template.post.events({
                     window.location.href = "whatsapp://send?text=" + text;
                 }
                 if(index === 3){
-                    window.prompt("Copy the following link: ", 'loremipsumdolorsitamet');                
+                    window.prompt("Copy the following link: ", rootURL + 'post/' + post._id);                
                 }
                 return true;
             },
@@ -375,8 +378,17 @@ Template.giveAway.events({
             var post = Posts.findOne({_id: Router.current().params._id});
             var receiver = Users.findOne({'_id' : id});
             var postId = Router.current().params._id;
-            Posts.update({'_id': postId}, {$set: {'vergebenAn': receiver._id}});
-            Posts.update({'_id': postId}, {$set: {'vergebenAnName': receiver.username}});
+
+            Posts.update({'_id': postId}, {$set: {
+                'vergebenAn': receiver._id,
+                'vergebenAnName': receiver.username,
+                'interessenten': []
+            }});
+
+            // interessenten removed done, now remove from starred
+            post.interessenten.forEach(function(interessent){
+                Users.update({_id: interessent}, { $pull: {'profile.watchlist': postId} });
+            });
 
             var message = 'Der Gegenstand ' + '<a href="/post/' + post._id + '">'+ post.title +'</a> wurde an dich vergeben.';
 
@@ -396,6 +408,8 @@ Template.giveAway.events({
 
             var message = 'Glückwunsch! Der Gegenstand ' + post.title +' wurde an dich vergeben.';
             Meteor.call('pushFromItemGewonnen', receiver._id, message);
+
+
 
             var nichtBekommen = post.interessenten;
             nichtBekommen.forEach(function(id){

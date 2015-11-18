@@ -1,7 +1,17 @@
 <template name="notFound">
+	{{#contentFor "headerButtonLeft"}}
+	{{/contentFor}}
+
 	{{#ionView}}
 		{{#ionContent}}
-			<h3>Awww snap!!</h3>
+			<div class="card padding" style="text-align: center">
+				<h3>Awww snap!! :(</h3>
+				<p>Diese Seite existiert nicht.</p>
+				<img src="logo.png">
+				<br><br>
+				<button id="home" class="button button-positive">Bring mich nach Hause</button>
+				<br><br>
+			</div>
 		{{/ionContent}}
 	{{/ionView}}
 </template>

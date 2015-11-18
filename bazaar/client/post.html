@@ -34,7 +34,7 @@
 				<br>
 				<p>{{post.text}}</p>
 				<br>
-				<p>tags: {{#each post.tags}} {{this}} {{/each}}</p>
+				<p>Kategorien: {{#each post.tags}} {{this}} {{/each}}</p>
 				<br>
 			</div>
 			<div class="item tabs tabs-secondary tabs-icon-left">
@@ -43,17 +43,23 @@
 				      <i class="icon ion-edit"></i>
 					</a>
 				{{else}}
-					<a id="like" class="tab-item" href="#" style='{{#if isOnWatchList }}color: #D6665A {{/if}}'>
-				      <i class="icon ion-star"></i>
-					</a>
+					{{#unless post.vergebenAn}}
+						{{#unless hasInterest}}
+							<a id="like" class="tab-item" href="#" style='{{#if isOnWatchList }}color: #D6665A {{/if}}'>
+						      <i class="icon ion-star"></i>
+							</a>
+						{{/unless}}
+					{{/unless}}
 				{{/if}}
 				<a id="QAndAButton" class="tab-item" href="#" style='{{#if QAndAOpened}} color: #75A48B {{/if}}'>
 					<i class="icon ion-chatbubble"></i>
 					Q&A
 				</a>
-				<a  id="shareButton" class="tab-item" href="#">
-					<i class="icon ion-share"></i>
-				</a>
+				{{#unless post.vergebenAn}}
+					<a  id="shareButton" class="tab-item" href="#">
+						<i class="icon ion-share"></i>
+					</a>
+				{{/unless}}
 			</div>
 		</div>
 
@@ -69,14 +75,15 @@
 		{{/if}}
 
 		{{#unless isMyPost}}
-			<div class="padding">
-				{{#if hasInterest}}
-					<button id="interesseZurueckziehen" class="button button-block button-assertive button-clear">Interesse zurückziehen</button>
-				{{else}}
-					<button id="interesseMelden" class="button button-block button-balanced">Interesse melden</button>
-				{{/if}}
-				
-			</div>
+			{{#unless post.vergebenAn}}
+				<div class="padding">
+					{{#if hasInterest}}
+						<button id="interesseZurueckziehen" class="button button-block button-assertive button-clear">Interesse zurückziehen</button>
+					{{else}}
+						<button id="interesseMelden" class="button button-block button-balanced">Interesse melden</button>
+					{{/if}}
+				</div>
+			{{/unless}}
 		{{/unless}}
 
 		{{#if isMyPost}}
@@ -112,7 +119,7 @@
 				{{/each}}
 				<br><button id='imageUpload' class='button button-positive button-outline icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
 			</div>
-			<div class="item item-divider">Tags</div>
+			<div class="item item-divider">Kategorien</div>
 			<div class="item">
 				{{#each possibleTags}}
 					<li class='item item-checkbox'>

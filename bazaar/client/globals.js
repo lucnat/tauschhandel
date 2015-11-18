@@ -39,7 +39,8 @@ Meteor.startup(function () {
 });
 
 Meteor.startup(function(){
-  if(!window.localStorage.getItem('hasStartedBefore')){
+  var isStatsScreen = window.location.href.indexOf('stats') >= 0;
+  if(!window.localStorage.getItem('hasStartedBefore') && !isStatsScreen){
     console.log('going to hello screen')
     Router.go('/hello');
   }
@@ -50,6 +51,27 @@ Template.registerHelper('isAndroid', function(){
     var browser = !Meteor.isCordova;
     var isAndroid = !(iOS || browser);
     return isAndroid
+});
+
+Template.registerHelper('isIOS', function(){
+    var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+    var browser = !Meteor.isCordova;
+    var isAndroid = !(iOS || browser);
+    return iOS;
+});
+
+Template.registerHelper('isBrowser', function(){
+    var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
+    var browser = !Meteor.isCordova;
+    var isAndroid = !(iOS || browser);
+    return browser && $(window).width() >= 1000;
+});
+
+Template.notFound.events({
+  'click #home': function(){
+    Router.go('/');
+    location.reload();
+  }
 });
 
 updateBadge = function(){

@@ -29,7 +29,6 @@
 						<button id="logout" class="button button-assertive button-outline"> Mich Abmelden </button>
 					</div>
 				</div>
-
 				{{> faq}}
 				{{> kontakt}}
 
@@ -57,8 +56,12 @@
 </template>
 
 <template name="login">
+	{{#contentFor "headerButtonLeft"}}
+		<a href="/profile" class="button button-clear pull-left" > </a>
+	{{/contentFor}}
 	{{#ionView}}
 		{{#ionContent class="padding"}}
+			{{> storeButtons}}
 			{{> atForm}}
 		{{/ionContent}}
 	{{/ionView}}
@@ -97,16 +100,18 @@
 <template name="kontakt">
 	<div class="card padding">
 		<h2 style="font-size: 25px">Kontakt</h2>
+
 		{{#ionSlideBox}}
 				{{#ionSlide class='light-bg'}}
-					<img src="/team.jpg" width="100%">
+					<img src="/team2.jpg" width="100%;">
 				{{/ionSlide}}
 	     {{/ionSlideBox}}
+
 	     <br>
-	     <p><b>Luca Naterop </b><span style="font-style: italic; display: inline"> - Gründer</span> </p>
-	     <p><b>Philippe Frei </b><span style="font-style: italic; display: inline"> - Gründer</span> </p>
+	     <p><b>Luca Naterop </b><span style="font-style: italic; display: inline"> - Gründer (ohne Schnauz)</span> </p>
+	     <p><b>Philippe Frei </b><span style="font-style: italic; display: inline"> - Gründer (mit Schnauz)</span> </p>
 	     <p><b>Nicolas Malzacher </b><span style="font-style: italic; display: inline"> - Mitwirkender</span> </p>
-	     <p><b>Nathalie Michele </b><span style="font-style: italic; display: inline"> - Mitwirkende</span> </p>
+	     <p><b>Nathalie Michèle </b><span style="font-style: italic; display: inline"> - Mitwirkende</span> </p>
 		<p>
 			Bei Fragen zur Benutzung von Basaar kannst du dich per Mail direkt ans Basaar-Team wenden. Natürlich freuen wir uns auch über konstruktive Kritik und Verbesserungsvorschläge! Wenn dir Angebote  missbräuchlich erscheinen, kannst du dies direkt im Angebot selbst melden (siehe Punkt 2 unter Häufig gestellte Fragen).
 		</p><br>

@@ -68,5 +68,12 @@ Meteor.methods({
 	      subject: 'Spam wurde gemeldet',
 	      text: 'Post: \n http://46.101.207.204/post/'+id + " \n\n Gemeldet von user\n http://basaar.ch/user/"+userId,
 	    });
+	},
+	'getStats': function(){
+		var stats = {
+			'users': Users.find().count(),
+			'posts': Posts.find().count()
+		}
+		return stats;
 	}
 });

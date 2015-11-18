@@ -1,0 +1,29 @@
+<template name="stats">
+	{{#contentFor "headerButtonLeft"}}
+	{{/contentFor}}
+
+	{{#ionView}}
+		{{#ionContent}}
+			<div class="card">
+				<div class="item item-divider">
+					Statistiken
+				</div>
+				<div class="item-text-wrap">
+					<br>
+					<div class="row">
+						<div class="col"><h2 style="color: #bbb; text-align: right"># Benutzer:</h2></div>     <div class="col"><h2>{{stats.users}}</h2></div>
+					</div>
+					<div class="row">
+						<div class="col"><h2 style="color: #bbb; text-align: right"># Angebote:</h2></div>     <div class="col"><h2>{{stats.posts}}</h2></div>
+					</div>
+					<br>
+					<div class="padding" style="text-align: center; color: #aaa"><p> Für die informationshungrigen unter euch: Mir ist bewusst, dass diese Seite momentan ziemlich minimalistisch augsestaltet ist. Mehr Statistiken werden mit der Zeit hinzugefügt. Grüsse vom Nerd. </p></div>
+				</div>
+			</div>
+			<br><br>
+			{{> storeButtons}}
+
+		{{/ionContent}}
+	{{/ionView}}
+
+</template>
