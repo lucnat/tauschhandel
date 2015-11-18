@@ -38,6 +38,13 @@ Meteor.startup(function () {
   } 
 });
 
+Meteor.startup(function(){
+  if(!window.localStorage.getItem('hasStartedBefore')){
+    console.log('going to hello screen')
+    Router.go('/hello');
+  }
+});
+
 Template.registerHelper('isAndroid', function(){
     var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
     var browser = !Meteor.isCordova;

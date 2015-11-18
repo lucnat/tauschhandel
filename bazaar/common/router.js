@@ -34,6 +34,8 @@ Router.onBeforeAction(OnBeforeActions.firstLogin, {
 
 Router.route('/', {name: 'home'});
 
+Router.route('/hello', {name: 'hello'});
+
 Router.route('/post/:_id', {name: 'post'});
 
 Router.route('/conversation/:_id', {name: 'conversation'});

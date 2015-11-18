@@ -32,10 +32,13 @@
 
 				{{> faq}}
 				{{> kontakt}}
+
+				<!--
 				<div style="text-align:center">
 					<button class="button button-clear button-default" data-ion-modal="terms">Read Terms</button>
 				</div><br>
-
+				-->
+				
 			{{else}}
 				{{> loader}}
 			{{/if}}
@@ -94,10 +97,21 @@
 <template name="kontakt">
 	<div class="card padding">
 		<h2 style="font-size: 25px">Kontakt</h2>
+		{{#ionSlideBox}}
+				{{#ionSlide class='light-bg'}}
+					<img src="/team.jpg" width="100%">
+				{{/ionSlide}}
+	     {{/ionSlideBox}}
+	     <br>
+	     <p><b>Luca Naterop </b><span style="font-style: italic; display: inline"> - Gründer</span> </p>
+	     <p><b>Philippe Frei </b><span style="font-style: italic; display: inline"> - Gründer</span> </p>
+	     <p><b>Nicolas Malzacher </b><span style="font-style: italic; display: inline"> - Mitwirkender</span> </p>
+	     <p><b>Nathalie Michele </b><span style="font-style: italic; display: inline"> - Mitwirkende</span> </p>
 		<p>
 			Bei Fragen zur Benutzung von Basaar kannst du dich per Mail direkt ans Basaar-Team wenden. Natürlich freuen wir uns auch über konstruktive Kritik und Verbesserungsvorschläge! Wenn dir Angebote  missbräuchlich erscheinen, kannst du dies direkt im Angebot selbst melden (siehe Punkt 2 unter Häufig gestellte Fragen).
-		</p>
-		<a href="mailto:basaarschweiz@gmail.com" class="button button-positive">Kontakt aufnehmen</a><br><br>
+		</p><br>
+		<div style="text-align: center"><a href="mailto:basaarschweiz@gmail.com" class="button button-positive">Kontakt aufnehmen</a><br><br></div>
+		
 	</div>
 </template>
 

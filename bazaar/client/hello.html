@@ -1,0 +1,33 @@
+<template name="hello">
+	{{#contentFor "headerButtonLeft"}}
+		<a href="/profile" class="button button-clear pull-left" > </a>
+	{{/contentFor}}
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Basaar</h1>
+	{{/contentFor}}
+
+	{{#ionView}}
+		{{#ionContent}}
+			<div class="padding">
+				<br>
+				<div style="text-align: center">
+					<h3>Willkommen. </h3>
+					<br>
+					<p>Mit Basaar können nicht mehr benötigte Gegenstände schnell und einfach den Besitzer wechseln. Basaar kombiniert Brockenhaus, Flohmarkt und Internetauktionshaus – das Besondere dabei: Es wird alles verschenkt. <a href="#" data-ion-modal="faqmodal">Mehr erfahren</a></p>
+					<br>
+					<button id="mitmachen" class="button button-positive button-block"> Mitmachen </button>
+				</div>
+			</div>
+		{{/ionContent}}
+	{{/ionView}}
+</template>
+
+
+
+
+<template name="faqmodal">
+	{{#ionModal title='Häufig gestellte Fragen'}}
+		{{> faq}}
+	{{/ionModal}}
+</template>
+

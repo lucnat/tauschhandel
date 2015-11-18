@@ -23,13 +23,13 @@
 				<h2>{{post.title}}</h2>
 				<br>
 				<div id='slidebox' style='width: 100%'>
-					{{#ionSlideBox}}
-						{{#each post.imageIDs}}
-							{{#ionSlide class='light-bg'}}
-								<img src="http://i.imgur.com/{{this}}l.jpg" class="bild" width='100%' style="display: none">
-							{{/ionSlide}}
-						{{/each}}
-				     {{/ionSlideBox}}
+				{{#ionSlideBox}}
+					{{#each post.imageIDs}}
+						{{#ionSlide class='light-bg'}}
+							<img src="http://i.imgur.com/{{this}}l.jpg" class="bild" width='100%' style="display: none">
+						{{/ionSlide}}
+					{{/each}}
+			     {{/ionSlideBox}}
 				</div>
 				<br>
 				<p>{{post.text}}</p>
