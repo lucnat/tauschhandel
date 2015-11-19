@@ -1,28 +1,45 @@
 <template name="stats">
 	{{#contentFor "headerButtonLeft"}}
 	{{/contentFor}}
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Basaar Statistiken</h1>
+	{{/contentFor}}
 
 	{{#ionView}}
 		{{#ionContent}}
-			<div class="card">
-				<div class="item item-divider">
-					Statistiken
-				</div>
-				<div class="item-text-wrap">
-					<br>
-					<div class="row">
-						<div class="col"><h2 style="color: #bbb; text-align: right"># Benutzer:</h2></div>     <div class="col"><h2>{{stats.users}}</h2></div>
-					</div>
-					<div class="row">
-						<div class="col"><h2 style="color: #bbb; text-align: right"># Angebote:</h2></div>     <div class="col"><h2>{{stats.posts}}</h2></div>
-					</div>
-					<br>
-					<div class="padding" style="text-align: center; color: #aaa"><p> Für die informationshungrigen unter euch: Mir ist bewusst, dass diese Seite momentan ziemlich minimalistisch augsestaltet ist. Mehr Statistiken werden mit der Zeit hinzugefügt. Grüsse vom Nerd. </p></div>
+			<div class="card padding">
+				<div class="item-text-wrap" style="text-align: center">
+					<h2><span style="color: #bbb">Basaar verzeichnet insgesamt</span> {{stats.totalUsers}} <span style="color: #bbb">Benutzer und </span> {{stats.totalPosts}} <span style="color: #bbb">Angebote.</span> </h2>
+
 				</div>
 			</div>
-			<br><br>
+			<div class="card padding">
+				<div class="item-text-wrap">
+					<div class="row">
+						<div class="col"><h2 style="color: #bbb; text-align: center"> Rangliste Benutzer Nach PLZ (Top Ten)</h2></div>
+					</div>
+					{{#each stats.usersByZipArray}}
+						<div class="row">
+							<div class="col"><h3 style="color: #bbb; text-align: right"> {{gemeinde}}</h3></div> <div class="col"><h3>&nbsp;&nbsp;&nbsp;{{anzahl}}</h3></div>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+			<div class="card padding">
+				<div class="item-text-wrap">
+					<div class="row">
+						<div class="col"><h2 style="color: #bbb; text-align: center">Rangliste Angebote Nach PLZ (Top Ten)</h2></div>
+					</div>
+					{{#each stats.postsByZipArray}}
+						<div class="row">
+							<div class="col"><h3 style="color: #bbb; text-align: right"> {{gemeinde}}</h3></div> <div class="col"><h3>&nbsp;&nbsp;&nbsp;{{anzahl}}</h3></div>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+			<br>
 			{{> storeButtons}}
-
+			<br><br>
 		{{/ionContent}}
 	{{/ionView}}
 

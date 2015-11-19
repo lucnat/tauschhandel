@@ -75,5 +75,37 @@ Meteor.methods({
 			'posts': Posts.find().count()
 		}
 		return stats;
+	},
+	'updateStats': function(){
+		var users = Users.find().fetch();
+		var zipUsers = {};
+		users.forEach(function(user){
+			if(zipUsers[user.profile.postleitzahl]){
+				zipUsers[user.profile.postleitzahl] = zipUsers[user.profile.postleitzahl] + 1;
+			} else {
+				zipUsers[user.profile.postleitzahl] = 1;
+			}
+		});
+		var posts = Posts.find().fetch();
+		var zipPosts = {};
+		posts.forEach(function(post){
+			if(zipPosts[post.postleitzahl]){
+				zipPosts[post.postleitzahl] = zipPosts[post.postleitzahl] + 1;
+			} else {
+				zipPosts[post.postleitzahl] = 1;
+			}
+		});
+
+		var stats = {
+			'which': 'this',
+			'totalUsers': Users.find().count(),
+			'usersByZip': zipUsers,
+			'totalPosts': Posts.find().count(),
+			'postsByZip': zipPosts, 
+			'totalNotifications': Notifications.find().count(),
+			'totalDiscussions': PostDiscussions.find().count(),
+			'totalConversations': Conversations.find().count()
+		}
+		Stats.update({'which': 'this'}, stats);
 	}
 });

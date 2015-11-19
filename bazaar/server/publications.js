@@ -16,6 +16,10 @@ Meteor.publish('notifications', function(userID){
 	return Notifications.find({ receiver: userID });
 });
 
+Meteor.publish('stats', function(userID){
+	return Stats.find();
+});
+
 Meteor.publish('messages', function(){
 	//TODO: do not publish all messages, but only if current user is sender or recipient
 	return Messages.find({});

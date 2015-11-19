@@ -16,6 +16,7 @@ Tracker.autorun(function(){
 Meteor.subscribe('messages');
 Meteor.subscribe('tags');
 Meteor.subscribe('adminshizzle');
+Meteor.subscribe('stats');
 
 Tracker.autorun(function() {
     Meteor.subscribe('allUsers');
