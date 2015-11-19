@@ -4,7 +4,6 @@ Template.conversations.helpers({
         conversations.sort(function(c1, c2){
             return c2.changedAt - c1.changedAt;
         });
-        console.log(conversations);
         conversations.forEach(function(conversation){
             // figure out which name to show (other person than currently logged in person)
             var person1 = Users.findOne(conversation.creator);
@@ -113,10 +112,9 @@ Template.conversation.events({
 });
 
 Template.conversation.rendered = function(){
-    Session.set('hideTabs', true);
-    console.log('hide tabs');
     Session.set('currentID', Router.current().params._id);
-
+    Session.set('hideTabs', true);
+    
     $('#moreButton').on('click', function(){
             var conversation = Conversations.findOne(Router.current().params._id);
             // figure out which name to show (other person than currently logged in person)

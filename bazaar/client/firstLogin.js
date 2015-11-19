@@ -61,7 +61,7 @@ Template.firstLogin3.events({
             Router.go('/');
             IonBackdrop.release();
             Users.update({'_id': Meteor.userId()},{$set: {'profile.umgebung': umgebung}});
-            lucPopup('Glückwunsch! Dein Profil ist vollständig. Viel Spass mit DorfBazaar!');
+            lucPopup('Glückwunsch! Dein Profil ist vollständig. Viel Spass mit Basaar!');
         }, 500);
     },
     'click #alle': function(){

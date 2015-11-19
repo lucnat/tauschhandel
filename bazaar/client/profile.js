@@ -32,26 +32,17 @@ Template.profile.events({
     },
     'click #changePostleitzahl': function(){
         lucPopup('Dieses Feature ist in dieser Version noch nicht verfügbar. Falls die Postleitzahl geändert werden muss, sollte ein neuer Account erstellt werden.');
-        /*
-        IonPopup.prompt({
+        IonPopup.confirm({
             title: 'Postleitzahl ändern',
-            template: 'Neue Postleitzahl eingeben. ',
-            okText: 'Ok',
-            inputType: 'number',
-            inputPlaceholder: 'Postleitzahl',
-            onOk: function(event) {
-                var newPLZ = $('input').val();
-                if(newPLZ.length != 4) {
-                    alert('Postleitzahl muss 4 zeichen lang sein. Konnte nicht gespeichert werden.');
-                } else {
-                    var profile = Meteor.user().profile;
-                    profile.postleitzahl = newPLZ;
-                    Users.update({'_id': Meteor.userId()},{$set: {'profile': profile}});
-                    IonModal.open('changePLZ');
-                }
+            template: 'Wenn du deine Postleitzahl änderst, dann wirst du keine Angebote mehr sehen, die sich an Orten ausserhalb deiner neuen Umgebung befinden. Bist du sicher, dass du die Postleitzahl ändern möchtest?',
+            okText: 'Ja',
+            cancelText: 'Abbrechen',
+            onOk: function() {
+                Router.go('/firstLogin2');
             },
+            onCancel: function() {
+            }
         });
-*/
     },
 	'click #changeProfilePicture': function(event){
 		event.preventDefault();
