@@ -19,6 +19,7 @@ constructGemeindenArray = function(posts){
         posts.forEach(function(post){
             if(gemeinde.plz == post.postleitzahl) gemeinde.posts.push(post);
         });
+        gemeinde.anzahlPosts = gemeinde.posts.length;
     });
     return gemeinden;
 }

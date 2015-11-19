@@ -103,7 +103,7 @@
 		  </button>
 		</div>
 		{{#each gemeinden}}
-			<div class="item item-divider">{{plz}} {{ORT}}</div>
+			<div class="item item-divider"> <div class="row" style="padding: 0px"><div class="col col-75" style="padding: 0px">{{plz}} {{ORT}}</div><div class="col" style="text-align: right; padding: 0px; color: #bbb">{{anzahlPosts}}</div> </div> </div>
 			{{#each posts}}
 				{{> postPreview}}
 			{{/each}}
