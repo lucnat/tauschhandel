@@ -103,10 +103,19 @@
 		  </button>
 		</div>
 		{{#each gemeinden}}
-			<div class="item item-divider"> <div class="row" style="padding: 0px"><div class="col col-75" style="padding: 0px">{{plz}} {{ORT}}</div><div class="col" style="text-align: right; padding: 0px; color: #bbb">{{anzahlPosts}}</div> </div> </div>
-			{{#each posts}}
-				{{> postPreview}}
-			{{/each}}
+			<div class="item item-divider collapsable" id="{{plz}}"> 
+				<div class="row" style="padding: 0px">
+					<div class="col col-75" style="padding: 0px">{{plz}} {{ORT}}</div>
+					<div class="col" style="text-align: right; padding: 0px; color: #bbb">{{anzahlPosts}} 
+						{{#if collapsed}}<i class="icon ion-plus-circled"></i> {{else}} <i class="icon ion-minus-circled"></i> {{/if}}
+					</div> 
+				</div> 
+			</div>
+			{{#unless collapsed}}
+				{{#each posts}}
+					{{> postPreview}}
+				{{/each}}
+			{{/unless}}
 		{{/each}}
 	{{/ionList}}
 

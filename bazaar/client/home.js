@@ -20,6 +20,11 @@ constructGemeindenArray = function(posts){
             if(gemeinde.plz == post.postleitzahl) gemeinde.posts.push(post);
         });
         gemeinde.anzahlPosts = gemeinde.posts.length;
+        gemeinde.collapsed = false;
+        var collapsed = Session.get('collapsed');
+        if(collapsed.indexOf(gemeinde.plz+'') >= 0){
+            gemeinde.collapsed = true;
+        }
     });
     return gemeinden;
 }
@@ -87,6 +92,19 @@ Template.previewList.events({
     'click #cancelSearch': function(){
         $('#search').val('');
         Session.set('searchString', '');
+    },
+    'click .collapsable': function(event){
+        var plz = event.currentTarget.id;
+        function toggleArrayItem(a, v) {
+            var i = a.indexOf(v);
+            if (i === -1)
+                a.push(v);
+            else
+                a.splice(i,1);
+        }
+        var collapsed = Session.get('collapsed');
+        toggleArrayItem(collapsed, plz);
+        Session.set('collapsed', collapsed);
     }
 });
 Template.createPost.helpers({
