@@ -8,7 +8,7 @@
 
 	{{#contentFor "headerButtonRight"}}
 		<button class="button button-clear pull-right" data-ion-modal="createPost">
-			{{> ionIcon icon='ios-plus-empty'}}
+			{{> ionIcon icon='android-add'}}
 		</button>
 	{{/contentFor}}
 
@@ -23,7 +23,7 @@
 </template>
 
 <template name="createPost">
-	{{#ionModal title='Neues Item hinzufügen' barClass="bar-dark"}}
+	{{#ionModal title='Neues Angebot hinzufügen' }}
 		<div class="list">
 			<div class='list card'>
 				<div class="item item-divider">Beschreibung</div>
@@ -60,7 +60,7 @@
 							<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
 						</li>
 					{{/each}}
-					<br><input id='submitButton' class='button button-balanced button-block' type="button" value="Absenden">
+					<br><input id='submitButton' class='button button-positive button-block' type="button" value="Absenden">
 				</div>
 			</div>
 		</div>
@@ -89,7 +89,7 @@
 		{{#if filterNotAll}}
 			{{#ionItem}}
 				<div style="text-align: center">
-					<button id="removeFilter" class='button button-balanced button-clear'>Filter und Suchkriterium entfernen</button>
+					<button id="removeFilter" class='button button-assertive button-clear'>Filter und Suchkriterium entfernen</button>
 				</div>
 			{{/ionItem}}
 		{{/if}}

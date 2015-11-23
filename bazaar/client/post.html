@@ -80,7 +80,7 @@
 					{{#if hasInterest}}
 						<button id="interesseZurueckziehen" class="button button-block button-assertive button-clear">Interesse zurückziehen</button>
 					{{else}}
-						<button id="interesseMelden" class="button button-block button-balanced">Interesse melden</button>
+						<button id="interesseMelden" class="button button-block button-positive">Interesse melden</button>
 					{{/if}}
 				</div>
 			{{/unless}}
@@ -117,7 +117,7 @@
 				{{#each imageIDs}}
 					<img id='image' style='margin-right: 10px' src='http://i.imgur.com/{{this}}s.jpg'>
 				{{/each}}
-				<br><button id='imageUpload' class='button button-positive button-outline icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
+				<br><button id='imageUpload' class='button button-positive icon icon-left ion-camera'> Foto hinzufügen</button><br><br>
 			</div>
 			<div class="item item-divider">Kategorien</div>
 			<div class="item">
@@ -126,7 +126,7 @@
 						<label class="checkbox"> <input class="tag" id='{{tag}}' type="checkbox"></label>{{tag}}
 					</li>
 				{{/each}}
-				<br><input id='speichern' class='button button-balanced button-block' type="button" value="Speichern">
+				<br><input id='speichern' class='button button-positive button-block' type="button" value="Speichern">
 			</div>
 		</div>
 	{{/ionModal}}
@@ -175,8 +175,8 @@
 					<label class="item item-input" style='display: none'>
 						<textarea id='antwort' placeholder="Schreibe eine Antwort" rows="5" ></textarea>
 					</label><br>
-					<button id="antwortVerfassenButton" class='button button-balanced button'>Antwort verfassen</button>
-					<button id="frageBeantwortenButton" class='button button-balanced button' style='display: none'>Antworten</button>
+					<button id="antwortVerfassenButton" class='button button-positive button'>Antwort verfassen</button>
+					<button id="frageBeantwortenButton" class='button button-positive button' style='display: none'>Antworten</button>
 					<button id="cancel" class='button button-assertive button-clear' style='display: none'>Abbrechen</button>
 				{{else}}
 					<p style="font-style: italic"> Noch keine Antwort </p>
@@ -193,7 +193,7 @@
 		<label class="item item-input">
 			<textarea id='newQuestion' placeholder="Stelle eine Frage" rows="5"></textarea>
 		</label>
-		<button id='newQuestionButton' class="button button-balanced button-clear" type="button">Abschicken!</button>
+		<button id='newQuestionButton' class="button button-positive button-clear" type="button">Abschicken!</button>
 		</div>
 	</form>
 </template>
