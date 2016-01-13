@@ -48,11 +48,6 @@ Meteor.methods({
 		profile.badgeCount = badge;
 		Users.update({'_id': message.to}, {$set: {'profile': profile}});
 	},
-	'getUmgebung': function(plz){
-		plz = plz/1.0;
-		// returns Umgebung of given plz
-		return Gemeinden.findOne({'plz': plz}).umgebung;
-	},
 	'getOrt': function(plz){
 		plz = plz/1.0;
 		return Gemeinden.findOne({'plz': plz}).ORT;
@@ -107,5 +102,61 @@ Meteor.methods({
 			'totalConversations': Conversations.find().count()
 		}
 		Stats.update({'which': 'this'}, stats);
+	},
+
+	'getLnglatFromPLZ': function(plz){
+		return getLnglatFromPLZ(plz);
+	},
+
+	'addToExistingUsers': function(){
+		// Adds lnglat coordinates to existing user
+		var users = Users.find().fetch();
+		users.forEach(function(user){
+			try{
+				var lnglat = getLnglatFromPLZ(user.profile.postleitzahl);
+				Users.update(user._id, {$set: {'profile.coordinates': lnglat}});
+			} catch(e) {};
+		});
+	},
+	'addToExistingPosts': function(){
+		// Adds lnglat coordinates to existing post
+		var posts = Posts.find().fetch();
+		posts.forEach(function(post){
+			var gemeinde = null;
+			for(var i=0; i<gemeinden.length; i++){
+				if(gemeinden[i].plz == post.postleitzahl){
+					gemeinde = gemeinden[i];
+					break;
+				}
+			}
+			Posts.update(post._id, {$set: {'location': { type: "Point", coordinates: [gemeinde.Longitude, gemeinde.Latitude]}}})
+		});
+	},
+	'cleanUsersWithNoPLZ': function(){
+		// deletes all users that have no lnglat 
+		var users = Users.find({'profile.postleitzahl': null}).fetch();
+		users.forEach(function(user){
+			Users.remove(user._id);
+		});
+	},
+	'cleanUpUsers': function(){
+		var users = Users.find().fetch();
+		users.forEach(function (user) {
+			Users.update({'_id': user._id}, {$set: {'profile.umgebung': ''}});
+		});
+
 	}
 });
+
+getLnglatFromPLZ = function(plz){
+	console.log('searching for plz ' + plz);
+	var gemeinde = null;
+	for(var i=0; i<gemeinden.length; i++){
+		if(gemeinden[i].plz == plz){
+			gemeinde = gemeinden[i];
+			break;
+		}
+	}
+	return [gemeinde.Longitude, gemeinde.Latitude];
+}
+

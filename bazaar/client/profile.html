@@ -16,19 +16,28 @@
 					<a id="changeUsername" class="item item-icon-left">
 						 <i class="icon ion-person"></i>
 						{{currentUser.username}}
-					<span class="item-note">Bearbeiten</span>
+						<span class="item-note">Bearbeiten</span>
 					</a>
 					<a id="changePostleitzahl" class="item item-icon-left">
 						 <i class="icon ion-home"></i>
 						{{currentUser.profile.postleitzahl}} {{currentUser.profile.ORT}}
-
-					<span class="item-note">Bearbeiten</span>
+						<span class="item-note">Bearbeiten</span>
+					</a>
+					<a id="changeRadius" data-ion-modal="changeRadius" class="item item-icon-left">
+						 <i class="icon ion-ionic"></i>
+						Sichtbarkeitsradius: <b>{{currentUser.profile.radius}} km </b>
+						<span class="item-note">Bearbeiten</span>
 					</a>
 					<div class="item item-icon-left">
 						 <i class="icon ion-power"></i>
 						<button id="logout" class="button button-assertive button"> Mich Abmelden </button>
 					</div>
 				</div>
+
+				<div class="padding">
+					<p>Klicke <a href="#" data-ion-modal="umgebungsmodal">hier</a> um herauszufinden, welche Gemeinden innerhalb von deinem momentanen Sichtbarkeitsradius sind.</p>
+				</div>
+
 				{{> faq}}
 				{{> kontakt}}
 
@@ -48,8 +57,23 @@
 <template name="changePLZ">
 	{{#ionModal title='Postleitzahl ändern'}}
 		<div class="padding">
-			<p>Achtung: Falls deine neue Gemeinde nicht in der Nähe der alten ist, kann es sein, dass deine eigenen Angebote für dich unsichtbar werden. Der Grund dafür ist, dass jeweils nur Angebote in deiner Umgebung sichtbar sind (inklusive deiner Angebote)</p>
+			<p>Achtung: Falls deine neue Gemeinde nicht in der Nähe der alten ist, kann es sein, dass deine eigenen Angebote für dich unsichtbar werden. Der Grund dafür ist, dass jeweils nur Angebote in deiner Umgebung sichtbar sind. Dies gilt auch für deine eigenen Angebote. Du kannst jedoch im Profil den Sichtbarkeitsradius erweitern. Achtung: Ein hoher Sichtbarkeitsradius kann bewirken, dass die App langsamer läuft. </p>
 			{{> umgebung}}
+			<button id="save" class="button button-positive button-block">Speichern</button>
+		</div>
+	{{/ionModal}}
+</template>
+
+<template name="changeRadius">
+	{{#ionModal title='Sichtbarkeitsradius ändern'}}
+		<div class="padding">
+			<p>Der Sichtbarkeitsradius ist die Entfernung, innerhalb derer du Gegenstände auf Basaar siehst. Wenn du Gegenstände von Gemeinden sehen möchtest, die weiter weg sind, dann kannst du hier den Sichtbarkeitsradius erhöhen. Momentan kann die Entfernung maximal auf 50km eingestellt werden. </p><br>
+			<div class="item range">
+				<input id="radius" type="range" min="3" max="50">
+				<i class="icon ion-ionic"></i>
+			</div>
+			<br>
+			<div style="text-align: center; font-size: 30px" class="padding"><p id="radiusLabel"> laden.. </p></div>
 			<button id="save" class="button button-positive button-block">Speichern</button>
 		</div>
 	{{/ionModal}}
@@ -65,6 +89,14 @@
 			{{> atForm}}
 		{{/ionContent}}
 	{{/ionView}}
+</template>
+
+<template name="umgebungsmodal">
+	{{#ionModal title='Gemeinden'}}
+		<div class="padding">
+			{{> umgebung}}
+		</div>
+	{{/ionModal}}
 </template>
 
 <template name="faq">

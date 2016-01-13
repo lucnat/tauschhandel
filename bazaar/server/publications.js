@@ -1,37 +1,55 @@
 
 
-Meteor.publish('allUsers', function() {
-	return Users.find({},  {fields: {'username': 1, 'profile': 1}});
+Meteor.publish('userData', function () {
+    return Meteor.users.find({_id: this.userId});
 });
 
-Meteor.publish('posts', function(umgebung){
-	return Posts.find({'postleitzahl': {$in: umgebung}});
+
+Meteor.publish('allUsers', function() {
+	return Users.find({},  {fields: {
+		'username': 1, 
+		'profile.ORT': 1,
+		'profile.picture': 1,
+		'profile.postleitzahl': 1,
+		'profile.coordinates': 1,
+		'profile.firstLogin': 1
+	}});
+});
+
+Posts._ensureIndex({'location': '2dsphere'});
+
+Meteor.publish('posts', function(user){
+	return Posts.find({
+      location: {
+        $near: {
+          $geometry: {
+            type: "Point",
+            coordinates: user.profile.coordinates
+          },
+          $maxDistance: user.profile.radius*1000
+        }
+      }
+	});
 });
 
 Meteor.publish('postdiscussions', function(){
 	return PostDiscussions.find({published: true});
 });
 
-Meteor.publish('notifications', function(userID){
-	return Notifications.find({ receiver: userID });
+Meteor.publish('notifications', function(){
+	return Notifications.find({ receiver: this.userId });
 });
 
-Meteor.publish('stats', function(userID){
+Meteor.publish('stats', function(){
 	return Stats.find();
 });
 
-Meteor.publish('messages', function(){
-	//TODO: do not publish all messages, but only if current user is sender or recipient
-	return Messages.find({});
-});
-
-Meteor.publish('conversations', function(userID){
-	//TODO: do not publish all messages, but only if current user is sender or recipient
-	return Conversations.find({$or: [{creator: userID},{partner: userID}]});
+Meteor.publish('conversations', function(){
+	// do not publish all conversations, but only if current user is creator or partner
+	return Conversations.find({$or: [{creator: this.userId},{partner: this.userId}]});
 });
 
 Meteor.publish('tags', function(){
 	return Tags.find({});
 });
 
-// TODO: publish adminShizzle database only to admins / mods

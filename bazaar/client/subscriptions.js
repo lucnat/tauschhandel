@@ -1,29 +1,23 @@
-//Meteor.subscribe('allUsers');
+
 Meteor.subscribe('postdiscussions');
 
-Tracker.autorun(function(){
-	try{
-		Meteor.subscribe('notifications', Meteor.userId());
+Meteor.subscribe('notifications');
+Meteor.subscribe('conversations');		
 
-		var umgebung = [Meteor.user().profile.postleitzahl];
-		Meteor.user().profile.umgebung.forEach(function(gemeinde){
-			umgebung.push(gemeinde.plz + '');
-		});
-		Meteor.subscribe('posts', umgebung);
-	} catch(e) {}	
-});
+Meteor.subscribe('userData');
+Meteor.subscribe('allUsers');
 
-Meteor.subscribe('messages');
 Meteor.subscribe('tags');
-Meteor.subscribe('adminshizzle');
 Meteor.subscribe('stats');
 
-Tracker.autorun(function() {
-    Meteor.subscribe('allUsers');
-});
 
-Tracker.autorun(function(){
+Tracker.autorun(function () {
 	try{
-		Meteor.subscribe('conversations', Meteor.userId());
+		//var plzUmgebung = Meteor.user().profile.plzUmgebung;
+		//var plzUmgebung = Users.findOne(Meteor.userId() /*, {fields: {'profile.plzUmgebung': 1}}*/).profile.plzUmgebung;
+		if(Meteor.user()){
+			Meteor.subscribe('posts', Meteor.user());
+		}
 	} catch(e) {}
 });
+

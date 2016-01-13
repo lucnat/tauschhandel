@@ -23,6 +23,7 @@ Template.layout.helpers({
 });
 
 Template.layout.rendered = function(){
+
 	document.addEventListener("backbutton", onBackButtonDown, false);
 
 	function onBackButtonDown(event) {

@@ -102,12 +102,16 @@
 		    Cancel
 		  </button>
 		</div>
+
+
 		{{#each gemeinden}}
 			<div class="item item-divider collapsable" id="{{plz}}"> 
 				<div class="row" style="padding: 0px">
 					<div class="col col-75" style="padding: 0px">{{plz}} {{ORT}}</div>
 					<div class="col" style="text-align: right; padding: 0px; color: #bbb">{{anzahlPosts}} 
+						<!---
 						{{#if collapsed}}<i class="icon ion-plus-circled"></i> {{else}} <i class="icon ion-minus-circled"></i> {{/if}}
+						-->
 					</div> 
 				</div> 
 			</div>
@@ -136,6 +140,6 @@
 
 <template name="noPostsHereYet">
 	<div class="card padding">
-		<p style="font-style: italic">Es gibt noch keine Items, welche deinen Filterkriterien entsprechen <br> Um ein Item hinzuzufügen, drücke auf das kleine Plus oben rechts. </p>
+		<p style="font-style: italic">Es gibt noch keine Items, welche deinen Filterkriterien entsprechen. Um mehr Angebote zu sehen, ändere den Sichtbarkeitsradius in deinem Profil. <br> Um ein eigenes Angebot hinzuzufügen, drücke auf das kleine Plus oben rechts. </p>
 	</div>
 </template>

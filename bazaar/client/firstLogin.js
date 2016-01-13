@@ -10,8 +10,18 @@ Template.firstLogin1.events({
 Template.firstLogin2.events({
     'click #weiter2':  function(){
         if( 1000 <= $('#postleitzahl').val() && $('#postleitzahl').val() <= 10000){
-            Users.update({'_id': Meteor.user()._id },{$set: {'profile.postleitzahl': $('#postleitzahl').val()}})
+            Users.update({'_id': Meteor.user()._id },{$set: {'profile.postleitzahl': $('#postleitzahl').val()}});
+            Meteor.call('getLnglatFromPLZ', $('#postleitzahl').val(), function(err,result){
+                console.log('--------------');
+                console.log(result);
+                if(err){
+                    console.log(err);
+                } else {
+                    Users.update(Meteor.user()._id,{$set: {'profile.coordinates': result }});
+                }
+            });
             Users.update({'_id': Meteor.user()._id },{$set: {'profile.firstLogin': false}});
+            Users.update({'_id': Meteor.user()._id },{$set: {'profile.radius': 25}});
             Meteor.call('getOrt', $('#postleitzahl').val()/1, function(error, result){
                 if(error) console.log(error)
                 else {
@@ -20,24 +30,9 @@ Template.firstLogin2.events({
             });
             
             IonBackdrop.retain();
-            Meteor.call('getUmgebung', $('#postleitzahl').val()/1, function(error, result){
-                if(error){
-                    console.log(error);
-                    alert('Invalid Zip Code');
-                    IonBackdrop.release();
-                } else {
-                    var umgebung = result;
-                    umgebung.sort(function(a,b){
-                        return a.distance-b.distance;
-                    })
-                    umgebung.forEach(function(gemeinde){
-                        gemeinde.selected = false;
-                    });
-                    IonBackdrop.release();
-                    Users.update({'_id': Meteor.userId()},{$set: {'profile.umgebung': umgebung}});
-                    Router.go('/firstLogin3');
-                }
-            });
+            Router.go('/');
+            IonBackdrop.release();
+            lucPopup('Glückwunsch! Dein Profil ist vollständig. Viel Spass mit Basaar!');
         }
         else{
             alert('Postleitzahl muss vierstellig sein.');
@@ -45,37 +40,3 @@ Template.firstLogin2.events({
     }
 });
 
-Template.firstLogin3.events({
-    'click #weiter3': function(){
-        IonBackdrop.retain();
-        var checkboxes = document.getElementsByClassName('tag');
-        var umgebung = Meteor.user().profile.umgebung;
-        for (var i = 0; i < checkboxes.length; i++) {
-            for(var j=0; j < umgebung.length; j++){
-                if(checkboxes[i].id == umgebung[j].plz){
-                    umgebung[j].selected = checkboxes[i].checked;
-                }
-            }
-        }
-        Meteor.setTimeout(function(){
-            Router.go('/');
-            IonBackdrop.release();
-            Users.update({'_id': Meteor.userId()},{$set: {'profile.umgebung': umgebung}});
-            lucPopup('Glückwunsch! Dein Profil ist vollständig. Viel Spass mit Basaar!');
-        }, 500);
-    },
-    'click #alle': function(){
-        var checkboxes = document.getElementsByClassName('tag');
-        var umgebung = Meteor.user().profile.umgebung;
-        for(var i=0; i<checkboxes.length; i++){
-            checkboxes[i].checked = true;
-        }
-        $('#weiter3').click();
-    }
-});
-
-Template.umgebung.helpers({
-    'umgebung': function(){
-        return Meteor.user().profile.umgebung;
-    }
-});

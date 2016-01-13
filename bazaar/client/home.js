@@ -1,31 +1,43 @@
 Session.set('imageIDs', []);
 
 constructGemeindenArray = function(posts){
-    var meineGemeinde = [{
-        'plz': Meteor.user().profile.postleitzahl,
-        'ORT': Meteor.user().profile.ORT,
-        'distance': 0,
-        'selected': true
-    }];
-    var selected = [];
-    Meteor.user().profile.umgebung.forEach(function(gemeinde){
-        if(gemeinde.selected){
-            selected.push(gemeinde);
-        }
-    });
-    var gemeinden = meineGemeinde.concat(selected);
-    gemeinden.forEach(function(gemeinde){
-        gemeinde.posts = [];
-        posts.forEach(function(post){
-            if(gemeinde.plz == post.postleitzahl) gemeinde.posts.push(post);
+    
+    var gemeinden = [];
+
+    posts.forEach(function(post){
+        var gemeindeExists = false;
+        gemeinden.forEach(function(gemeinde){
+            if(gemeinde.plz == post.postleitzahl){
+                gemeinde.posts.push(post);
+                gemeinde.anzahlPosts = gemeinde.anzahlPosts + 1;
+                gemeindeExists = true;
+            }
         });
-        gemeinde.anzahlPosts = gemeinde.posts.length;
-        gemeinde.collapsed = false;
-        var collapsed = Session.get('collapsed');
-        if(collapsed.indexOf(gemeinde.plz+'') >= 0){
-            gemeinde.collapsed = true;
+        if(!gemeindeExists){
+
+            gemeinden.push({
+                'plz': post.postleitzahl,
+                'anzahlPosts': 1,
+                'collapsed': false,
+                posts: [post]
+            });
         }
     });
+
+    function distanceSquared(pos1, pos2){
+        // returns distance squared between two positions
+        return Math.pow(pos1[0]-pos2[0],2) + Math.pow(pos1[1]-pos2[1],2);
+    }
+
+    gemeinden.sort(function(g1, g2){
+        var myPos = Meteor.user().profile.coordinates;
+        var pos1 = g1.posts[0].location.coordinates;
+        var pos2 = g2.posts[0].location.coordinates;
+        return distanceSquared(myPos,pos1) - distanceSquared(myPos,pos2);
+    });
+
+    
+
     return gemeinden;
 }
 
@@ -133,6 +145,7 @@ Template.createPost.events({
             title:          $('#titel').val(),
             text:           $('#text').val(),
             postleitzahl:   Meteor.user().profile.postleitzahl,
+            location:       { type: "Point", coordinates: Meteor.user().profile.coordinates },
             istAngebot:     true,
             imageIDs:       Session.get('imageIDs'),
             tags:           tags,

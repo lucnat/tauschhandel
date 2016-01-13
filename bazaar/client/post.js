@@ -49,14 +49,16 @@ Template.post.events({
             // toggles this post on the watchlist of currentUser
             var postId = Router.current().params._id;
             var watchList = Meteor.user().profile.watchlist;
+                console.log('toggle');
 
             if($.inArray(postId, watchList) >= 0){
                 // means is already there, let's remove it
                 Users.update({_id: Meteor.user()._id}, { $pull: {'profile.watchlist': postId} });
-
+                console.log('done');
             } else {
                 // means doesn't exist yet, let's push to array
                 Users.update({_id: Meteor.user()._id}, { $push: {'profile.watchlist': postId} });
+                console.log('done');
             }
         }
     },

@@ -3,16 +3,19 @@ Accounts.onCreateUser(function(options, user) {
 	user.profile 				= {};
 	user.profile.watchlist 		= [];
 	user.profile.postleitzahl 	= null;
+	user.profile.coordinates	= [0,0];
 	user.profile.ORT 			= '';
 	user.profile.firstLogin 	= true;
 	user.profile.badgeCount 	= 0;
 	user.profile.picture 		= "http://i.imgur.com/hzByj22b.jpg";
+	user.profile.radius 		= 25;
 	user.profile.umgebung 		= [];
 	if(!user.username){
 		// user used facebook login
 		user.username = user.services.facebook.name;
 		user.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?width=400&height=400"; 
 	}
+	console.log(user);
 	return user;
 });
 

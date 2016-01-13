@@ -116,37 +116,65 @@ Template.conversation.rendered = function(){
     Session.set('hideTabs', true);
     
     $('#moreButton').on('click', function(){
-            var conversation = Conversations.findOne(Router.current().params._id);
-            // figure out which name to show (other person than currently logged in person)
-            if(conversation){
-                var person1 = Users.findOne(conversation.creator);
-                var person2 = Users.findOne(conversation.partner);
-                var post = Posts.findOne(conversation.postID);
+        var conversation = Conversations.findOne(Router.current().params._id);
+        // figure out which name to show (other person than currently logged in person)
+        if(conversation){
+            var person1 = Users.findOne(conversation.creator);
+            var person2 = Users.findOne(conversation.partner);
+            var post = Posts.findOne(conversation.postID);
 
-                if(Meteor.user()._id == person1._id){
-                    conversation.other = person2; 
-                } else{
-                    conversation.other = person1;
-                }
+            if(Meteor.user()._id == person1._id){
+                conversation.other = person2; 
+            } else{
+                conversation.other = person1;
             }
-          IonActionSheet.show({
-              titleText: 'Picture',
-              buttons: [
+        }
+
+        if(conversation.creator == Meteor.userId() && Posts.findOne(conversation.postID).vergebenAn !== ''){
+            // means post was from this user, so action sheet must show ability to re-publish post
+
+            IonActionSheet.show({
+                titleText: 'Picture',
+                buttons: [
                   { text: '<i class="icon ion-person"></i> Profil von ' + conversation.other.username },
                   { text: '<i class="icon ion-forward"></i> Als übergeben markieren' },
-              ],
-              cancelText: 'Cancel',
-              cancel: function() {
-              },
-              buttonClicked: function(index) {
-                if (index === 0) { 
-                    Router.go('/user/' + conversation.other._id);
-                    return true;
-                } else {
+                  { text: 'Gegenstand wieder veröffentlichen' }
+                ],
+                cancelText: 'Cancel',
+                cancel: function() {
+                },
+                buttonClicked: function(index) {
+                    if (index === 0) { 
+                        Router.go('/user/' + conversation.other._id);
+                        return true;
+                    } else if (index === 0) {
 
-                }  
-              }
-          });
+                    }  else {
+                        republish(conversation.postID);
+                    }
+                }
+            });
+        } else {
+            // show reduced action sheet
+            IonActionSheet.show({
+                titleText: 'Picture',
+                buttons: [
+                  { text: '<i class="icon ion-person"></i> Profil von ' + conversation.other.username },
+                  { text: '<i class="icon ion-forward"></i> Als übergeben markieren' },
+                ],
+                cancelText: 'Cancel',
+                cancel: function() {
+                },
+                buttonClicked: function(index) {
+                    if (index === 0) { 
+                        Router.go('/user/' + conversation.other._id);
+                        return true;
+                    } else {
+
+                    }  
+                }
+            });
+        }
     });
 }
 
@@ -163,4 +191,39 @@ Template.conversation.destroyed = function(){
     updateBadge();
 }
 
+function republish(postID){
+    // republish post becauase "isch nie go abhole"
+    // can be called from anywhere - depends only on postID
+    var post = Posts.findOne(postID);
+    IonPopup.confirm({
+        'title': 'Möchtest du ' + post.title + ' wieder veröffentlichen?',
+        'template': 'Du bist im Begriff, die Übergabe von ' + post.title + ' abzubrechen. Diese Aktion ist nötig, falls die Person den Gegenstand einfach nie abholt. Versuche zuerst, die Person über den Chat zu fragen, ob sie den Gegenstand wirklich nicht will. Bist du nun sicher, dass du '+ post.title + ' wieder veröffentlichen willst?',
+        'okText': 'Ja',
+        'cancelText': 'Abbrechen',
+        'onCancel': function(){
 
+        },
+        'onOk': function(){
+            Posts.update({'_id': postID}, {$set: {'vergebenAn': '', 'vergebenAnName': ''}});
+
+            // notifications
+            var notification = {
+                type:       'uebergabeAbgebrochen',
+                icon:       'ion-close-round',
+                triggerer:  post.userID,
+                receiver:   post.vergebenAn,
+                message:    'Da du ' + post.title + ' nie abgeholt hast, hat ' + post.userName + ' die Übergabe an dich abgebrochen. Gegenstand anschauen: ',
+                postTitle:  post.title, 
+                link:       '/post/'+post._id,
+                createdAt:  new Date(),
+                readAt:     null,
+            };
+            Notifications.insert(notification);
+            IonActionSheet.close();
+            Meteor.setTimeout(function(){
+                IonPopup.confirm({'title': post.title + ' wurde wieder veröffentlicht. '});
+            }, 1000);
+        }
+    });
+
+}

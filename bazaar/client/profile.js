@@ -99,6 +99,24 @@ Template.changePLZ.events({
     }
 });
 
+Template.changeRadius.rendered = function(){
+    var radius = Meteor.user().profile.radius;
+    $('#radius').val(radius);
+    $('#radiusLabel').html(radius + ' km');
+}
+
+Template.changeRadius.events({
+    'change #radius': function(){
+        var radius = $('#radius').val();
+        $('#radiusLabel').html(radius + ' km');
+    },
+    'click #save': function(){
+        var radius = $('#radius').val();
+        console.log('new radius: ' + radius);
+        setRadius(radius);
+    }
+});
+
 Template.login.rendered = function(){
     var iOS = /iPad|iPhone|iPod/.test(navigator.platform);
     var browser = !Meteor.isCordova;
@@ -114,4 +132,13 @@ Template.login.rendered = function(){
 
 Template.login.destroyed = function(){
     Session.set('hideTabs', false);
+};
+
+setRadius = function(radius){
+    // sets new radius [in km] in profile of current user 
+    IonBackdrop.retain();
+    Users.update(Meteor.userId(), {$set: {'profile.radius': radius }});
+    IonBackdrop.release();
+    IonModal.close();
+    lucPopup('Gespeichert!');
 };
