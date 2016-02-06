@@ -15,7 +15,6 @@ Accounts.onCreateUser(function(options, user) {
 		user.username = user.services.facebook.name;
 		user.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?width=400&height=400"; 
 	}
-	console.log(user);
 	return user;
 });
 

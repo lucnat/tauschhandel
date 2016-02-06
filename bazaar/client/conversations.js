@@ -182,7 +182,7 @@ Template.conversation.destroyed = function(){
     var id = Session.get('currentID');
     var messages = Conversations.findOne(id).messages;
     messages.forEach(function(message){
-        if(!message.readAt) {
+        if(message.to == Meteor.userId() && !message.readAt) {
             message.readAt = new Date();
         }
     });

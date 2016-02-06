@@ -144,7 +144,6 @@ Meteor.methods({
 		users.forEach(function (user) {
 			Users.update({'_id': user._id}, {$set: {'profile.umgebung': ''}});
 		});
-
 	}
 });
 
